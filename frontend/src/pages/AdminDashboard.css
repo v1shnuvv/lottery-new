@@ -24,8 +24,17 @@
 
 .AdminDashboard_row_col {
   width: 48%;
-  background-color: #2A687C;
+  background-color: #020223;
+  color: #fff;
   /* padding: 10px; */
+  padding: 5px 10px 15px 10px;
+  border-radius: 10px;
+
+}
+.AdminDashboard_row_col label{
+  font-size: 25px;
+  margin: 15px 0px 18px 10px;
+
 }
 .AdminDashboard_tables {
   width: 80%;

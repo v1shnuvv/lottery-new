@@ -10,6 +10,7 @@
  display: flex;
  justify-content: center;
  flex-direction: column;
+ background-color:  #0b0b2a;
  /* align-items: center; */
 }
 .userpage_lottunits, .userpage_option,.userpage_list{

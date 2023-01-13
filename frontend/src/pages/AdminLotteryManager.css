@@ -1,9 +1,11 @@
 .AdminLotteryManager_outer {
     width: 100%;
-    display: flex;
+    /* display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;gap:50px;
+    align-items: center;gap:50px; */
+    /* background-color: #0b0b2a; */
+    height: 100vh;
   }
   .AdminLotteryManager_headerUser {
     width: 100%;

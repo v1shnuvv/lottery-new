@@ -202,10 +202,10 @@
   /* border-radius: 1px solid grey;; */
   
 }
-.Cartitems_row2_col2_row1 button{
+/* .Cartitems_row2_col2_row1 button{
   color:black;
  
-}
+} */
 .Cartitems_row2_col2_tst2{
  display: flex;
  justify-content: space-evenly;

@@ -251,6 +251,7 @@ axios
       <div className="AdminDashboard_row">
         <div className="AdminDashboard_tables">
           <div className="AdminDashboard_row_col">
+            <label>Unit sold</label>
             <Unitsold
               label1={"Lottery"}
               label2={"Drawdate"}
@@ -262,6 +263,7 @@ axios
             />
           </div>
           <div className="AdminDashboard_row_col">
+            <label>Unit pending</label>
             <Unitpending
               label1={"Lottery"}
               label2={"Units Confirmed"}
@@ -277,17 +279,18 @@ axios
       </div>
       
       <div className="AdminDashboard_row">
-        <div className="AdminDashboard_row_col1"><Totalwinningvalidation
+      <div className="AdminDashboard_tables">
+        <div className="AdminDashboard_row_col"><Totalwinningvalidation
         setTotalwinning={setTotalwinning}
         totallotterywinning={totallotterywinning}
         setNewarray={setNewarray}
         array1={totalwinning}
         array2={newarray}
         /></div>
-        <div className="AdminDashboard_row_col2"><Uservalidationfetch_Admin
+        <div className="AdminDashboard_row_col"><Uservalidationfetch_Admin
         array1={latestunits}
         /></div>
-      
+      </div>
         {/* <Winners value1={winner} /> */}
       </div>
 

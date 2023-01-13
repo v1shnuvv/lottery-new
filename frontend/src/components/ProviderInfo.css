@@ -6,12 +6,13 @@
 }
 .providerinfo_header{
     padding: 10px;
-    color: goldenrod;
+    /* color: goldenrod; */
     display: flex;
     align-items: center;
 }
 .providerinfo_header h4{
     margin: 0;
+    font-size: 16px;
 }
 .providerinfo_header span{
     font-size: 20px;
@@ -22,6 +23,7 @@
     padding: 10px;
     display: flex;
     align-items: center;
+    
 }
 .providerinfo_subheader span{
     font-size: 20px;

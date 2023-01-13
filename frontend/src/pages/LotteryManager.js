@@ -134,9 +134,11 @@ export default function LotteryManager() {
           label8click={label8click}
         />
       </div>
+
+
        <div className="LotteryManager_row1">
         <div className="LotteryManager_col1"><AddLott/></div>
-        <div className="LotteryManager_col2"> <ProviderInfo/></div>
+        <div className="LotteryManager_col1"> <ProviderInfo/></div>
    
        </div>+
       {/* <div className="LotteryManager_row">

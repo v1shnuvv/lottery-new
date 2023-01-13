@@ -62,7 +62,7 @@ console.log("ts",usrname);
     if (temp.length == 0) {
       for (var i = 0; i < linenum; i++) {
         var tarray = [];
-        for (let j = 1; j <= 49; j++) {
+        for (let j = 1; j <= 39; j++) {
           let tobj = { value: j, isselected: false };
           tarray.push(tobj);
           // tarray.push()

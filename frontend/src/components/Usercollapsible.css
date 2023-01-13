@@ -1,9 +1,9 @@
 .Userdetails_unitdetails_outer, .Userdetails_providerandprizedetails_outer {
     /* min-width: 700px; */
     width: 100%;
-    font-family: "Comic Neue", cursive;
+    /* font-family: "Comic Neue", cursive; */
     /* min-width: 700px; */
-    background-color: goldenrod;
+    background-color: #2A687C;
     border-radius: 5px;
     padding: 5px;
   }

@@ -36,7 +36,7 @@ export default function Totalwinningvalidation({
           {" "}
           <h4>Total winning todate</h4>
         </div>
-        <div className="totalwinning_header">
+        <div className="totalwinning_subheader">
           <h4>Provider name</h4>
           <h4>Total winning</h4>
         </div>

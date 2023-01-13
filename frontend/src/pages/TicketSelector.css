@@ -4,6 +4,8 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 50px;
+    background-color: #0b0b2a;
+    
    
 }
 
@@ -13,8 +15,9 @@
     flex-direction: row;
     width:100%;
     justify-content: center;
-    margin-top: 90px;
+    margin-top: 40px;
     margin-bottom: 50px;
+    
 }
 .ticketselector_chkoutbtn{
     display: flex;
@@ -41,6 +44,7 @@
 
 }
 .ticketslector_lotterybuynow{
+    margin-top: 40px;
     display: flex;
     justify-content: center;
 }

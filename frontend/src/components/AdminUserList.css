@@ -5,6 +5,8 @@
 table{
     width: 100%;
     /* border-collapse: collapse; */
+    color: #fff;
+    background-color: #171739;
 }
 td{
     /* border: 1px solid black; */
@@ -14,7 +16,7 @@ td{
     
 }
 th{
-    background-color:#202232;
-    color: goldenrod;
+    background-color: #2A687C;
+    color: white;
     padding: 10px;
 }

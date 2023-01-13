@@ -9,6 +9,9 @@
     
     /* justify-content: center; */
 }
+.provideradd_header h4{
+    font-size: 16px;
+}
 .provideradd_header span{
     font-size: 20px;
     margin-right: 5px;

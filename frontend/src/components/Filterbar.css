@@ -87,7 +87,7 @@
 .column2_inner2 label,
 .column2_inner3 label,
 .column2_inner4 label {
-  color: grey;
+  /* color: grey; */
   padding-left: 5px;
   padding-top: 2px;
 }
@@ -118,7 +118,7 @@
   border-radius: 2px;
   padding: 10px;
 
-  color: #c3cad9;
+  /* color: #c3cad9; */
   border: 0.2px solid #f3f3f4;
   box-shadow: 1px 1px #f3f3f4;
 }
@@ -144,12 +144,12 @@
   border: none;
   outline-color: white;
   padding-top: 4px;
-  color: #7c8aa5;
+  /* color: #7c8aa5; */
   font-size: medium;
 }
 .filterbar_search::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #8298c2;
+  /* color: #8298c2; */
   padding-left: 3px;
   font-weight: normal;
   font-size: medium;
