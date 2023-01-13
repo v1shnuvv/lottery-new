@@ -1,0 +1,130 @@
+.drawres_container{
+  width: 80%;
+  color: #fff;
+  /* padding: 10px 0px; */
+}
+.drawres_header {
+background-color: #171739;
+display: flex;
+justify-content: center;
+padding-bottom: 10px;
+}
+
+.drawres_body {
+display: flex;
+padding: 15px 0px;
+background-color: #171739;
+}
+.drawres_body_sec_header {
+margin-bottom: 15px;
+}
+.drawres_body_sec_header h1{
+margin: 15px 0px;
+}
+.drawres_body_sec_lft {
+width: 50%;
+/* background-color: #171739; */
+}
+.drawres_body_sec_rgt {
+width: 50%;
+/* background-color: #171739; */
+
+border-left: solid 2px #2A687C;
+}
+.drawres_body_sec_lft_content {
+margin: 0px 20px;
+/* border: solid 2px #1e6eb7; */
+}
+.drawres_body_sec_rgt_content {
+/* background-color: yellowgreen; */
+margin: 0px 20px;
+/* position: relative; */
+}
+
+.drawres_body_lft_row {
+border: solid 1px #2A687C;
+border-radius: 5px;
+}
+.drawres_body_sec_lft_row_header {
+display: flex;
+justify-content: space-around;
+background-color: #2A687C;
+color: white;
+margin-bottom: 5px;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+/* position: relative; */
+}
+/* .drawres_body_sec_lft_row_header:after{
+      content: "";
+      width: 10px;
+      background-color: rgb(255, 255, 255);
+      right: 50%;
+      display: block;
+      position: absolute;
+      z-index: 1;
+  }   */
+.drawres_body_sec_lft_row {
+/* border: solid 1px #1e6eb7; */
+position: relative;
+}
+.drawres_sec_lft_row_inner_div{
+background-color: #2A687C;
+display: flex;
+justify-content: space-between;
+color: white;
+padding: 0px 10px;
+margin: 0px 10px 10px;
+border-radius: 5px;
+}
+.drawres_sec_rgt_row_inner_div{
+  background-color: #2A687C;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  padding: 0px 10px;
+  margin: 0px 0px 10px;
+  border-radius: 5px; 
+}
+
+.drawres_body_sec_rgt_num{
+  display: flex;
+  margin-bottom: 20px;
+  margin-top:20px
+}
+
+.drawres_rgt_numbers_div{
+
+  display: flex;
+}
+.drawres_rgt_numbers_span{
+border: solid 2px#2A687C;
+padding: 5px;
+margin-right: 8px;
+border-radius: 8px;
+color: #fff;
+
+}
+/* .drawres_footer {
+
+background-color: #f9f288;
+
+padding: 10px 20px;
+display: flex;
+justify-content: center;
+}
+.drawres_footer button {
+  border: solid 1px #00a9e0;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 5px;
+  color: #00a9e0;
+  padding: 10px;
+  font-size: 16px;
+}
+.drawres_footer button:hover{
+  border: solid 1px #1e6db7;
+  color: white;
+  background-color: #00a9e0;
+  
+} */
