@@ -4,8 +4,8 @@ import Input from "./Input";
 import { useState } from "react";
 export default function Filterbox({
   showfilter,
-  setName,
   setLotteryname,
+  setProvidername,
   setPurchasedate1,
   setPurchasedate2,
   setDrawdate,
@@ -38,11 +38,11 @@ export default function Filterbox({
         </div>
         <div className="Filterbox_row1">
           <div>
-            <label>Username</label>
+            <label>Lottery Name</label>
             <Model1
               show={show}
-              Name={"Username"}
-              setUname={(e) => setName(e.target.value)}
+              Name={"Lotteryname"}
+              setlotteryname={(e) => setLotteryname(e.target.value)}
             />
           </div>
           <div>
@@ -51,11 +51,11 @@ export default function Filterbox({
         </div>
         <div className="Filterbox_row2">
           <div>
-            <label>Lotteryname</label>
+            <label>Provider Name</label>
             <Model2
               show={show1}
-              Name={"Lotteryname"}
-              setlotteryname={(e) => setLotteryname(e.target.value)}
+              Name={"Provideryname"}
+              setprovidername={(e) => setProvidername(e.target.value)}
               
             />
           </div>
@@ -65,12 +65,12 @@ export default function Filterbox({
         </div>
         <div className="Filterbox_row3">
           <div>
-            <label>LotteryPurchasedate</label>
+            <label>Lottery Draw Date</label>
             <Model3
               show={show2}
               Name1={"YYYY-MM-DD"}
               Name2={"Date to"}
-              setpurchasedate1={(e) => setPurchasedate1(e.target.value)}
+              setpurchasedate1={(e) => setDrawdate(e.target.value)}
               // setpurchasedate2={(e) => setPurchasedate2(e.target.value)}
             />
           </div>
@@ -78,7 +78,7 @@ export default function Filterbox({
             <MdAddCircle onClick={selectpurchasedate} />
           </div>
         </div>
-        <div className="Filterbox_row4">
+        {/* <div className="Filterbox_row4">
           <div>
             <label>LotteryDrawdate</label>
             <Model4
@@ -90,7 +90,7 @@ export default function Filterbox({
           <div>
             <MdAddCircle onClick={selectdrawdate} />
           </div>
-        </div>
+        </div> */}
         <div className="Filterbox_row5">
           <button onClick={handleclickfilter}>Apply Filter</button>
         </div>
@@ -100,19 +100,19 @@ export default function Filterbox({
     <></>
   );
 }
-function Model1({ show, Name, setUname }) {
+function Model1({ show, Name, setlotteryname }) {
   return show ? (
     <>
-      <Input name={Name} onChange={setUname} />
+      <Input name={Name} onChange={setlotteryname} />
     </>
   ) : (
     <></>
   );
 }
-function Model2({ show, Name, setlotteryname}) {
+function Model2({ show, Name, setprovidername}) {
   return show ? (
     <>
-      <Input name={Name} onChange={setlotteryname} />
+      <Input name={Name} onChange={setprovidername} />
       
       
     </>

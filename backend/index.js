@@ -204,31 +204,31 @@ app.post("/Unitpasstolottery", (req, res) => {
     res.send(result);
   });
 });
-app.post("/addlottery", (req, res) => {
-  let lotteryname = req.body.lotteryname;
-  let drawdate = req.body.drawdate;
-  let lotteryprize = req.body.lotteryprize;
-  let ticketcost = req.body.ticketcost;
-  let userid = req.body.userid;
+// app.post("/addlottery", (req, res) => {
+//   let lotteryname = req.body.lotteryname;
+//   let drawdate = req.body.drawdate;
+//   let lotteryprize = req.body.lotteryprize;
+//   let ticketcost = req.body.ticketcost;
+//   let userid = req.body.userid;
 
-  console.log(req.body);
-  let sql =
-    "insert into tbllotterymaster (txtLotteryname,dtLotterydrawdate,txtLotteryprize,txtCost,txtCreatedBy,txtCreatedOn) values('" +
-    lotteryname +
-    "','" +
-    drawdate +
-    "'," +
-    lotteryprize +
-    "," +
-    ticketcost +
-    ",'admin',curdate())";
+//   console.log(req.body);
+//   let sql =
+//     "insert into tbllotterymaster (txtLotteryname,dtLotterydrawdate,txtLotteryprize,txtCost,txtCreatedBy,txtCreatedOn) values('" +
+//     lotteryname +
+//     "','" +
+//     drawdate +
+//     "'," +
+//     lotteryprize +
+//     "," +
+//     ticketcost +
+//     ",'admin',curdate())";
 
-  con.query(sql, (err, result) => {
-    if (err) throw err;
-    console.log(result);
-    res.send(result);
-  });
-});
+//   con.query(sql, (err, result) => {
+//     if (err) throw err;
+//     console.log(result);
+//     res.send(result);
+//   });
+// });
 
 app.post("/lotteryfetch", (req, res) => {
   console.log(req.body);
@@ -551,42 +551,85 @@ app.post("/addprovider", (req, res) => {
 /***********************************************************************By Vidya  Add lottery ********************************************************************************** */
 
 //--------------------ADD LOTTERY--------------------- //
+// app.post("/addlottery", function (req, res) {
+//   let lotteryname = req.body.lotteryname;
+//   let lotterydate = req.body.lotterydate;
+//   let lotterycost = req.body.lotterycost;
+//   let unitsaleamount = req.body.unitsaleamount;
+//   let adminchargeperunit = req.body.adminchargeperunit;
+//   let lotterystart = req.body.lotterystart;
+//   let lotteryend = req.body.lotteryend;
+//   let lotteryselection = req.body.lotteryselection;
+//   let lotterypurchase = req.body.lotterypurchase;
+//   let lotterysub = req.body.lotterysub;
+//   let agentcommission = req.body.agentcommission;
+//   let tax = req.body.tax;
+//   let commissionrate = req.body.commissionrate
+//   let otherdeduct1 = req.body.otherdeduct1;
+//   let charitypercent = req.body.charitypercent;
+//   let otherdeduct2 = req.body.otherdeduct2;
+//   let refProvider = req.body.refProvider;
+//   let id=req.body.id;
+//   var sql ="insert into tbllotterymaster(txtLotteryname,dtLotterydrawdate,txtCost,txtUnitSaleAmount,txtAdminChargeperUnit,txtStartRange,txtEndRange,txtSelectionLimit,txtPurchaseLimit,txtSubLottery,txtAgentCommission,txtTax ,txtOtherDeduct1 ,txtOtherDeduct2,txtCommissionrate,txtCharitypercent,refProvider) values('" + lotteryname + "','" + lotterydate + "','" + lotterycost + "','" + unitsaleamount + "','" + adminchargeperunit + "','" + lotterystart + "','" + lotteryend + "','" + lotteryselection + "','" + lotterypurchase + "','" + lotterysub + "','" + agentcommission + "','" + tax + "','" + otherdeduct1 + "','" + otherdeduct2 + "','" + commissionrate + "','" + charitypercent + "','" + refProvider + "' );";
+//   var sql1="insert into  tblresultmaster set refLotterymaster = LAST_INSERT_ID('"+id+"')";
+//   con.query(sql, function (err, result) {
+//       if (err) throw err;
+//       console.log(result);
+//       console.log("ji",sql)
+//       res.send(result);
+//   });
+//   con.query(sql1,function(err,result){
+//       if (err) throw err;
+//       console.log(result);
+//       console.log("j",sql1)
+//       res.send(result);
+//   })
+// });
+
 app.post("/addlottery", function (req, res) {
   let lotteryname = req.body.lotteryname;
   let lotterydate = req.body.lotterydate;
-  let lotteryprize = req.body.lotteryprize;
   let lotterycost = req.body.lotterycost;
-  let lotterystatus = req.body.lotterystatus;
+  let unitsaleamount = req.body.unitsaleamount;
+  let adminchargeperunit = req.body.adminchargeperunit;
   let lotterystart = req.body.lotterystart;
   let lotteryend = req.body.lotteryend;
   let lotteryselection = req.body.lotteryselection;
   let lotterypurchase = req.body.lotterypurchase;
   let lotterysub = req.body.lotterysub;
-  var sql =
-    "insert into tbllotterymaster(txtLotteryname,dtLotterydrawdate,txtLotteryprize,txtCost,txtStartRange,txtEndRange,txtSelectionLimit,txtPurchaseLimit,txtSubLottery) values('" +
-    lotteryname +
-    "','" +
-    lotterydate +
-    "','" +
-    lotteryprize +
-    "','" +
-    lotterycost +
-    "','" +
-    lotterystart +
-    "','" +
-    lotteryend +
-    "','" +
-    lotteryselection +
-    "','" +
-    lotterypurchase +
-    "','" +
-    lotterysub +
-    "');";
+  let agentcommission = req.body.agentcommission;
+  let tax = req.body.tax;
+  let commissionrate = req.body.commissionrate
+  let otherdeduct1 = req.body.otherdeduct1;
+  let charitypercent = req.body.charitypercent;
+  let otherdeduct2 = req.body.otherdeduct2;
+  let refProvider = req.body.refProvider;
+  let puramount = req.body.puramount;
+  let noofCol = req.body.noofCol;
+  let noofRow = req.body.noofRow;
+  let colstartNo = req.body.colstartNo;
+  let first = req.body.first;
+  let second = req.body.second;
+  let third = req.body.third;
+  let fourth = req.body.fourth;
+  let fifth = req.body.fifth;
+  let sixth = req.body.sixth;
+  let colendNo = req.body.colendNo;
+  let id=req.body.id;
+  var sql ="insert into tbllotterymaster (txtLotteryname, refProvider, dtLotterydrawdate, txtCost, txtPurchasedamount, txtUnitSaleAmount, txtAdminChargeperUnit, txtSubLottery, txtStartRange, txtEndRange, txtSelectionLimit, txtPurchaseLimit, txtNoOfCol, txtNoOfRow, txtColStartAt, txtColEndAt, txtAgentCommission, txtTax, txtCommissionrate, txtOtherDeduct1, txtOtherDeduct2, txtCharitypercent, txtFirstprize, txtSecondprize, txtThirdprize, txtFourthprize, txtFifthprize, txtSixthprize) values ('"+lotteryname+"','"+refProvider+"','"+lotterydate+"','"+lotterycost+"','"+puramount+"','"+unitsaleamount+"','"+adminchargeperunit+"','"+lotterysub+"','"+lotterystart+"','"+lotteryend+"','"+lotteryselection+"','"+lotterypurchase+"','"+noofCol+"','"+noofRow+"','"+colstartNo+"','"+colendNo+"','"+agentcommission+"','"+tax+"','"+commissionrate+"','"+otherdeduct1+"','"+otherdeduct2+"','"+charitypercent+"','"+first+"','"+second+"','"+third+"','"+fourth+"','"+fifth+"','"+sixth+"')";
+  var sql1="insert into  tblresultmaster set refLotterymaster = LAST_INSERT_ID('"+id+"')";
   con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log(result);
-    res.send(result);
+      if (err) throw err;
+      console.log(result);
+      console.log("ji",sql)
+      res.send(result);
   });
+  con.query(sql1,function(err,result){
+      if (err) throw err;
+      console.log(result);
+      console.log("j",sql1)
+      res.send(result);
+  })
 });
 
 //--------------------ADD LOTTERY PROVIDER----------------------//
@@ -632,37 +675,32 @@ app.post("/addlotterydetails", function (req, res) {
 app.post("/editlottery", function (req, res) {
   let id = req.body.id;
   let drawdate = req.body.drawdate;
-  let prize = req.body.prize;
+  let puramount = req.body.puramount;
+  let unitsaleamount = req.body.unitsaleamount;
+  let adminchargeperunit = req.body.adminchargeperunit;
+  let commissionrate = req.body.commissionrate;
+  let agentcommission = req.body.agentcommission;
+  let tax = req.body.tax;
+  let otherdeduct1 = req.body.otherdeduct1;
+  let otherdeduct2 = req.body.otherdeduct2;
+  let charitypercent = req.body.charitypercent;
+  let first = req.body.first;
+  let second = req.body.second;
+  let third = req.body.third;
+  let fourth = req.body.fourth;
+  let fifth = req.body.fifth;
+  let sixth = req.body.sixth;
   let cost = req.body.cost;
   let start = req.body.start;
   let end = req.body.end;
   let selection = req.body.selection;
   let purchase = req.body.purchase;
   let sublottery = req.body.sublottery;
-  var sql =
-    "UPDATE tbllotterymaster SET dtLotterydrawdate='" +
-    drawdate +
-    "',txtLotteryprize= '" +
-    prize +
-    "',txtCost='" +
-    cost +
-    "',txtStartRange='" +
-    start +
-    "',txtEndRange='" +
-    end +
-    "',txtSelectionLimit='" +
-    selection +
-    "',txtPurchaseLimit='" +
-    purchase +
-    "',txtSubLottery='" +
-    sublottery +
-    "' WHERE id = '" +
-    id +
-    "';";
+  var sql = "UPDATE tbllotterymaster SET dtLotterydrawdate='" + drawdate + "',txtCost='" + cost + "',txtPurchasedamount='" + puramount + "' ,txtStartRange='" + start + "',txtEndRange='" + end + "',txtSelectionLimit='" + selection + "',txtPurchaseLimit='" + purchase + "',txtSubLottery='" + sublottery + "' ,txtUnitSaleAmount='" + unitsaleamount + "',txtAdminChargeperUnit='" + adminchargeperunit + "',txtCommissionrate='" + commissionrate + "',txtAgentCommission='" + agentcommission + "',txtTax='" + tax + "',txtOtherDeduct1='" + otherdeduct1 + "',txtOtherDeduct2='" + otherdeduct2 + "',txtCharitypercent='" + charitypercent + "',txtFirstprize='" + first + "',txtSecondprize='" + second + "',txtThirdprize='" + third + "',txtFourthprize='" + fourth + "',txtFifthprize='" + fifth + "',txtSixthprize='" + sixth + "' WHERE id = '" + id + "';";
   con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log(result);
-    res.send(result);
+      if (err) throw err;
+      console.log(result);
+      res.send(result);
   });
 });
 
@@ -710,9 +748,19 @@ app.post("/lotteryexile", function (req, res) {
 
 //------------userinfoforadmin--------------//
 
+// app.post("/userlistforadmin", (req, res) => {
+//   var sql =
+//     "select TUR.id,concat(TUR.txtFname,TUR.txtLname) as name,TUR.txtaddress,TLM.txtLotteryname,date_format(dtLotterydrawdate,'%Y-%m-%d') as lotterydrawdate,date_format(txtPurchaseddate,'%Y-%m-%d') as purchasedate from tblunit TU  join tblusers TUR on TU.refUser=TUR.id  join tbllotterymaster TLM on TU.refLotterymaster=TLM.id;";
+//   con.query(sql, function (err, result) {
+//     if (err) throw err;
+//     console.log(result);
+//     res.send(result);
+//   });
+// });
+
 app.post("/userlistforadmin", (req, res) => {
   var sql =
-    "select TUR.id,concat(TUR.txtFname,TUR.txtLname) as name,TUR.txtaddress,TLM.txtLotteryname,date_format(dtLotterydrawdate,'%Y-%m-%d') as lotterydrawdate,date_format(txtPurchaseddate,'%Y-%m-%d') as purchasedate from tblunit TU  join tblusers TUR on TU.refUser=TUR.id  join tbllotterymaster TLM on TU.refLotterymaster=TLM.id;";
+    "SELECT txtLotteryname, txtProvidername, dtLotterydrawdate, txtLotteryresult FROM tbllotterymaster left join tblprovider on tbllotterymaster.refProvider=tblprovider.id";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
@@ -854,7 +902,24 @@ app.post("/subltryfetch",(req,res)=>{
     });
   });
   //-------<
-
+  //unitsold-->
+  app.post("/admindash_fetchall",(req,res)=>{
+    let sql="SELECT lm.txtLotteryname,tp.txtProvidername,lm.txtCost,COUNT(tu.refUser) AS unitsold,COUNT(tu.refUser) AS purchase,COUNT(tu.refUser) * lm.txtCost AS totalcost,lm.txtCost + lm.txtAdminChargeperUnit AS total,(COUNT(tu.refUser) * lm.txtCost) - (lm.txtCost + lm.txtAdminChargeperUnit) AS balance,((COUNT(tu.refUser) * lm.txtCost) - (lm.txtCost + lm.txtAdminChargeperUnit)) / lm.txtCost AS adminticket FROM tblunit tu LEFT JOIN  tblusers tusr ON tu.refUser = tusr.id LEFT JOIN tbllotterymaster lm ON tu.refLotterymaster = lm.id LEFT JOIN tblprovider tp ON tp.id = lm.refProvider WHERE tusr.refUserRole = 2 GROUP BY refLotterymaster; ";
+    con.query(sql,(err,result)=>{
+      if(err)throw err;
+      res.send(result);
+      console.log(result)
+    })
+  })
+  app.post("/admindash_adminpurchase",(req,res)=>{
+    let sql="SELECT lm.txtLotteryname,tp.txtProvidername,COUNT(tu.refUser) AS adminsold FROM tblunit tu left JOIN tblusers tusr ON tu.refUser = tusr.id left JOIN tbllotterymaster lm ON tu.refLotterymaster = lm.id left JOIN tblprovider tp ON tp.id = lm.refProvider WHERE tusr.refUserRole = 1 GROUP BY refLotterymaster";
+    con.query(sql,(err,result)=>{
+        if(err)throw err;
+        res.send(result)
+        console.log(result)
+    })
+  })
+//--<
 app.post("/purchasedloryfetch",(req,res)=>{
   let sql="select tu.id ,tm.txtLotteryname,tu.txtLotteryNumber from tblunit tu left join tbllotterymaster tm on tu.refLotterymaster=tm.id where tu.refUser=2 and tu.txtDeleteflag=0 and tu.txtPurchaseddate < tm.dtLotterydrawdate;";
   con.query(sql,(err,result)=>{

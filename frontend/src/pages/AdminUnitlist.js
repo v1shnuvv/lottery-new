@@ -13,7 +13,7 @@ import { useEffect } from "react";
 
 
 
-function AdminUnitlist() {
+export default function AdminUnitlist() {
     const navigate = useNavigate();
     const uname = localStorage.getItem("usrname");
     const [unitdetails, setUnitdetails] = useState([]);
@@ -22,11 +22,11 @@ function AdminUnitlist() {
 
   const [userarray, setUserarray] = useState([]);
   const [userdata, setUserdata] = useState([]);
-  const [username, setUsername] = useState("");
+  const [providername, setProvidername] = useState("");
   const [Lotteryname, setLotteryname] = useState("");
-  const [purchasedate1, setPurchasedate1] = useState("");
+  const [purchasedate1, setPurchasedate1] = useState("");//
   // const [purchasedate2, setPurchasedate2] = useState("");
-  const [drawdate, setDrawdate] = useState("");
+  const [drawdate, setDrawdate] = useState("");//
   const [selectall, setSelectall] = useState(false);
   const [mainshow, setMainshow] = useState(false);
 
@@ -56,55 +56,60 @@ function AdminUnitlist() {
   const filterhandleclick = () => {
     setMainshow(mainshow ? false : true);
     setUserarray(userdata);
-    setLotteryname("");
-    setUsername("");
-    setDrawdate("");
-    setPurchasedate1("");
+    setLotteryname("");//
+    // setUsername("");//
+    setDrawdate("");//
+    // setPurchasedate1("");//
   };
 
   //=================Filterbox=======================//
 
   const handleclickfilter = () => {
-    let temp = userarray.filter((item) =>
-      item.name.toLowerCase().includes(username.toLowerCase())
-    );
-    let sample = userarray.filter((item) =>
+    let templottery = userarray.filter((item) =>
       item.txtLotteryname.toLowerCase().includes(Lotteryname.toLowerCase())
     );
-    let newsample = userarray.filter(
-      (item) =>
-        item.name.toLowerCase().includes(username.toLowerCase()) &&
-        item.txtLotteryname.toLowerCase().includes(Lotteryname.toLowerCase())
+    let tempprovider = userarray.filter((item) =>
+      item.txtProvidername.toLowerCase().includes(providername.toLowerCase())
     );
-    let ddate = userarray.filter((item) => item.lotterydrawdate === drawdate);
-    console.log("dd", ddate);
+    // let newsample = userarray.filter(
+    //   (item) =>
+    //     item.txtProvidername.toLowerCase().includes(providername.toLowerCase()) &&
+    //     item.txtLotteryname.toLowerCase().includes(Lotteryname.toLowerCase())
+    // );
+    // let ddate = userarray.filter((item) => item.lotterydrawdate === drawdate);
+    // console.log("dd", ddate);
 
-    let pdate = userarray.filter((item) => item.purchasedate === purchasedate1);
-    console.log("pd", pdate);
+    // let pdate = userarray.filter((item) => item.purchasedate === purchasedate1);
+    // console.log("pd", pdate);
 
-    console.log("new", newsample);
-    console.log("lotteryname", sample);
-    console.log("username", temp);
-    console.log("myname", username);
-    console.log("mylott", Lotteryname);
-    console.log("purdate",purchasedate1)
+    // console.log("new", newsample);
+    // console.log("lotteryname", sample);
+    // console.log("username", temp);
+    // console.log("myname", username);
+    // console.log("mylott", Lotteryname);
+    // console.log("purdate",purchasedate1)
     if (
-      temp.length > 0 &&
-      sample.length > 0 &&
-      pdate.length === 0 &&
-      ddate.length === 0
+      templottery.length > 0
+      //  &&
+      // sample.length > 0 
+      // &&
+      // pdate.length === 0 &&
+      // ddate.length === 0
     ) {
       console.log("using1")
-      setUserarray(newsample);
-    } else if (
-      ddate.length > 0 &&
-      pdate.length === 0
-    ) {
-      console.log("using2");
-      setUserarray(ddate);
+      setUserarray(templottery);
+    // else if (
+    //   ddate.length > 0 &&
+    //   pdate.length === 0
+    // ) {
+    //   console.log("using2");
+    //   setUserarray(ddate);
+    // } else{
+    //   setUserarray(pdate);
     } else{
-      setUserarray(pdate);
-    } 
+      setUserarray(tempprovider);
+
+    }
     setMainshow(false);
     console.log(mainshow);
   };
@@ -257,11 +262,12 @@ const label6click=()=>{
       <div className="AdminUnitlist_filterbox">
       <Filterbox
         showfilter={mainshow}
-        setName={setUsername}
+        
         setLotteryname={setLotteryname}
-        setPurchasedate1={setPurchasedate1}
+        setProvidername={setProvidername}
+        // setPurchasedate1={setPurchasedate1}
         // setPurchasedate2={setPurchasedate2}
-        setDrawdate={setDrawdate}
+        setDrawdate={setDrawdate}//
         handleclickfilter={handleclickfilter}
       />
       </div>
@@ -278,4 +284,4 @@ const label6click=()=>{
     </div>
   );
 }
-export default AdminUnitlist;
+// export default AdminUnitlist;

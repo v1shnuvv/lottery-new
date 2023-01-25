@@ -7,12 +7,12 @@ export default function AdminUserlist({ data,handlechange}) {
         <tbody>
           <tr>
             <th></th>
-            <th>ID</th>
-            <th>Username</th>
-            <th>UserAddress</th>
-            <th>LottreyName</th>
-            <th>LotteryPurchasedate</th>
-            <th>LotteryDrawdate</th>
+            {/* <th>ID</th>
+            <th>Username</th> */}
+            <th>Lottery Name</th>
+            <th>Provider Name</th>
+            <th>Lottery Draw Date</th>
+            <th>Lottery Result</th>
           </tr>
           {data.map((item, index) => {
             return (
@@ -28,12 +28,12 @@ export default function AdminUserlist({ data,handlechange}) {
                       checked={item.ischecked}
                     />
                   </td>
-                  <td>{item.id}</td>
-                  <td>{item.name}</td>
-                  <td>{item.txtaddress}</td>
+                  {/* <td>{item.id}</td> */}
                   <td>{item.txtLotteryname}</td>
-                  <td>{item.purchasedate}</td>
-                  <td>{item.lotterydrawdate}</td>
+                  <td>{item.txtProvidername}</td>
+                  <td>{item.dtLotterydrawdate}</td>
+                  <td>{item.txtLotteryresult}</td>
+                  {/* <td>{item.lotterydrawdate}</td> */}
                 </tr>
               </>
             );

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { MdArrowDropDownCircle } from "react-icons/md";
 import Collapsible from "react-collapsible";
+import usestate from "usestate";
 export default function AddLottery() {
 
     const [drawdate, setLotterydate] = useState("");
@@ -32,6 +33,11 @@ export default function AddLottery() {
     const [puramount, setPuramount] = useState("");
     const [lname, setLname] = useState("")
     const [id,setId]=useState("");
+
+    const [noofCol, setNoofCol] = useState("");
+    const [noofRow, setNoofRow] = useState("");
+    const [colstartNo, setColstartNo] = useState('');
+    const [colendNo, setColendNo] = useState('');
 
 
     const [Array, setArray] = useState([]);
@@ -63,7 +69,13 @@ export default function AddLottery() {
             third: third,
             fourth: fourth,
             fifth: fifth,
-            sixth: sixth
+            sixth: sixth,
+            noofCol: noofCol,
+            noofRow: noofRow,
+            colstartNo: colstartNo,
+            colendNo: colendNo,
+            id: id
+
         }
         console.log(req)
         let header = {}
@@ -80,8 +92,6 @@ export default function AddLottery() {
             console.log("Hiii", res.data)
             setArray(res.data)
         }).catch();
-
-
     }, []);
 
     const Lotteryname = (id) => {
@@ -210,8 +220,10 @@ export default function AddLottery() {
                                         <>
                                             <option value={add}>{itm.txtLotteryname}</option>
                                         </>
+                                        
                                     )
                                 })}
+                                <option><input type="text" placeholder="lotteerryy"/></option>
                             </select>
 
                         </div>
@@ -247,6 +259,18 @@ export default function AddLottery() {
                             </div>
                             <div>
                                 <Input name="Purchasing Limit" value={lotterypurchase} onChange={(e) => { setLotterypurchase(e.target.value) }} />
+                            </div>
+                            <div>
+                                <Input name="No. of columns" value={noofCol} onChange={(e) => { setNoofCol(e.target.value) }}/>
+                            </div>
+                            <div>
+                                <Input name="No. of rows"  value={noofRow} onChange={(e) => { setNoofRow(e.target.value) }}/>
+                            </div>
+                            <div>
+                                <Input name="Column starting no." value={colstartNo} onChange={(e) => { setColstartNo(e.target.value) }} />
+                            </div>
+                            <div>
+                                <Input name="Column ending no." value={colendNo} onChange={(e) => { setColendNo(e.target.value) }} />
                             </div>
 
 

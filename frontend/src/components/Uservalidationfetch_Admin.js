@@ -15,6 +15,7 @@ export default function Uservalidationfetch({array1}) {
             label1={"Username"}
             label2={"Matching number"}
             label3="Prize Money"
+            label4="LotteryName"
             array={array1}
             variable1={"txtFname"}
             variable2={"txtMatchingcount"}
