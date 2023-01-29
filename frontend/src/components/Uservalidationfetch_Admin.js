@@ -1,9 +1,6 @@
-
 import "../components/Uservalidationfetch_Admin.css";
 import List from "./List";
 export default function Uservalidationfetch({array1}) {
-
-
   return (
     <>
       <div className="uservalidationfetch_container">
@@ -15,11 +12,12 @@ export default function Uservalidationfetch({array1}) {
             label1={"Username"}
             label2={"Matching number"}
             label3="Prize Money"
-            label4="LotteryName"
+            label4={"Lottery Name"}
             array={array1}
             variable1={"txtFname"}
             variable2={"txtMatchingcount"}
             variable3={"txtPrizemoney"}
+            variable4={"txtLotteryname"}
           />
         </div>
       </div>

@@ -42,7 +42,16 @@ function HomePage() {
         setPrize(res.data[0].txtLotteryprize);
         setLotteryid(res.data[0].id);
         setLotterydetails(res.data);
+        var t = false;
+        for (const iterator of res.data) {
+          if (iterator.sub_id != null) {
+            console.log("itrt_sub_id",iterator.sub_id)
+            t = true;
+            dispatch({ type: "issubidexist", payload: t });
+          }
+        }
       })
+    
       .catch();
 
 

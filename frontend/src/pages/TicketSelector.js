@@ -54,6 +54,7 @@ console.log("ts",usrname);
   const cnt = localStorage.getItem("cartcount");
 
   useEffect(() => {
+    dispatch({ type: "setLineArray", payload: [] });
     let id = location.state.lotterydetails[0].sub_id;
     setSubltryid(id);
     let temp = [...linearray];
@@ -166,7 +167,7 @@ console.log("ts",usrname);
                 });
               } else {
                 setShow(!show);
-
+                dispatch({ type: "setLineArray", payload: [] });
                 dispatch({ type: "issubidexist", payload: false });
               }
              
@@ -203,7 +204,7 @@ console.log("ts",usrname);
               navigate("/Checkout", {
                 state: { lid: lotteryid, subltryid: subltryid },
               });
-
+              dispatch({ type: "setLineArray", payload: [] });
               setShow(!show);
 
               dispatch({ type: "issubidexist", payload: false });

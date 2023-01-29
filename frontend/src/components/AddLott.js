@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { MdArrowDropDownCircle } from "react-icons/md";
 import Collapsible from "react-collapsible";
-import usestate from "usestate";
 export default function AddLottery() {
 
     const [drawdate, setLotterydate] = useState("");
@@ -38,12 +37,13 @@ export default function AddLottery() {
     const [noofRow, setNoofRow] = useState("");
     const [colstartNo, setColstartNo] = useState('');
     const [colendNo, setColendNo] = useState('');
-
+    const [lotshow, setLotshow]= useState("none")
 
     const [Array, setArray] = useState([]);
     const [Array1, setArray1] = useState([]);
     const [Array2, setArray2] = useState([]);
-    const handleAddlottery = (id) => {
+    const handleAddlottery = () => {
+        console.log("idx")
         let url = "http://localhost:8080/addlottery"
         let req = {
             refProvider: provider,
@@ -74,7 +74,7 @@ export default function AddLottery() {
             noofRow: noofRow,
             colstartNo: colstartNo,
             colendNo: colendNo,
-            id: id
+            // id: id
 
         }
         console.log(req)
@@ -109,10 +109,13 @@ export default function AddLottery() {
     }
 
     const fetchDetails = (e, Array1) => {
-        console.log("k", e)
+        console.log("ee",e);
+        if(e=="Add new lottery"){
+            document.getElementById("lotselect").style.display="none";
+            setLotshow("block")
+        }else{
         const obj = JSON.parse(e)
-        console.log(obj.id)
-        console.log(obj.value);
+        console.log("ohh",obj);
         let url2 = "http://localhost:8080/addlotterydetails";
         let req2 = {
             id: obj.id
@@ -122,7 +125,7 @@ export default function AddLottery() {
             .then((res) => {
                 console.log("hi", obj.id)
                 setArray2("hi", res.data)
-                setLotterydate(res.data[0].dtLotterydrawdate)
+                setLotterydate(res.data[0].drawdate)
                 setAdminchargeperunit(res.data[0].txtAdminChargeperUnit)
                 setLotterycost(res.data[0].txtCost)
                 setUnitsaleamount(res.data[0].txtUnitSaleAmount)
@@ -145,6 +148,7 @@ export default function AddLottery() {
             }).catch();
             setLname(obj.value)
             setId(obj.id)
+        }
     }
     const handleEditlottery = () => {
         let url3 = "http://localhost:8080/editlottery"
@@ -208,11 +212,14 @@ export default function AddLottery() {
                             </select>
                         </div>
                         <div>
+                            <span style={{display:lotshow}} id="lotinput">
+                            <Input name="Lottery name" value={lname} onChange={(e) => { setLname(e.target.value) }}/></span>
                             <select
                                 onChange={(e) => {
                                     fetchDetails(e.target.value)
-                                }}>
+                                }} id="lotselect">
                                 <option disabled selected hidden>Lottery Name</option>
+                                <option style={{backgroundColor:"goldenrod"}}>Add new lottery</option>
 
                                 {Array1.map((itm, index) => {
                                     let add = '{"id":"' + itm.id + '","value":"' + itm.txtLotteryname + '"}';
@@ -223,7 +230,6 @@ export default function AddLottery() {
                                         
                                     )
                                 })}
-                                <option><input type="text" placeholder="lotteerryy"/></option>
                             </select>
 
                         </div>

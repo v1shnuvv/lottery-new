@@ -6,7 +6,7 @@ import Topbar from "./components/Topbar";
 import Sucess from "./pages/Sucess";
 import Failure from "./pages/Failure";
 import Login from "./pages/Login";
-import HomePage from "./components/Sidemenu";
+import HomePage from "./pages/HomePage";
 import UserPage from "./pages/UserPage";
 import Checkout from "./pages/Checkout";
 import Userprofile from "./pages/Userprofile";
