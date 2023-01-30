@@ -8,6 +8,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import Result from "../components/Drawresult";
+import AddLott from "../components/AddLott"
 import AddLottery from "../components/AddLottery";
 import AddLotterycalc from "../components/AddLotterycalc";
 import AddLotterycom from "../components/AddLotterycom";
@@ -21,6 +22,8 @@ import Totalwinningvalidation from "../components/Totalwinningvalidation";
 import Uservalidationfetch from "../components/Uservalidationfetch_Admin";
 import List from "../components/List";
 import Sidemenu from "../components/Sidemenu";
+import AdminUnitlist from "./AdminUnitlist";
+import Providerinfo from "../components/ProviderInfo";
 function Dashboard() {
   const navigate = useNavigate();
 
@@ -31,6 +34,8 @@ function Dashboard() {
   const usrname = localStorage.getItem("usrname");
   console.log("usrname", usrname);
   const [value, setValue] = useState("false");
+
+  
 
   //drawresult----->
   const [lotteryresult, setLotteryresult] = useState([]);
@@ -54,7 +59,59 @@ function Dashboard() {
 
   const [unitlist, setUnitlist] = useState([]);
   const [adminpurchase, setAdminpurchase] = useState([]);
+//component show----->
+const[shw, setShw]=useState([{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"}])
+console.log("investi",shw[0].shwme);
+const handleclick1=()=>{
+  let temp = [...shw];
+  for (const item of temp) {
+    item.shwme="none"
+  }
+  temp[0].shwme="block"
+  setShw(temp)
+}
+const handleclick2=()=>{
+  let temp = [...shw];
+  for (const item of temp) {
+    item.shwme="none"
+  }
+  temp[1].shwme="block"
+  setShw(temp)
+}
+const handleclick3=()=>{
+  let temp = [...shw];
+  for (const item of temp) {
+    item.shwme="none"
+  }
+  temp[2].shwme="block"
+  setShw(temp)
+}
+const handleclick4=()=>{
+  let temp = [...shw];
+  for (const item of temp) {
+    item.shwme="none"
+  }
+  temp[3].shwme="block"
+  setShw(temp)
+}
+const handleclick5=()=>{
+  let temp = [...shw];
+  for (const item of temp) {
+    item.shwme="none"
+  }
+  temp[4].shwme="block"
+  setShw(temp)
+}
+const handleclick6=()=>{
+  let temp = [...shw];
+  for (const item of temp) {
+    item.shwme="none"
+  }
+  temp[5].shwme="block"
+  setShw(temp)
+}
 
+//-----<
   useEffect(() => {
     let url_unitsold = "http://localhost:8080/Unitsold";
     let request_unitsold = {};
@@ -270,10 +327,28 @@ function Dashboard() {
       </div>
       <div className="AdminDashboard_main">
         <div className="AdminDashboard_main_col_left">
-          <Sidemenu/>
+          <Sidemenu
+           shwFilter={handleclick1}
+           shwAddresult={ handleclick2}
+           shwAddlottery={handleclick3}
+           shwAddprovider={ handleclick4}
+           shwPurchasesummary={handleclick5}
+           shwResult={handleclick6}
+          />
         </div>
         <div className="AdminDashboard_main_col_right">
-          <div className="AdminDashboard_row">
+
+          <div className="AdminDashboard_row" style={{display: shw[0].shwme}}>
+            <AdminUnitlist/>
+          </div>
+          <div className="AdminDashboard_row" style={{display: shw[2].shwme}}>
+            <AddLott/>
+          </div>
+          <div className="AdminDashboard_row" style={{display: shw[3].shwme}}>
+            <Providerinfo/>
+          </div>
+
+          <div className="AdminDashboard_row" style={{display: shw[5].shwme}}>
             <Result
               array1={lotteryresult}
               array2={latestlotteryresult}
@@ -283,9 +358,10 @@ function Dashboard() {
               value2={"txtCost"}
             />
           </div>
-          <div className="AdminDashboard_row">
-            <div className="AdminDashboard_tables">
-              <div className="AdminDashboard_row_col">
+
+          <div className="AdminDashboard_row" style={{display: shw[4].shwme}}>
+            {/* <div className="AdminDashboard_tables"> */}
+              {/* <div className="AdminDashboard_row_col" > */}
                 <label>Unit sold</label>
                 {/* <Unitsold
         label1={"Lottery"}
@@ -323,10 +399,10 @@ function Dashboard() {
         variable3={"UnitPending"}
       />
     </div> */}
-            </div>
-          </div>
+            {/* </div> */}
+          {/* </div> */}
 
-          <div className="AdminDashboard_row">
+          <div className="AdminDashboard_row" style={{display: "none"}}>
             <div className="AdminDashboard_tables">
               <div className="AdminDashboard_row_col">
                 <Totalwinningvalidation

@@ -5,11 +5,11 @@ import { BsGraphUp } from "react-icons/bs"
 import { TfiBriefcase } from "react-icons/tfi"
 import { FiFilter, FiArrowUp, FiArrowDown } from "react-icons/fi"
 import { GiPodiumWinner } from "react-icons/gi"
-export default function Sidemenu() {
+export default function Sidemenu({shwFilter, shwAddresult, shwAddlottery, shwAddprovider, shwPurchasesummary, shwResult}){
     const [show, setDownarrow] = useState(false)
     return (
                 <div className="sidemenu_menu">
-                    <div className=" sidemenu_list">
+                    <div className=" sidemenu_list" onClick={e=>{shwFilter()}}>
                         <span><FiFilter color="white"/></span><label>Filter</label>
                     </div>
                     <div className="sidemenu_list">
@@ -18,21 +18,21 @@ export default function Sidemenu() {
                     </div>
                     {show &&
                         <div className="sidemenu_submenu">
-                            <div className="sidemenu_sublist">
+                            <div className="sidemenu_sublist" onClick={e=>{shwAddresult()}}>
                                 <label>Add Result</label>
                             </div>
-                            <div className="sidemenu_sublist">
+                            <div className="sidemenu_sublist" onClick={e=>{shwAddlottery()}}>
                                 <label>Add Lottery</label>
                             </div>
-                            <div className="sidemenu_sublist">
+                            <div className="sidemenu_sublist" onClick={e=>{shwAddprovider()}}>
                                 <label>Add Provider</label>
                             </div>
                         </div>
                     }
-                    <div className="sidemenu_list">
+                    <div className="sidemenu_list" onClick={e=>{shwPurchasesummary()}}>
                     <span><BsGraphUp color="white"/></span><label> Purchase Summary</label>
                     </div>
-                    <div className="sidemenu_list">
+                    <div className="sidemenu_list" onClick={e=>{shwResult()}}>
                     <span><GiPodiumWinner color="white"/></span><label> Result</label>
                     </div>
                 </div>

@@ -24,9 +24,9 @@ export default function AdminUnitlist() {
   const [userdata, setUserdata] = useState([]);
   const [providername, setProvidername] = useState("");
   const [Lotteryname, setLotteryname] = useState("");
-  const [purchasedate1, setPurchasedate1] = useState("");//
+  const [purchasedate1, setPurchasedate1] = useState("");
   // const [purchasedate2, setPurchasedate2] = useState("");
-  const [drawdate, setDrawdate] = useState("");//
+  const [drawdate, setDrawdate] = useState("");
   const [selectall, setSelectall] = useState(false);
   const [mainshow, setMainshow] = useState(false);
 
@@ -231,7 +231,7 @@ const label6click=()=>{
 }
   return (
     <div className="AdminUnitlist_outer">
-      <div className="AdminUnitlist_headerUser">
+      {/* <div className="AdminUnitlist_headerUser">
         {" "}
         <HeaderUser
           label1={uname}
@@ -248,7 +248,7 @@ const label6click=()=>{
           label6click={label6click}
         />
         
-      </div>
+      </div> */}
       <div className="AdminUnitlist_filterbar">
         <Filterbar
           //   DeleteFunc={DeleteFunc}
@@ -277,10 +277,10 @@ const label6click=()=>{
           <AdminUserList data={userarray} handlechange={handlechanging} />
         </div>
       </div>
-      <div className="AdminUnitlist_footer">
+      {/* <div className="AdminUnitlist_footer">
         <Footer />
 
-      </div>
+      </div> */}
     </div>
   );
 }

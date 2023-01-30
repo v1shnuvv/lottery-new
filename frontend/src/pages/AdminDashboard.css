@@ -3,8 +3,8 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-items: center;gap:50px;
-
+  align-items: center;
+  /* gap:50px; */
   background-color: #0b0b2a;;
 }
 .AdminDashboard_headerUser {
@@ -15,15 +15,22 @@
 .AdminDashboard_main{
   display: flex;
   width: 100%;
+  min-height: calc(100vh - 174.8px);
+}
+.AdminDashboard_main_col_left{
+background-color: #020223;
+}
+.AdminDashboard_main_col_right{
+  width: calc(100% - 260px);
+  padding: 15px;
 }
 .AdminDashboard_row {
   width: 100%;
-  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  margin-left:10px;
+  
 }
 
 .AdminDashboard_row_col {
