@@ -864,7 +864,7 @@ app.post("/lotteryexile", function (req, res) {
 
 app.post("/userlistforadmin", (req, res) => {
   var sql =
-    "SELECT txtLotteryname, txtProvidername, dtLotterydrawdate, txtLotteryresult FROM tbllotterymaster left join tblprovider on tbllotterymaster.refProvider=tblprovider.id";
+    "SELECT txtLotteryname, txtProvidername, date_format(dtLotterydrawdate,'%Y-%m-%d') as dtLotterydrawdate, txtLotteryresult FROM tbllotterymaster left join tblprovider on tbllotterymaster.refProvider=tblprovider.id";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);

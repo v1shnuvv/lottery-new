@@ -87,7 +87,7 @@
 .column2_inner2 label,
 .column2_inner3 label,
 .column2_inner4 label {
-  /* color: grey; */
+  color: grey;
   padding-left: 5px;
   padding-top: 2px;
 }
