@@ -1,5 +1,5 @@
 import "../components/AdminUserList.css";
-export default function AdminUserlist({ data,handlechange}) {
+export default function AdminUserlist({ data,handlechange, loname}) {
   
   return (
     <>
@@ -9,7 +9,7 @@ export default function AdminUserlist({ data,handlechange}) {
             <th></th>
             {/* <th>ID</th>
             <th>Username</th> */}
-            <th>Lottery Name</th>
+            <th >Lottery Name</th>
             <th>Provider Name</th>
             <th>Lottery Draw Date</th>
             <th>Lottery Result</th>
@@ -32,8 +32,13 @@ export default function AdminUserlist({ data,handlechange}) {
                   <td>{item.txtLotteryname}</td>
                   <td>{item.txtProvidername}</td>
                   <td>{item.dtLotterydrawdate}</td>
-                  <td>{item.txtLotteryresult}</td>
-                  {/* <td>{item.lotterydrawdate}</td> */}
+                  <td>{item.txtLotteryresult}<span></span></td>
+                  {/* <td>{(JSON.parse(item.txtLotteryresult)).map((itm, idx)=>{
+                    return(<>
+                    {itm}
+                    </>)
+                  })}</td> */}
+                  {/* <td>{JSON.parse(item.txtLotteryresult)}</td> */}
                 </tr>
               </>
             );

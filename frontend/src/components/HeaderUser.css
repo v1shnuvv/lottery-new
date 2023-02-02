@@ -152,6 +152,10 @@
     justify-content: space-evenly;
     padding: 5px;
 }
+.Header_row2 label{
+display: flex;
+justify-content: center;
+}
 .Header_row1_clm5_lt_logo span{
     color:goldenrod;
 }

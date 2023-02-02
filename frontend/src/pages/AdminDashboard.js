@@ -24,6 +24,7 @@ import List from "../components/List";
 import Sidemenu from "../components/Sidemenu";
 import AdminUnitlist from "./AdminUnitlist";
 import Providerinfo from "../components/ProviderInfo";
+import ResultUpdate from "../components/ResultUpdate";
 function Dashboard() {
   const navigate = useNavigate();
 
@@ -60,7 +61,7 @@ function Dashboard() {
   const [unitlist, setUnitlist] = useState([]);
   const [adminpurchase, setAdminpurchase] = useState([]);
 //component show----->
-const[shw, setShw]=useState([{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"}])
+const[shw, setShw]=useState([{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"}])
 console.log("investi",shw[0].shwme);
 const handleclick1=()=>{
   let temp = [...shw];
@@ -75,7 +76,7 @@ const handleclick2=()=>{
   for (const item of temp) {
     item.shwme="none"
   }
-  temp[1].shwme="block"
+  temp[6].shwme="block"
   setShw(temp)
 }
 const handleclick3=()=>{
@@ -110,6 +111,7 @@ const handleclick6=()=>{
   temp[5].shwme="block"
   setShw(temp)
 }
+
 
 //-----<
   useEffect(() => {
@@ -290,19 +292,19 @@ const handleclick6=()=>{
     navigate("/Login");
   };
   const handleLotteryAdd = () => {};
-  const label4click = (e) => {
+  const label5click = (e) => {
     navigate("/");
   };
-  const label5click = () => {
-    navigate("/AdminDashboard");
-  };
+  // const label5click = () => {
+  //   navigate("/AdminDashboard");
+  // };
+  // const label7click = () => {
+  //   navigate("/LotteryManager");
+  // };
+  // const label6click = () => {
+  //   navigate("/AdminUnit");
+  // };
   const label7click = () => {
-    navigate("/LotteryManager");
-  };
-  const label6click = () => {
-    navigate("/AdminUnit");
-  };
-  const label8click = () => {
     navigate("/TicketSelector", { state: { lotterydetails: lotterydetails } });
   };
   return (
@@ -313,16 +315,16 @@ const handleclick6=()=>{
           label1={usrname}
           label2={0}
           label3={"My Cart"}
-          label4={"Home"}
-          label5={"Dashboard"}
-          label6={"Summary"}
-          label7={"Lottery Manager"}
-          label8={"Buy Now"}
-          label4click={label4click}
+          label5={"Home"}
+          // label5={"Dashboard"}
+          // label6={"Summary"}
+          // label7={"Lottery Manager"}
+          label7={"Buy Now"}
           label5click={label5click}
+          // label5click={label5click}
+          // label7click={label7click}
+          // label6click={label6click}
           label7click={label7click}
-          label6click={label6click}
-          label8click={label8click}
         />
       </div>
       <div className="AdminDashboard_main">
@@ -340,6 +342,9 @@ const handleclick6=()=>{
 
           <div className="AdminDashboard_row" style={{display: shw[0].shwme}}>
             <AdminUnitlist/>
+          </div>
+          <div className="AdminDashboard_row" style={{display: shw[6].shwme}}>
+            <ResultUpdate/>
           </div>
           <div className="AdminDashboard_row" style={{display: shw[2].shwme}}>
             <AddLott/>

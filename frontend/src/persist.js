@@ -13,7 +13,8 @@ const initialState = {
   offerarray:[],
   ltryid:"",
   ltryname:"",
-  issubidexist:false
+  issubidexist:false,
+  lotterydetails:[]
 };
 
 function todoReducer(prevState=initialState, action) {
@@ -23,6 +24,9 @@ function todoReducer(prevState=initialState, action) {
       break;  
       case 'setLineArray': 
         return {...prevState, linearray: action.payload};
+        break;
+        case 'setLotterydetails': 
+        return {...prevState, lotterydetails: action.payload};
         break;
         case 'setOfferArray': 
         return {...prevState, offerarray: action.payload};

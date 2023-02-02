@@ -107,7 +107,7 @@ axios
   return (
     <>
       <div className="providerinfo_container">
-        <Collapsible
+        {/* <Collapsible
           trigger={
             <div className="providerinfo_header">
               <span>
@@ -116,7 +116,7 @@ axios
               <h4>Provider info</h4>
             </div>
           }
-        >
+        > */}
 
           <Provideredit 
           handleclickPdelete={handleclickPdelete}
@@ -158,7 +158,7 @@ axios
           
           />
           
-        </Collapsible>
+        {/* </Collapsible> */}
        
       </div>
     </>

@@ -13,37 +13,29 @@ export default function Offerselector({
   childdata,
   lineindex,
   ltryid,
-  show
+  show,
 }) {
   const [count, setCount] = useState(0);
   const [temparr, setTemparr] = useState([]);
-  // const [show, setShow] = useState(true);
+  const lotterydetails = useSelector((state) => state.lotterydetails);
+  const [sel_limit,setSel_limit]=useState("")
   const [showchk, setShowchk] = useState(false);
   const [selection, setSelection] = useState([]);
   const [arr, setArr] = useState([]);
-  // const [final, setFinal] = useState([]])
-  let selectionarray = []; 
+  let selectionarray = [];
   const offerarray = useSelector((state) => state.offerarray);
   // const ltryid = useSelector((state) => state.ltryid);
   const ltryname = useSelector((state) => state.ltryname);
   console.log("id and name", ltryid, ltryname);
   const dispatch = useDispatch();
-  var num = 3;
+  const [num,setNum] = useState("");
   var limit = 39;
 
   useEffect(() => {
     //console.log("line", linearray);
     console.log("offerarray", show);
+    setSel_limit(lotterydetails[0].sub_limit)
   }, []);
-  // useMemo(() => {
-
-  //   for (var i = num; i <= limit; i++) {
-  //     selectionarray.push([{ value: i, selected: false }])
-  //     // selectionarray=[...selectionarray,[{ value: i, selected: false }]]
-  //   }
-  //   console.log(selectionarray)
-  //   setArr(selectionarray)
-  // }, [])
 
   const handleClick = (e, indx) => {
     let temp = [...offerarray];
@@ -51,7 +43,7 @@ export default function Offerselector({
     for (const iterator of temp[lineindex]) {
       if (iterator.isselected) count++;
     }
-    if (count < 5) {
+    if (count < sel_limit) {
       temp[lineindex][indx].isselected = !temp[lineindex][indx].isselected;
 
       // console.log(temp[lineindex][indx].isselected);
@@ -63,27 +55,6 @@ export default function Offerselector({
 
       dispatch({ type: "setOfferArray", payload: temp });
     }
-    // console.log(indx);
-    // console.log(temp[lineindex][indx].isselected);
-
-    // Ends here
-
-    //   let newt = [];
-
-    //   for (const iterator of temp) {
-    //     console.log(iterator)
-    //     if (iterator.isselected == true) {
-    //       // console.log(iterator.value)
-    //       newt.push(iterator.value);
-    //       //  newt+=iterator.value+","
-    //     }
-    //     if (newt.length > 5 && iterator.isselected == true) {
-    //       iterator.isselected = false;
-    //       return;
-    //     }
-    //   }
-    //   dispatch({ type: "setLineArray", payload: temp });
-    //  console.log(newt)
   };
 
   const shuffle = () => {
@@ -92,7 +63,7 @@ export default function Offerselector({
     let ta = [];
     let r;
     let randomnum = [];
-    while (randomnum.length < 5) {
+    while (randomnum.length < sel_limit) {
       r = Math.floor(Math.random() * (limit - num)) + num;
       if (randomnum.indexOf(r) == -1) {
         randomnum.push(r);
@@ -115,40 +86,6 @@ export default function Offerselector({
     }
 
     dispatch({ type: "setOfferArray", payload: temp });
-
-    // let ta = [];
-    // let test = [...final];
-    // let randomnum = [];
-    // let temp = [...arr];
-    // let r;
-    // // console.log(test);
-    // const randomarray = [];
-    // while (randomnum.length < 5) {
-    //   r = Math.floor(Math.random() * (limit - num)) + num;
-    //   if (randomnum.indexOf(r) == -1) {
-    //     randomnum.push(r);
-    //     ta.push({ value: r, selected: true });
-    //   }
-    // }
-    // const tempa = [...arr];
-    // for (const eleent of tempa) {
-    //   eleent.selected = false;
-    // }
-    // for (const eleent of tempa) {
-    //   for (const elt of ta) {
-    //     if (eleent.value == elt.value) {
-    //       eleent.selected = true;
-    //       // test.push({ value: eleent.value, selected: true });
-    //       test[lineindex] = [test.push(eleent.value)];
-    //       // setFinal({lineindex:test})
-    //     }
-    //   }
-    // }
-    // // var t=[...final]
-    // // t=[...t,test]
-    // // setFinal(test)
-    // console.log(test);
-    // setTemparr(tempa);
   };
   const handlerefresh = () => {
     const tempsel = [...offerarray];
@@ -158,10 +95,9 @@ export default function Offerselector({
     }
     dispatch({ type: "setOfferArray", payload: tempsel });
   };
-  return (show ?(
+  return show ? (
     <div className="Lineselector">
-     
-      <div className="Header">{label1}</div> 
+      <div className="Header">{label1}</div>
       <div className="Middle">
         <>
           {" "}
@@ -197,6 +133,8 @@ export default function Offerselector({
         </button>
       </div>
          
-    </div>):""
+    </div>
+  ) : (
+    ""
   );
 }

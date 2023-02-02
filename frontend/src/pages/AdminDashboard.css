@@ -21,7 +21,7 @@
 background-color: #020223;
 }
 .AdminDashboard_main_col_right{
-  width: calc(100% - 260px);
+  width: calc(100% - 210px);
   padding: 15px;
 }
 .AdminDashboard_row {

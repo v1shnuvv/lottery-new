@@ -16,6 +16,8 @@ import { GiConsoleController } from "react-icons/gi";
 
 
 function HomePage() {
+  const lotterydetails = useSelector((state) => state.lotterydetails);
+  console.log("hp",lotterydetails)
   const navigate = useNavigate();
   const [lotteryname, setLotteryname] = useState("");
   const [date, setDate] = useState("");
@@ -24,7 +26,7 @@ function HomePage() {
   const [count, setCount] = useState("");
   var uname = localStorage.getItem("uname");
   const userid=localStorage.getItem("userid")
-  const [lotterydetails,setLotterydetails]=useState([])
+  // const [lotterydetails,setLotterydetails]=useState([])
   console.log(userid)
   console.log("dt",date)
   // const ltryid = useSelector((state) => state.ltryid);
@@ -41,7 +43,8 @@ function HomePage() {
         setLotteryname(res.data[0].txtLotteryname);
         setPrize(res.data[0].txtLotteryprize);
         setLotteryid(res.data[0].id);
-        setLotterydetails(res.data);
+        // setLotterydetails(res.data);
+        dispatch({type:'setLotterydetails',payload:res.data})
         var t = false;
         for (const iterator of res.data) {
           if (iterator.sub_id != null) {
@@ -79,7 +82,8 @@ function HomePage() {
   };
   const registerclick = (e) => {};
   const label6click = (e) => {
-    navigate("/TicketSelector", { state: {lotterydetails:lotterydetails } });
+    navigate("/TicketSelector");
+    // { state: {lotterydetails:lotterydetails } }
   };
   const label7click = () => {
     navigate("/Login");
@@ -90,7 +94,7 @@ function HomePage() {
   const ticketPurchase = () => {
     console.log("lotterydetails",lotterydetails)
    
-      navigate("/TicketSelector", { state: {lotterydetails:lotterydetails } });
+      navigate("/TicketSelector");
 
   };
   return (

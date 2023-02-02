@@ -57,7 +57,7 @@ export default function AddLottery() {
             lotterycost: lotterycost,
             lotterypurchase: lotterypurchase,
             lotteryselection: lotteryselect,
-            lotterysub: lotterysub,
+            lotterysub: lotterysub == "" ? "No sub lottery" : lotterysub,
             agentcommission: agentcommission,
             commissionrate: commissionrate,
             tax: tax,
@@ -69,11 +69,11 @@ export default function AddLottery() {
             third: third,
             fourth: fourth,
             fifth: fifth,
-            sixth: sixth,
-            noofCol: noofCol,
-            noofRow: noofRow,
-            colstartNo: colstartNo,
-            colendNo: colendNo,
+            sixth: sixth == "" ? 0 : sixth,
+            noofCol: noofCol == "" ? 0 : noofCol,
+            noofRow: noofRow == "" ? 0 : noofRow,
+            colstartNo: colstartNo == "" ? 0 : colstartNo,
+            colendNo: colendNo == "" ? 0 : colendNo,
             // id: id
 
         }
@@ -191,7 +191,7 @@ export default function AddLottery() {
     return (
         <>
             <div className="AddLottery">
-                <Collapsible trigger={<div className="AddLottery_header"><span><MdArrowDropDownCircle></MdArrowDropDownCircle></span> Add Lottery </div>}>
+                {/* <Collapsible trigger={<div className="AddLottery_header"><span><MdArrowDropDownCircle></MdArrowDropDownCircle></span> Add Lottery </div>}> */}
 
 
                     <div className="AddLottery_sheader" >
@@ -341,7 +341,7 @@ export default function AddLottery() {
                             <button onClick={(e) => { handleAddlottery(e) }}>Add Lottery</button>
                         </div>
                     </div>
-                </Collapsible>
+                {/* </Collapsible> */}
             </div >
 
         </>

@@ -10,15 +10,11 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 
-
-
-
 export default function AdminUnitlist() {
-    const navigate = useNavigate();
-    const uname = localStorage.getItem("usrname");
-    const [unitdetails, setUnitdetails] = useState([]);
-    const [searchdate, setSearchdate] = useState([]);
-
+  const navigate = useNavigate();
+  const uname = localStorage.getItem("usrname");
+  const [unitdetails, setUnitdetails] = useState([]);
+  const [searchdate, setSearchdate] = useState([]);
 
   const [userarray, setUserarray] = useState([]);
   const [userdata, setUserdata] = useState([]);
@@ -29,6 +25,8 @@ export default function AdminUnitlist() {
   const [drawdate, setDrawdate] = useState("");
   const [selectall, setSelectall] = useState(false);
   const [mainshow, setMainshow] = useState(false);
+
+  console.log("udata", userarray);
 
   useEffect(() => {
     let url = "http://localhost:8080/userlistforadmin";
@@ -56,21 +54,28 @@ export default function AdminUnitlist() {
   const filterhandleclick = () => {
     setMainshow(mainshow ? false : true);
     setUserarray(userdata);
-    setLotteryname("");//
-    // setUsername("");//
-    setDrawdate("");//
+    setLotteryname(""); 
+    setProvidername("");//
+    setDrawdate("");
     // setPurchasedate1("");//
   };
-
+  console.log("li/p", Lotteryname);
   //=================Filterbox=======================//
 
   const handleclickfilter = () => {
-    let templottery = userarray.filter((item) =>
+    
+    let templottery= userarray.filter((item) =>
       item.txtLotteryname.toLowerCase().includes(Lotteryname.toLowerCase())
     );
     let tempprovider = userarray.filter((item) =>
       item.txtProvidername.toLowerCase().includes(providername.toLowerCase())
     );
+    let tempCompLotPro = userarray.filter((item)=>
+    item.txtLotteryname.toLowerCase().includes(Lotteryname.toLowerCase()) &&
+    item.txtProvidername.toLowerCase().includes(providername.toLowerCase())
+    )
+    console.log("rp", tempCompLotPro);
+    
     // let newsample = userarray.filter(
     //   (item) =>
     //     item.txtProvidername.toLowerCase().includes(providername.toLowerCase()) &&
@@ -88,30 +93,20 @@ export default function AdminUnitlist() {
     // console.log("myname", username);
     // console.log("mylott", Lotteryname);
     // console.log("purdate",purchasedate1)
-    if (
-      templottery.length > 0
-      //  &&
-      // sample.length > 0 
-      // &&
-      // pdate.length === 0 &&
-      // ddate.length === 0
-    ) {
-      console.log("using1")
+    if (Lotteryname.length>0 && providername.length==0){
       setUserarray(templottery);
-    // else if (
-    //   ddate.length > 0 &&
-    //   pdate.length === 0
-    // ) {
-    //   console.log("using2");
-    //   setUserarray(ddate);
-    // } else{
-    //   setUserarray(pdate);
-    } else{
+    } else if (providername.length>0 && Lotteryname.length==0) {
       setUserarray(tempprovider);
-
+    } else if(Lotteryname.length>0 && providername.length>0 ){
+      setUserarray(tempCompLotPro)
+    }
+    else {
     }
     setMainshow(false);
     console.log(mainshow);
+    console.log("tp",tempprovider);
+    console.log("tl",templottery);
+    console.log("pr", providername.length, Lotteryname.length);
   };
 
   //=================searchbar===================//
@@ -120,10 +115,7 @@ export default function AdminUnitlist() {
     let temp = userdata.filter(
       (item) =>
         item.txtLotteryname.toLowerCase().includes(value.toLowerCase()) ||
-        item.name.toLowerCase().includes(value.toLowerCase()) ||
-        item.txtaddress.toLowerCase().includes(value.toLowerCase()) ||
-        item.purchasedate.includes(value) ||
-        item.lotterydrawdate.includes(value)
+        item.txtProvidername.toLowerCase().includes(value.toLowerCase()) 
     );
 
     setUserarray(temp);
@@ -150,18 +142,19 @@ export default function AdminUnitlist() {
   const handlechange = () => {
     setSelectall(selectall ? false : true);
     var temp = [...userarray];
-    if(selectall===false){
-    for (const item of temp) {
-      // if (item.ischecked == false) {
-      //   item.ischecked = true;
-      //   console.log("hello iam");
-      // } else {
-      //   item.ischecked = false;
-      // }
-      item.ischecked=true
-    }}else{
-      for(const item of temp){
-        item.ischecked=false;
+    if (selectall === false) {
+      for (const item of temp) {
+        // if (item.ischecked == false) {
+        //   item.ischecked = true;
+        //   console.log("hello iam");
+        // } else {
+        //   item.ischecked = false;
+        // }
+        item.ischecked = true;
+      }
+    } else {
+      for (const item of temp) {
+        item.ischecked = false;
       }
     }
     setUserarray(temp);
@@ -216,19 +209,18 @@ export default function AdminUnitlist() {
   //       })
   //       .catch();
   //   };
-const label4click=()=>{
-  navigate("/")
-}
-const label5click=()=>{
-  navigate("/AdminDashboard")
-}
-const label7click=()=>{
-  navigate("/LotteryManager")
-  
-}
-const label6click=()=>{
-  navigate("/AdminUnit")
-}
+  const label4click = () => {
+    navigate("/");
+  };
+  const label5click = () => {
+    navigate("/AdminDashboard");
+  };
+  const label7click = () => {
+    navigate("/LotteryManager");
+  };
+  const label6click = () => {
+    navigate("/AdminUnit");
+  };
   return (
     <div className="AdminUnitlist_outer">
       {/* <div className="AdminUnitlist_headerUser">
@@ -260,23 +252,23 @@ const label6click=()=>{
         />
       </div>
       <div className="AdminUnitlist_filterbox">
-      <Filterbox
-        showfilter={mainshow}
-        
-        setLotteryname={setLotteryname}
-        setProvidername={setProvidername}
-        // setPurchasedate1={setPurchasedate1}
-        // setPurchasedate2={setPurchasedate2}
-        setDrawdate={setDrawdate}//
-        handleclickfilter={handleclickfilter}
-      />
+        <Filterbox
+          showfilter={mainshow}
+          setLotteryname={setLotteryname}
+          setProvidername={setProvidername}
+          // setPurchasedate1={setPurchasedate1}
+          // setPurchasedate2={setPurchasedate2}
+          setDrawdate={setDrawdate} //
+          handleclickfilter={handleclickfilter}
+        />
       </div>
-      
+
       <div className="AdminUnitlist_unitlist">
         <div className="AdminUnitlist_unitlist_item">
           <AdminUserList data={userarray} handlechange={handlechanging} />
         </div>
       </div>
+    
       {/* <div className="AdminUnitlist_footer">
         <Footer />
 

@@ -63,7 +63,7 @@ export default function Filterbox({
             <MdAddCircle onClick={selectLotteryname} />
           </div>
         </div>
-        <div className="Filterbox_row3">
+        {/* <div className="Filterbox_row3">
           <div>
             <label>Lottery Draw Date</label>
             <Model3
@@ -77,7 +77,7 @@ export default function Filterbox({
           <div>
             <MdAddCircle onClick={selectpurchasedate} />
           </div>
-        </div>
+        </div> */}
         {/* <div className="Filterbox_row4">
           <div>
             <label>LotteryDrawdate</label>

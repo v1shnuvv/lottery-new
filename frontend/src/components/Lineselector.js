@@ -4,6 +4,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { TbArrowsShuffle } from "react-icons/tb";
 import Plusbutton from "./Plusbutton";
 import { GiSteampunkGoggles } from "react-icons/gi";
+
 import { MdSportsTennis } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -20,19 +21,22 @@ export default function Lineselector({
   const [showchk, setShowchk] = useState(false);
   const [selection, setSelection] = useState([]);
   const [arr, setArr] = useState([]);
-  // const [final, setFinal] = useState([]])
   let selectionarray = [];
+  const lotterydetails = useSelector((state) => state.lotterydetails);
+  console.log("ls+ld",lotterydetails)
   const linearray = useSelector((state) => state.linearray);
   const offerarray = useSelector((state) => state.offerarray);
-  // const ltryid = useSelector((state) => state.ltryid);
   const ltryname = useSelector((state) => state.ltryname);
-  // console.log("id and name", ltryid, ltryname);
   const dispatch = useDispatch();
-  var num = 3;
-  var limit = 39;
+  const [num,setNum]  = useState("");//startnum
+  const [limit,setLimit]= useState("");
+  const [numberlimit,setNumberlimit]=useState("")
   useEffect(() => {
     console.log("line", linearray);
     console.log("offerarray", offerarray);
+    setNum(lotterydetails[0].mina_start)
+    setLimit(lotterydetails[0].main_end)
+    setNumberlimit(lotterydetails[0].main_limit)
   }, []);
   // useMemo(() => {
   //   for (var i = num; i <= limit; i++) {
@@ -48,7 +52,7 @@ export default function Lineselector({
     for (const iterator of temp[lineindex]) {
       if (iterator.isselected) count++;
     }
-    if (count < 5) {
+    if (count < numberlimit) {
       temp[lineindex][indx].isselected = !temp[lineindex][indx].isselected;
       // console.log(temp[lineindex][indx].isselected);
       dispatch({ type: "setLineArray", payload: temp });
@@ -57,24 +61,6 @@ export default function Lineselector({
       // console.log(temp[lineindex][indx].isselected);
       dispatch({ type: "setLineArray", payload: temp });
     }
-    // console.log(indx);
-    // console.log(temp[lineindex][indx].isselected);
-    // Ends here
-    //   let newt = [];
-    //   for (const iterator of temp) {
-    //     console.log(iterator)
-    //     if (iterator.isselected == true) {
-    //       // console.log(iterator.value)
-    //       newt.push(iterator.value);
-    //       //  newt+=iterator.value+","
-    //     }
-    //     if (newt.length > 5 && iterator.isselected == true) {
-    //       iterator.isselected = false;
-    //       return;
-    //     }
-    //   }
-    //   dispatch({ type: "setLineArray", payload: temp });
-    //  console.log(newt)
   };
   const shuffle = () => {
     let temp = [...linearray];
@@ -82,7 +68,7 @@ export default function Lineselector({
     let ta = [];
     let r;
     let randomnum = [];
-    while (randomnum.length < 5) {
+    while (randomnum.length < numberlimit) {
       r = Math.floor(Math.random() * (limit - num)) + num;
       if (randomnum.indexOf(r) == -1) {
         randomnum.push(r);
@@ -103,39 +89,6 @@ export default function Lineselector({
       }
     }
     dispatch({ type: "setLineArray", payload: temp });
-    // let ta = [];
-    // let test = [...final];
-    // let randomnum = [];
-    // let temp = [...arr];
-    // let r;
-    // // console.log(test);
-    // const randomarray = [];
-    // while (randomnum.length < 5) {
-    //   r = Math.floor(Math.random() * (limit - num)) + num;
-    //   if (randomnum.indexOf(r) == -1) {
-    //     randomnum.push(r);
-    //     ta.push({ value: r, selected: true });
-    //   }
-    // }
-    // const tempa = [...arr];
-    // for (const eleent of tempa) {
-    //   eleent.selected = false;
-    // }
-    // for (const eleent of tempa) {
-    //   for (const elt of ta) {
-    //     if (eleent.value == elt.value) {
-    //       eleent.selected = true;
-    //       // test.push({ value: eleent.value, selected: true });
-    //       test[lineindex] = [test.push(eleent.value)];
-    //       // setFinal({lineindex:test})
-    //     }
-    //   }
-    // }
-    // // var t=[...final]
-    // // t=[...t,test]
-    // // setFinal(test)
-    // console.log(test);
-    // setTemparr(tempa);
   };
   const handlerefresh = () => {
     const tempsel = [...linearray];

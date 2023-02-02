@@ -136,7 +136,7 @@ app.post("/confirmuser", (req, res) => {
 
 app.post("/drawticket", (req, res) => {
   let sql =
-    "SELECT tm.id ,tm .txtLotteryname as main_ltry ,tb.id as sub_id,tb.txtLotteryname as sub_ltry ,tm.txtFirstprize, date_format( tm.dtLotterydrawdate,'%Y-%m-%d') as drawdate,date_format(tb.dtLotterydrawdate,'%Y-%m-%d') as sub_drawdate from tbllotterymaster tm left join tbllotterymaster tb on tm.txtSubLottery=tb.id WHERE tm.dtLotterydrawdate > NOW()ORDER BY tm.dtLotterydrawdate LIMIT 1; ";
+    "SELECT tm.id ,tm .txtLotteryname as main_ltry ,tb.id as sub_id,tm.txtPurchaseLimit as purchase,tm.txtSelectionLimit as main_limit,tb.txtSelectionLimit as sub_limit,tb.txtLotteryname as sub_ltry ,tm.txtFirstprize,tm.txtStartRange as mina_start,tm.txtEndRange as main_end,tb.txtStartRange as sub_start,tb.txtEndRange as sub_end, date_format( tm.dtLotterydrawdate,'%Y-%m-%d') as drawdate,date_format(tb.dtLotterydrawdate,'%Y-%m-%d') as sub_drawdate from tbllotterymaster tm left join tbllotterymaster tb on tm.txtSubLottery=tb.id WHERE tm.dtLotterydrawdate > NOW()ORDER BY tm.dtLotterydrawdate LIMIT 1;  ";
   con.query(sql, (err, result) => {
     res.send(result);
     console.log(result);
@@ -470,7 +470,7 @@ app.post("/search_date", (req, res) => {
 
 app.post("/viewprovider", (req, res) => {
   var sql =
-    "SELECT id, txtProvidername,txtEmail,txtContactnumber,txtRegisteredaddress,txtZipcode,refState FROM tblprovider;";
+    "SELECT id, txtProvidername,txtEmail,txtContactnumber,txtRegisteredaddress,txtZipcode,refState FROM tblprovider where txtDeleteflag =0;";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
@@ -511,7 +511,7 @@ app.post("/editprovider", (req, res) => {
 
 app.post("/deleteprovider", (req, res) => {
   let providereditid = req.body.providereditid;
-  var sql = "DELETE FROM tblprovider WHERE id='" + providereditid + "';";
+  var sql = "update tblprovider set txtDeleteflag = 1 where id = '"+providereditid+"';";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
@@ -577,7 +577,7 @@ app.post("/addlottery", function (req, res) {
   let third = req.body.third;
   let fourth = req.body.fourth;
   let fifth = req.body.fifth;
-  let sixth = req.body.sixth == "" ? 0 : req.body.sixth;
+  let sixth = req.body.sixth ;
   let colendNo = req.body.colendNo;
   let id = req.body.id;
   var sql =
@@ -864,12 +864,61 @@ app.post("/lotteryexile", function (req, res) {
 
 app.post("/userlistforadmin", (req, res) => {
   var sql =
-    "SELECT txtLotteryname, txtProvidername, date_format(dtLotterydrawdate,'%Y-%m-%d') as dtLotterydrawdate, txtLotteryresult FROM tbllotterymaster left join tblprovider on tbllotterymaster.refProvider=tblprovider.id";
+    "SELECT ifnull(txtLotteryname, 'null') as txtLotteryname, ifnull(txtProvidername, 'null') as txtProvidername, ifnull(date_format(dtLotterydrawdate,'%Y-%m-%d'), 'null')  as dtLotterydrawdate, ifnull(txtLotteryresult, 'Result not published') as txtLotteryresult FROM tbllotterymaster left join tblprovider on tbllotterymaster.refProvider=tblprovider.id";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
     res.send(result);
   });
+});
+
+//-------------------<resultupdate<<----------------------------------------
+app.post('/RaffleBothInsert', (req, res) => {
+  console.log("both insert ", req.body)
+  // let id= req.body.id;
+  let winl = req.body.winl;
+  let winr = req.body.winr;
+  console.log("lottery", winl.resultl)
+  console.log("raffle", winr.resultr)
+  let sql = "update tbllotterymaster set "
+  let condition = ""
+  // if (winl.resultl != "") {
+  //   condition += " txtLotteryresult='" + winl.resultl + "' "
+  //   if (winr.resultr != "")
+  //     condition += " , "
+  // }
+  // if (winr.resultr != "") {
+  //   condition += " txtRaffleid='" + winr.resultr + "' "
+  // }
+  if (winl.lid != "") {
+    condition += " txtLotteryresult='" + winl.resultl + "' "
+    if (winr.rid != "")
+      condition += " txtRaffleid='" + winr.resultr + "'  where id ='" + winr.rid + "'";
+    else
+      condition += " where id ='" + winl.lid + "' ";
+  }
+  if (winr.rid != "") { condition += " txtRaffleid='" + winr.resultr + "'  where id ='" + winr.rid + "'"; }
+  sql += condition;
+  // let sql = "update tblresultmaster SET txtRaffleid ='" + winr.resultr + "',txtWinningnumber ='" + winl.resultl + "' WHERE refLotterymaster='" + winr.rid + "';";
+  //let sql = "UPDATE tbllotterymaster SET txtLotteryresult = IF(txtLotteryresult IS NULL,' ','"+winl.resultl+"'), txtRaffleid = IF(txtRaffleid IS NULL,'', '"+winr.resultr+"') WHERE id ='"+winl.lid+"';";
+  console.log("new==>" + sql)
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    console.log(result);
+    res.send(result);
+  })
+});
+
+app.post('/Lotteryprovdresultfetch', (req, res) => {
+  // let id=req.body.id;
+  // let sql="Select pr.txtProvidername as Providername, lm.txtLotteryname as Lotteryname, date_format(lm.dtLotterydrawdate,' %Y - %m - %d ') as DrawDate  from tblprovider pr  LEFT JOIN tbllotterymaster lm   ON lm.refProvider =  pr.id  ";
+  // let sql = "SELECT pr.txtProvidername AS Providername, lm.id as lotteryid, lm.txtLotteryname AS Lotteryname, DATE_FORMAT(lm.dtLotterydrawdate, ' %Y - %m - %d ') AS DrawDate, rm.txtWinningnumber as Winningnumber, rm.txtRaffleid as Raffleid FROM tblprovider pr LEFT JOIN tbllotterymaster lm ON lm.refProvider = pr.id left join tblresultmaster rm on lm.id=rm.refLotterymaster where rm.txtWinningnumber is null or  rm.txtRaffleid is null";
+  let sql = "SELECT pr.txtProvidername AS Providername, lm.id as lotteryid, lm.txtLotteryname AS Lotteryname,  DATE_FORMAT(lm.dtLotterydrawdate, ' %Y - %m - %d ') AS DrawDate, lm.txtLotteryresult as Winningnumber, lm.txtRaffleid as Raffleid FROM tblprovider pr LEFT JOIN tbllotterymaster lm ON lm.refProvider = pr.id where  (lm.txtLotteryresult is null or lm.txtRaffleid is null) or (lm.txtLotteryresult is null and lm.txtRaffleid is null)";
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    console.log(result);
+    res.send(result);
+  })
 });
 
 /*********************************************************Archana =- Ticket Selector      ********************************************************************************************************************* */

@@ -31,9 +31,17 @@ export default function TicketSelector() {
   const navigate = useNavigate();
   const id = localStorage.getItem("id");
   const [lotteryid, setLotteryid] = useState("");
-  const [lotterydetails, setLotterydetails] = useState([]);
+  const[linenum,setlinenum]=useState("")
+  const[linenumnew,setlinenumnew]=useState(5);
+  const [main_start,setMainstart]=useState("");
+  const [main_end,setMainend]=useState("")
+  const[sub_start,setSubstart]=useState("");
+  const[sub_end,setSubend]=useState("")
+  // const [lotterydetails, setLotterydetails] = useState([]);
   const linearray = useSelector((state) => state.linearray);
   const offerarray = useSelector((state) => state.offerarray);
+  const lotterydetails = useSelector((state) => state.lotterydetails);
+  console.log("ts+ld",lotterydetails)
   const dispatch = useDispatch();
   const location = useLocation();
   const usrname = localStorage.getItem("usrname");
@@ -42,8 +50,10 @@ export default function TicketSelector() {
   //const [isfinishd, setisfinished] = useState(false);
   const isfinishd = useSelector((state) => state.issubidexist);
   console.log("isfinished",isfinishd)
-console.log("ts",usrname);
-  var linenum = 3;
+  console.log("ts",usrname);
+  // var linenum = 2;
+
+  // console.log("linenum",linenum)
   var temp = [];
   // useEffect(()=>{
   //   dispatch({ type: "setLineArray", payload: [] });
@@ -53,17 +63,38 @@ console.log("ts",usrname);
   console.log("userid", userid);
   const cnt = localStorage.getItem("cartcount");
 
+
+  // useEffect(()=>{
+
+  //   //alert('here')
+  //   let temp=[];
+  //   for(let k=0;k<linenumnew;k++){
+  //     temp.push(k)
+  //   }
+  //   setAr(temp)
+
+
+  // },[linenumnew])
+
   useEffect(() => {
+   setlinenum(lotterydetails[0].purchase) 
+   setMainstart(lotterydetails[0].mina_start);  
+   setMainend(lotterydetails[0].main_end)
+   setSubstart(lotterydetails[0].sub_start)
+   setSubend(lotterydetails[0].sub_end)
     dispatch({ type: "setLineArray", payload: [] });
-    let id = location.state.lotterydetails[0].sub_id;
+    let id = lotterydetails[0].sub_id;
     setSubltryid(id);
-    let temp = [...linearray];
+    // let temp = [...linearray];
+    let temp=[];
     let t = [];
     // console.log(temp);
+    console.log("length",temp.length)
     if (temp.length == 0) {
+      console.log("len",linenum)
       for (var i = 0; i < linenum; i++) {
         var tarray = [];
-        for (let j = 1; j <= 39; j++) {
+        for (let j = main_start; j <= main_end; j++) {
           let tobj = { value: j, isselected: false };
           tarray.push(tobj);
           // tarray.push()
@@ -84,7 +115,7 @@ console.log("ts",usrname);
 
       for (var i = 0; i < linenum; i++) {
         var offerarray = [];
-        for (let j = 1; j <= 39; j++) {
+        for (let j = sub_start; j <= sub_end; j++) {
           let offerobj = { value: j, isselected: false };
           offerarray.push(offerobj);
         }
@@ -109,12 +140,12 @@ console.log("ts",usrname);
         // setLotteryname(res.data[0].txtLotteryname);
         // setPrize(res.data[0].txtLotteryprize);
         setLotteryid(res.data[0].id);
-        setLotterydetails(res.data);
+        // setLotterydetails(res.data);
       })
       .catch();
-    if (location.state.lotterydetails != "") {
-      console.log("location.state", location.state.lotterydetails);
-      setLotterylist(location.state.lotterydetails);
+    if (lotterydetails != "") {
+      console.log("location.state", lotterydetails);
+      setLotterylist(lotterydetails);
     } else {
       let url = "http://localhost:8080/ticketselector_lotteryfetch";
       let header = {};
@@ -128,7 +159,7 @@ console.log("ts",usrname);
         })
         .catch();
     }
-  }, []);
+  }, [linenum]);
   const home = () => {
     navigate("/");
   };
@@ -215,27 +246,27 @@ console.log("ts",usrname);
     }
   };
 
-  const childdata = (e, selection, setShowchk) => {
-    e.preventDefault();
-    setValue(selection);
+  // const childdata = (e, selection, setShowchk) => {
+  //   e.preventDefault();
+  //   setValue(selection);
 
-    if (selection.length < 5) {
-      setErrmsg("Need to select 5 numbers before confirming!!");
-    } else if (selection != "") {
-      let url = "http://localhost:8000/insertunit";
-      let request = {
-        firstnum: selection[0],
-        secondnum: selection[1],
-        thirdnum: selection[2],
-        fournum: selection[3],
-        fifthnum: selection[4],
-        id: id,
-      };
+  //   if (selection.length < 5) {
+  //     setErrmsg("Need to select 5 numbers before confirming!!");
+  //   } else if (selection != "") {
+  //     let url = "http://localhost:8000/insertunit";
+  //     let request = {
+  //       firstnum: selection[0],
+  //       secondnum: selection[1],
+  //       thirdnum: selection[2],
+  //       fournum: selection[3],
+  //       fifthnum: selection[4],
+  //       id: id,
+  //     };
 
-      setShowchk(true);
-      setErrmsg("");
-    }
-  };
+  //     setShowchk(true);
+  //     setErrmsg("");
+  //   }
+  // };
   const callfn = (e) => {
     // var x = document.getElementById("abc").label;
     // console.log("x", x);
@@ -277,6 +308,11 @@ console.log("ts",usrname);
   return (
     <>
       <div className="ticketselector_outer">
+        {/* <label style={{color:'white'}}>Here{linenumnew}
+        {ar.map((itm, indx)=>{
+          return <>{indx} <br /></>
+        })}
+        </label> */}
         <HeaderUser
           label1={usrname}
           label3={""}
@@ -363,7 +399,7 @@ console.log("ts",usrname);
                   <Lineselector
                     label1={"Unit" + index}
                     setValue={setValue}
-                    childdata={childdata}
+                   
                     lineindex={index}
                     ltryid={ltryid}
                     show={!show}
@@ -392,7 +428,7 @@ console.log("ts",usrname);
                   <Offerselector
                     label1={"Unit" + index}
                     setValue={setValue}
-                    childdata={childdata}
+                    
                     lineindex={index}
                     ltryid={ltryid}
                     show={show}

@@ -1,6 +1,6 @@
 
 .sidemenu_menu{
-    width: 260px;
+    width: 210px;
     /* padding:10px; */
     display: flex;
     flex-direction: column;
@@ -9,7 +9,7 @@
     /* min-height: 100vh; */
 }
 
-label{
+.sidemenu_menu label{
     font-size: 1rem;
     color:white;
     width: 100%;
