@@ -1,18 +1,30 @@
 import "../components/AdminUserList.css";
-export default function AdminUserlist({ data,handlechange, loname}) {
+import { useState } from "react";
+import { IoIosArrowUp, IoIosArrowDown, } from "react-icons/io"
+export default function AdminUserlist({ data,handlechange, sortnamea, sortnamed, sortproa, sortprod, sortdatea, sortdated,lonamedown2, lonameup2, showloname, providerup2, providerdown2, showproname, dateup2, datedown2, showdate}) {
   
   return (
     <>
       <table>
         <tbody>
           <tr>
-            <th></th>
+          <th></th>
             {/* <th>ID</th>
             <th>Username</th> */}
-            <th >Lottery Name</th>
-            <th>Provider Name</th>
-            <th>Lottery Draw Date</th>
-            <th>Lottery Result</th>
+            <th onClick={e => {showloname()}}>Lottery Name
+              <button id= "lonameup" onClick={e => { sortnamea(e)  }} style={{display: lonameup2}} ><IoIosArrowUp /></button>
+              <button id= "lonamedown" onClick={e => { sortnamed(e) }} style={{display: lonamedown2}}><IoIosArrowDown /></button>
+              
+            </th>
+            <th onClick={e => {showproname()}}>Provider Name
+              <button id= "providerup" onClick={e => { sortproa(e) }} style={{display: providerup2}}><IoIosArrowUp /></button>
+              <button id= "providerdown" onClick={e => { sortprod(e) }} style={{display: providerdown2}}><IoIosArrowDown /></button>
+            </th>
+            <th onClick={e => {showdate()}}>Lottery Draw Date
+              <button id= "dateup" onClick={e => { sortdatea() }} style={{display: dateup2}}><IoIosArrowUp /></button>
+              <button id= "datedown" onClick={e => { sortdated() }} style={{display: datedown2}}><IoIosArrowDown /></button>
+            </th>
+            <th>Lottery Result</th>
           </tr>
           {data.map((item, index) => {
             return (

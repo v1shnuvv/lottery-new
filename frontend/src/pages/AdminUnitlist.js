@@ -25,8 +25,16 @@ export default function AdminUnitlist() {
   const [drawdate, setDrawdate] = useState("");
   const [selectall, setSelectall] = useState(false);
   const [mainshow, setMainshow] = useState(false);
+//adminuserlist
+  const [lonameup2, setLonameup2] = useState("none");
+  const [lonamedown2, setLonamedown2] = useState("none");
+  const [providerup2, setProviderup2] = useState("none");
+  const [providerdown2, setProviderdown2] = useState("none");
+  const [dateup2, setDateup2] = useState("none");
+  const [datedown2, setDatedown2] = useState("none")
+  const _ = require("lodash");
+ 
 
-  console.log("udata", userarray);
 
   useEffect(() => {
     let url = "http://localhost:8080/userlistforadmin";
@@ -160,6 +168,78 @@ export default function AdminUnitlist() {
     setUserarray(temp);
   };
 
+//adminuserlist
+const showloname =() => {
+  
+  if(lonameup2=="none"){
+    setLonameup2("block")
+  }
+}
+
+const showproname =() => {
+  
+  if(providerup2=="none"){
+    setProviderup2("block")
+  }
+}
+
+const showdate =() => {
+  
+  if(dateup2=="none"){
+    setDateup2("block")
+  }
+}
+
+const sortnamea =(e) => {
+  let sortnamea = _.orderBy(userarray, ['txtLotteryname' ], ['asc']);
+  console.log("sortnamea",sortnamea);
+  console.log("doc",document.getElementById("lonameup").style.display);
+  setUserarray(sortnamea);
+  setLonamedown2("block")
+  setLonameup2("none")
+  console.log(lonamedown2)
+}
+
+const sortnamed =(e) => {
+  let sortnamed = _.orderBy(userarray, ['txtLotteryname' ], ['desc']);
+  console.log("sortnamed",sortnamed);
+  setLonamedown2("none")
+  setLonameup2("block")
+  setUserarray(sortnamed);
+}
+
+const sortproa =() => {
+  let sortproa = _.orderBy(userarray, ['txtProvidername' ], ['asc']);
+  console.log("sortproa",sortproa);
+  setProviderdown2("block")
+  setProviderup2("none")
+  setUserarray(sortproa);
+}
+
+const sortprod =() => {
+  let sortprod = _.orderBy(userarray, ['txtProvidername' ], ['desc']);
+  console.log("sortprod",sortprod);
+  setProviderdown2("none")
+  setProviderup2("block")
+  setUserarray(sortprod);
+}
+
+const sortdatea =() => {
+  let sortdatea = _.orderBy(userarray, ['dtLotterydrawdate' ], ['asc']);
+  console.log("sortdatea",sortdatea);
+  setDatedown2("block")
+  setDateup2("none")
+  setUserarray(sortdatea);
+}
+
+const sortdated =() => {
+  let sortdated = _.orderBy(userarray, ['dtLotterydrawdate' ], ['desc']);
+  console.log("sortdated",sortdated);
+  setDatedown2("none")
+  setDateup2("block")
+  setUserarray(sortdated);
+}
+
   //================================================================================//
 
   //   const LogIn = () => {
@@ -265,7 +345,7 @@ export default function AdminUnitlist() {
 
       <div className="AdminUnitlist_unitlist">
         <div className="AdminUnitlist_unitlist_item">
-          <AdminUserList data={userarray} handlechange={handlechanging} />
+          <AdminUserList data={userarray} handlechange={handlechanging} sortnamea={sortnamea} sortnamed={sortnamed} sortproa={sortproa} sortprod={sortprod} sortdatea={sortdatea} sortdated={sortdated} lonamedown2={lonamedown2} lonameup2={lonameup2} showloname={showloname} providerup2={providerup2} providerdown2={providerdown2} showproname={showproname} dateup2={dateup2} datedown2={datedown2} showdate={showdate}/>
         </div>
       </div>
     
