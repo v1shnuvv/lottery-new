@@ -7,20 +7,20 @@ export default function AdminUserlist({ data,handlechange, sortnamea, sortnamed,
     <>
       <table>
         <tbody>
-          <tr>
+          <tr className="adminuserlist_header">
           <th></th>
             {/* <th>ID</th>
             <th>Username</th> */}
-            <th onClick={e => {showloname()}}>Lottery Name
+            <th className="adminuserlist_header_column" onClick={e => {showloname()}}>Lottery Name
               <button id= "lonameup" onClick={e => { sortnamea(e)  }} style={{display: lonameup2}} ><IoIosArrowUp /></button>
               <button id= "lonamedown" onClick={e => { sortnamed(e) }} style={{display: lonamedown2}}><IoIosArrowDown /></button>
               
             </th>
-            <th onClick={e => {showproname()}}>Provider Name
+            <th className="adminuserlist_header_column" onClick={e => {showproname()}}>Provider Name
               <button id= "providerup" onClick={e => { sortproa(e) }} style={{display: providerup2}}><IoIosArrowUp /></button>
               <button id= "providerdown" onClick={e => { sortprod(e) }} style={{display: providerdown2}}><IoIosArrowDown /></button>
             </th>
-            <th onClick={e => {showdate()}}>Lottery Draw Date
+            <th className="adminuserlist_header_column" onClick={e => {showdate()}}>Lottery Draw Date
               <button id= "dateup" onClick={e => { sortdatea() }} style={{display: dateup2}}><IoIosArrowUp /></button>
               <button id= "datedown" onClick={e => { sortdated() }} style={{display: datedown2}}><IoIosArrowDown /></button>
             </th>

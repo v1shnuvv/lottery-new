@@ -11,6 +11,7 @@
  justify-content: center;
  flex-direction: column;
  background-color:  #0b0b2a;
+ /* min-height: 100vh; */
  /* align-items: center; */
 }
 .userpage_lottunits, .userpage_option,.userpage_list{
@@ -43,4 +44,12 @@
 .userpage_col_tab_icon label{
    margin-left: 10px;
    color: goldenrod;
+}
+.userpage_footer{
+   position: absolute;
+   width: 100%;
+   bottom: 0;
+}
+.userpage_row{
+   padding: 20px;
 }

@@ -14,7 +14,8 @@ const initialState = {
   ltryid:"",
   ltryname:"",
   issubidexist:false,
-  lotterydetails:[]
+  lotterydetails:[],
+  iscolumnexist: false
 };
 
 function todoReducer(prevState=initialState, action) {
@@ -32,7 +33,10 @@ function todoReducer(prevState=initialState, action) {
         return {...prevState, offerarray: action.payload};
         break; 
         case "issubidexist":
-          return {...prevState, issubidexist:action.payload} 
+          return {...prevState, issubidexist:action.payload}
+        case "iscolumnexist":
+            return { ...prevState, iscolumnexist: action.payload };
+        break; 
         // case "setLtryid":
         //   return { ...prevState, ltryid: action.payload };
         //   break;

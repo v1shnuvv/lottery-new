@@ -32,6 +32,8 @@ function HomePage() {
   // const ltryid = useSelector((state) => state.ltryid);
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch({ type: "issubidexist", payload: false });
+    dispatch({ type: "iscolumnexist", payload: false })
     let url = "http://localhost:8080/drawticket";
     let request = {};
     let header = {};
@@ -53,6 +55,14 @@ function HomePage() {
             dispatch({ type: "issubidexist", payload: t });
           }
         }
+        var k = false;
+        for (const iterator of res.data) {
+          console.log("itr_clmno", iterator.columnNo);
+          if (iterator.columnNo != null) {
+            k = true;
+            dispatch({ type: "iscolumnexist", payload: k });
+          }
+        }
       })
     
       .catch();

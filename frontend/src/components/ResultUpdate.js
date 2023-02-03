@@ -13,6 +13,7 @@ export default function ResultUpdate() {
         setWinningarray({ winningnumber });
    
     }
+    console.log("mm",winningnumber.lid);
     const handleChangeRaffleId = (e, rid) => {     //RaffleID
         console.log("i rid", rid)
         // console.log(e.target.value)
@@ -69,7 +70,7 @@ console.log("winni",winningarray);
         axios.post(url, req, header)
             .then((res) => {
                 if (res.data.length !== 0) {
-                    console.log(JSON.stringify(res.data.length))
+                    console.log("nn",JSON.stringify(res.data))
                     console.log("Insert lottery number");
                 }
                 else {

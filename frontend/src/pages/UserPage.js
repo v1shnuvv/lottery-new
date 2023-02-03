@@ -12,6 +12,7 @@ import { GrAddCircle } from "react-icons/gr";
 import { useState } from "react";
 import Userdetails from "./Userdetails";
 import { useEffect } from "react";
+import List1 from "../components/List1";
 function UserPage() {
   const navigate = useNavigate();
   const [array, setArray] = useState([]);
@@ -19,6 +20,8 @@ function UserPage() {
   const [subdate, setSubdate] = useState("");
   const [lotterydetails, setLotterydetails] = useState([]);
   const [lotteryid, setLotteryid] = useState("");
+
+  const [userresult, setUserresult] = useState([]);
 
   useEffect(()=>{
     let url = "http://localhost:8080/drawticket";
@@ -36,6 +39,26 @@ function UserPage() {
         setLotterydetails(res.data);
       })
       .catch();
+
+
+
+        let url1 = "http://localhost:8080/userunitfetch";
+        let req1 = {
+          userid: 5,
+          provid: 3,
+          lotteryname: "Kerala lottery"
+        };
+        let header1 = {};
+    
+        axios.post(url1, req1, header1).then((res) => {
+          console.log("result", userresult)
+          setUserresult(res.data)
+    console.log("k",userresult[0].txtLotteryname)
+        })
+          .catch();
+    
+  
+
   },[])
  
   const usrname=localStorage.getItem('usrname')
@@ -85,8 +108,22 @@ function UserPage() {
           label8click={label8click}
         />
       </div>
-      <div className="userpage_col1">
-        <Userdetails/>
+      <div className="userpage_row">
+        <List1 
+        label1={"Lottery Name"}
+        label2={"Prize won"}
+        label3="Provider Name"
+        label4="Prizes Won Until Now" 
+variable1={"txtLotteryname"} 
+variable2={"txtPrizemoney"} 
+variable3={"txtProvidername"} 
+variable4={"TotalPrize"} 
+
+        array={userresult}
+        />
+      </div>
+      {/* <div className="userpage_col1"> */}
+        {/* <Userdetails/> */}
       {/* <div className="userpage_lottunits">
         <Timer />
         </div> */}
@@ -103,10 +140,10 @@ function UserPage() {
           <List array={array} />
         </Collapsible>
       </div> */}
-      </div>
-      <div className="userpage_list">
+      {/* </div> */}
+      {/* <div className="userpage_list"> */}
         {/* <List label1={"Lotteryname"} label2={"Numbers"} label3={"status"} /> */}
-      </div>
+      {/* </div> */}
       {/* <div className="userpage_option">
         {" "}
         <Option />

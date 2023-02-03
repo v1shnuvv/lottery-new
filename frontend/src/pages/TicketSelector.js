@@ -18,7 +18,14 @@ import { GiConsoleController } from "react-icons/gi";
 import { CgDetailsLess } from "react-icons/cg";
 import { loadClientAuth2 } from "gapi-script";
 import usestate from "usestate";
+import Numberselector from "../components/Numberselector";
+
 export default function TicketSelector() {
+  const [column, setColumn] = useState("");
+  const [startno, setStartno] = useState("");
+  const [endno, setEndno] = useState("");
+  const [numarray, setNumarray] = useState([]);
+
   const [value, setValue] = useState([]);
   const [subltry, setSubltry] = useState([]);
   const [err, setErrmsg] = useState("");
@@ -31,27 +38,31 @@ export default function TicketSelector() {
   const navigate = useNavigate();
   const id = localStorage.getItem("id");
   const [lotteryid, setLotteryid] = useState("");
-  const[linenum,setlinenum]=useState("")
-  const[linenumnew,setlinenumnew]=useState(5);
-  const [main_start,setMainstart]=useState("");
-  const [main_end,setMainend]=useState("")
-  const[sub_start,setSubstart]=useState("");
-  const[sub_end,setSubend]=useState("")
+  const [linenum, setlinenum] = useState("");
+  const [linenumnew, setlinenumnew] = useState(5);
+  const [main_start, setMainstart] = useState("");
+  const [main_end, setMainend] = useState("");
+  const [sub_start, setSubstart] = useState("");
+  const [sub_end, setSubend] = useState("");
   // const [lotterydetails, setLotterydetails] = useState([]);
   const linearray = useSelector((state) => state.linearray);
   const offerarray = useSelector((state) => state.offerarray);
   const lotterydetails = useSelector((state) => state.lotterydetails);
-  console.log("ts+ld",lotterydetails)
+  console.log("ts+ld", lotterydetails);
   const dispatch = useDispatch();
   const location = useLocation();
   const usrname = localStorage.getItem("usrname");
   const [subltryid, setSubltryid] = useState("");
   const [show, setShow] = useState(false);
+
   //const [isfinishd, setisfinished] = useState(false);
   const isfinishd = useSelector((state) => state.issubidexist);
-  console.log("isfinished",isfinishd)
-  console.log("ts",usrname);
-  // var linenum = 2;
+  console.log("isfinished", isfinishd);
+  console.log("ts", usrname);
+
+  const columnvalue = useSelector((state) => state.iscolumnexist);
+  console.log("columnvalue", columnvalue);
+  const [show2, setShow2] = useState(false);
 
   // console.log("linenum",linenum)
   var temp = [];
@@ -63,7 +74,6 @@ export default function TicketSelector() {
   console.log("userid", userid);
   const cnt = localStorage.getItem("cartcount");
 
-
   // useEffect(()=>{
 
   //   //alert('here')
@@ -73,44 +83,57 @@ export default function TicketSelector() {
   //   }
   //   setAr(temp)
 
-
   // },[linenumnew])
 
   useEffect(() => {
-   setlinenum(lotterydetails[0].purchase) 
-   setMainstart(lotterydetails[0].mina_start);  
-   setMainend(lotterydetails[0].main_end)
-   setSubstart(lotterydetails[0].sub_start)
-   setSubend(lotterydetails[0].sub_end)
+    console.log("newcol" + columnvalue);
+    setShow2(columnvalue);
+    //alert("here")
+    console.log("inside ticket selector");
+    setColumn(lotterydetails[0].columnNo);
+    setStartno(lotterydetails[0].strtNo);
+    setEndno(lotterydetails[0].endNo);
+
+    setlinenum(lotterydetails[0].purchase);
+    setMainstart(lotterydetails[0].mina_start);
+    setMainend(lotterydetails[0].main_end);
+    setSubstart(lotterydetails[0].sub_start);
+    setSubend(lotterydetails[0].sub_end);
     dispatch({ type: "setLineArray", payload: [] });
     let id = lotterydetails[0].sub_id;
     setSubltryid(id);
-    // let temp = [...linearray];
-    let temp=[];
-    let t = [];
-    // console.log(temp);
-    console.log("length",temp.length)
-    if (temp.length == 0) {
-      console.log("len",linenum)
-      for (var i = 0; i < linenum; i++) {
-        var tarray = [];
+
+    //======================================================================================//
+
+    let finalarray = [];
+    for (let k = 0; k < linenum; k++) {
+      let temparray = [];
+      if (column > 0) {
+        console.log("insideif");
+        for (let i = 0; i < column; i++) {
+          let a = [];
+          for (let j = startno; j < endno + 1; j++) {
+            a.push({ value: j, isclicked: false });
+          }
+          temparray.push(a);
+        }
+      } else {
+        console.log("inside else");
         for (let j = main_start; j <= main_end; j++) {
           let tobj = { value: j, isselected: false };
-          tarray.push(tobj);
-          // tarray.push()
+          temparray.push(tobj);
         }
-        temp.push(tarray);
-        // temp.push({"main":tarray,"sub":tarray})
-        // t.push(...{"id":1,"name":"hai"})
       }
+      finalarray.push(temparray);
     }
-
-    dispatch({ type: "setLineArray", payload: temp });
-    console.log("linearray" + JSON.stringify(linearray));
+    // setNumarray(finalarray);
+    console.log("Manu", finalarray);
+    dispatch({ type: "setLineArray", payload: finalarray });
+    console.log("this is line array", linearray);
+    //=============================================================================================//
 
     console.log("sublotryid=>" + isfinishd);
     if (isfinishd) {
-      
       let t_offer = [];
 
       for (var i = 0; i < linenum; i++) {
@@ -159,7 +182,7 @@ export default function TicketSelector() {
         })
         .catch();
     }
-  }, [linenum]);
+  }, []);
   const home = () => {
     navigate("/");
   };
@@ -193,7 +216,7 @@ export default function TicketSelector() {
               if (!isfinishd) {
                 console.log("isfinished", isfinishd);
                 dispatch({ type: "setLineArray", payload: [] });
-               navigate("/Checkout", {
+                navigate("/Checkout", {
                   state: { lid: lotteryid, subltryid: subltryid },
                 });
               } else {
@@ -201,7 +224,6 @@ export default function TicketSelector() {
                 dispatch({ type: "setLineArray", payload: [] });
                 dispatch({ type: "issubidexist", payload: false });
               }
-             
             }
           })
           .catch();
@@ -305,6 +327,47 @@ export default function TicketSelector() {
       navigate("/");
     }
   };
+  //============================================================================//
+  const shuffle = (index) => {
+    let temp = [...linearray];
+
+    for (const iterator of temp[index]) {
+      let randNum = randomNumberInRange(startno, endno);
+      for (const two of iterator) {
+        if (two.value === randNum) {
+          two.isclicked = true;
+        } else {
+          two.isclicked = false;
+        }
+      }
+    }
+    dispatch({ type: "setLineArray", payload: temp });
+  };
+  function randomNumberInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  const handlerefresh = (index) => {
+    const temp = [...linearray];
+    for (const iterator of temp[index]) {
+      for (const two of iterator) {
+        if (two.isclicked === true) two.isclicked = false;
+      }
+    }
+
+    dispatch({ type: "setLineArray", payload: temp });
+  };
+  const selectclick = (value) => {
+    const temp = [...linearray];
+    let index = value.index;
+    let cindx = value.cindx;
+    let indx = value.indx;
+    for (const iterator of temp[index][indx]) {
+      iterator.isclicked = false;
+    }
+    temp[index][indx][cindx].isclicked = true;
+
+    dispatch({ type: "setLineArray", payload: temp });
+  };
   return (
     <>
       <div className="ticketselector_outer">
@@ -313,6 +376,7 @@ export default function TicketSelector() {
           return <>{indx} <br /></>
         })}
         </label> */}
+
         <HeaderUser
           label1={usrname}
           label3={""}
@@ -323,8 +387,9 @@ export default function TicketSelector() {
           label7click={label7click}
         />
         {/* <Drawinformation/> */}
-        
-         {!show ? (<div className="ticketslector_lotterybuynow">
+
+        {!show ? (
+          <div className="ticketslector_lotterybuynow">
             <Lotterybuynow
               details={lotterydetails}
               deadline={maindate}
@@ -337,9 +402,9 @@ export default function TicketSelector() {
               variable4={"drawdate"}
               variable5={"sub_ltry"}
             />
-          </div>):
-       
-        (<div className="ticketslector_lotterybuynow">
+          </div>
+        ) : (
+          <div className="ticketslector_lotterybuynow">
             <Lotterybuynow
               details={lotterydetails}
               deadline={subdate}
@@ -352,8 +417,135 @@ export default function TicketSelector() {
               variable4={"sub_drawdate"}
               variable5={"sub_ltry"}
             />
-          </div>)}
-        
+          </div>
+        )}
+
+        {!show2 ? (
+          <>
+            {show ? (
+              <>
+                arc
+                <div className="ticketselector_line">
+                  {linearray.map((item, index) => {
+                    return (
+                      <>
+                        <Lineselector
+                          label1={"Unit" + index}
+                          setValue={setValue}
+                          lineindex={index}
+                          ltryid={ltryid}
+                          show={!show}
+                          array={linearray}
+                          text={"linearray"}
+                        />
+                      </>
+                    );
+                  })}
+                </div>
+                <Linemessage />
+                <div className="ticketselector_chkoutbtn">
+                  <Checkoutbutton
+                    value2={"Checkout"}
+                    chkout={() => chkout(lotteryid)}
+                    linenum={linenum}
+                  />
+                </div>
+                hana
+              </>
+            ) : (
+              <>
+                of
+                <div className="ticketselector_line">
+                  {offerarray.map((item, index) => {
+                    return (
+                      <>
+                        <Offerselector
+                          label1={"Unit" + index}
+                          setValue={setValue}
+                          lineindex={index}
+                          ltryid={ltryid}
+                          show={show}
+                          array={linearray}
+                          text={"linearray"}
+                        />
+                      </>
+                    );
+                  })}
+                </div>
+                <Linemessage />
+                <div className="ticketselector_chkoutbtn">
+                  <Checkoutbutton
+                    value2={"Checkout"}
+                    chkout={() => offerchkout(subltryid)}
+                    linenum={linenum}
+                  />
+                </div>
+                fer
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            {!show ? (
+              <>
+                vis
+                <div className="ticketselector_line">
+                  {linearray.map((item, index) => {
+                    <>
+                      <Numberselector
+                        Label1={"Unit" + index}
+                        index={index}
+                        shuffle={shuffle}
+                        handlerefresh={handlerefresh}
+                        selectclick={selectclick}
+                      />
+                      <Linemessage />
+                <div className="ticketselector_chkoutbtn">
+                  <Checkoutbutton
+                    value2={"Checkout"}
+                    chkout={() => offerchkout(subltryid)}
+                    linenum={linenum}
+                  />
+                </div>
+                    </>;
+                  })}
+                </div>
+                akh
+              </>
+            ) : (
+              <>
+                of
+                <div className="ticketselector_line">
+                  {offerarray.map((item, index) => {
+                    return (
+                      <>
+                        <Offerselector
+                          label1={"Unit" + index}
+                          setValue={setValue}
+                          lineindex={index}
+                          ltryid={ltryid}
+                          show={show}
+                          array={linearray}
+                          text={"linearray"}
+                        />
+                      </>
+                    );
+                  })}
+                </div>
+                <Linemessage />
+                <div className="ticketselector_chkoutbtn">
+                  <Checkoutbutton
+                    value2={"Checkout"}
+                    chkout={() => offerchkout(subltryid)}
+                    linenum={linenum}
+                  />
+                </div>
+                fer
+              </>
+            )}
+          </>
+        )}
+
         {/* <div className="ticketselector_lotteryname">
           <label> Lottery Name : </label>
 
@@ -391,66 +583,75 @@ export default function TicketSelector() {
           </>
          })}
         </div> */}
-        {!show ? (<div>
-          <div className="ticketselector_line">
-            {linearray.map((item, index) => {
-              return (
-                <>
-                  <Lineselector
-                    label1={"Unit" + index}
-                    setValue={setValue}
-                   
-                    lineindex={index}
-                    ltryid={ltryid}
-                    show={!show}
-                    array={linearray}
-                    text={"linearray"}
-                  />
-                </>
-              );
-            })}
+        {/*        
+        {!show ? (
+          <div>
+            <div className="ticketselector_line">
+             
+              {linearray.map((item, index) => {
+                return show2 ? (
+                  <>
+                    <Numberselector
+                      Label1={"Unit" + index}
+                      index={index}
+                      shuffle={shuffle}
+                      handlerefresh={handlerefresh}
+                      selectclick={selectclick}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Lineselector
+                      label1={"Unit" + index}
+                      setValue={setValue}
+                      lineindex={index}
+                      ltryid={ltryid}
+                      show={!show}
+                      array={linearray}
+                      text={"linearray"}
+                    />
+                  </>
+                );
+              })}
+            </div>
+            <Linemessage />
+            <div className="ticketselector_chkoutbtn">
+              <Checkoutbutton
+                value2={"Checkout"}
+                chkout={() => chkout(lotteryid)}
+                linenum={linenum}
+              />
+            </div>
           </div>
-          <Linemessage />
-          <div className="ticketselector_chkoutbtn">
-            <Checkoutbutton
-              value2={"Checkout"}
-              chkout={() => chkout(lotteryid)}
-              linenum={linenum}
-            />
+        ) : (
+          <div>
+            <div className="ticketselector_line">
+              {offerarray.map((item, index) => {
+                return (
+                  <>
+                    <Offerselector
+                      label1={"Unit" + index}
+                      setValue={setValue}
+                      lineindex={index}
+                      ltryid={ltryid}
+                      show={show}
+                      array={linearray}
+                      text={"linearray"}
+                    />
+                  </>
+                );
+              })}
+            </div>
+            <Linemessage />
+            <div className="ticketselector_chkoutbtn">
+              <Checkoutbutton
+                value2={"Checkout"}
+                chkout={() => offerchkout(subltryid)}
+                linenum={linenum}
+              />
+            </div>
           </div>
-        </div>):
-
-       (<div>
-          <div className="ticketselector_line">
-            {offerarray.map((item, index) => {
-              return (
-                <>
-                  <Offerselector
-                    label1={"Unit" + index}
-                    setValue={setValue}
-                    
-                    lineindex={index}
-                    ltryid={ltryid}
-                    show={show}
-                    array={linearray}
-                    text={"linearray"}
-                  />
-                </>
-              );
-            })}
-             </div>
-             <Linemessage />
-             <div className="ticketselector_chkoutbtn">
-            <Checkoutbutton
-              value2={"Checkout"}
-              chkout={() => offerchkout(subltryid)}
-              linenum={linenum}
-            />
-          </div>
-         
-         
-         
-        </div>)}
+        )} */}
 
         <div className="Ticketslector_errmsg">{err}</div>
 
@@ -465,6 +666,7 @@ export default function TicketSelector() {
 
         {/* <Footer/> */}
       </div>
+          
     </>
   );
 }
