@@ -52,11 +52,11 @@ export default function AddLottery() {
             puramount: puramount,
             unitsaleamount: unitsaleamount,
             adminchargeperunit: adminchargeperunit,
-            lotterystart: lotterystart,
-            lotteryend: lotteryend,
+            lotterystart: lotterystart == "" ? 0 : lotterystart,
+            lotteryend: lotteryend == "" ? 0 : lotteryend,
             lotterycost: lotterycost,
             lotterypurchase: lotterypurchase,
-            lotteryselection: lotteryselect,
+            lotteryselection: lotteryselect == "" ? 0 : lotteryselect,
             lotterysub: lotterysub == "" ? "No sub lottery" : lotterysub,
             agentcommission: agentcommission,
             commissionrate: commissionrate,
@@ -79,9 +79,16 @@ export default function AddLottery() {
         }
         console.log(req)
         let header = {}
-        axios.post(url, req, header).then((res) => {
-            console.log("Success", res.data);
-        }).catch();
+        if(provider=="" || lname=="" ||drawdate=="" ||puramount=="" || unitsaleamount=="" || adminchargeperunit=="" || lotterycost=="" ||lotterypurchase==""
+        || agentcommission=="" || commissionrate=="" ||tax=="" ||otherdeduct1=="" || otherdeduct2=="" || charitypercent=="" || first=="" ||second==""
+        || third=="" ||fourth=="" ||fifth=="" ){
+alert("insert")
+        }else{
+            axios.post(url, req, header).then((res) => {
+                console.log("Success", res.data);
+            }).catch();
+        }
+       
     }
 
     useEffect(() => {

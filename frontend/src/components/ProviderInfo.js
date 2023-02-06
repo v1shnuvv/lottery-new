@@ -73,7 +73,7 @@ const handleAddprovider=()=>{
     providercity:providerstate
   }
   let header_provideradd = {}
-  if(provideremail=="" || providermobile=="" || provideraddress=="" || providerzip=="" ){document.getElementById("errmsg").innerHTML="red"}else{
+  if(provideremail=="" || providermobile=="" || provideraddress=="" || providerzip=="" ){document.getElementById("errmsg").innerHTML="Enter all fields"}else{
     axios.post(url_provideradd, req_provideradd, header_provideradd).then((res)=>{
       console.log(res.data)
       if(res.data.affectedRows==1){

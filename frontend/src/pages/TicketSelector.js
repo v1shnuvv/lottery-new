@@ -207,26 +207,31 @@ setTimeout(() => {
   };
 
   const chkout = (id) => {
-    
+   
     if (usrname === " ") {
       navigate("/Login");
     }
+    console.log("selected line", linearray);
     console.log("selected id", id);
     let url = "http://localhost:8080/insertunit";
     let header = {}; 
     const valu = [];
     const temp = [...linearray];
     for (const itrt of temp) {
+      
       let temp = [];
       for (const t of itrt) {
-        if (t.isselected) temp.push(t.value);
+        if (t.isselected) 
+        alert(t)
+        temp.push(t.value);
       }
       valu.push(temp);
     }
+    alert(JSON.stringify(temp))
     for (var i = 0; i < valu.length; i++) {
       if (valu[i] != "") {
         let request = { uid: 2, lid: id, arr: valu[i] };
-
+         console.log("req",request)
         // console.log(request);
         axios
           .post(url, request, header)
@@ -253,7 +258,7 @@ setTimeout(() => {
     // }
   };
   const offerchkout = () => {
-    let url = "http://localhost:8000/insertunit";
+    let url = "http://localhost:8080/insertunit";
     let header = {};
 
     const valu = [];

@@ -60,7 +60,7 @@ function HomePage() {
         var k = false;
         for (const iterator of res.data) {
           console.log("itr_clmno", iterator.columnNo);
-          if (iterator.columnNo != null) {
+          if (iterator.columnNo != 0) {
             k = true;
             dispatch({ type: "iscolumnexist", payload: k });
           }
