@@ -468,6 +468,16 @@ app.post("/search_date", (req, res) => {
 
 /********************************************************************** by Vishu Provider Page ************************************************************************************************************* */
 
+app.post("/fetchstate", (req, res) => {
+  var sql =
+    "select ts.id, ts.txtStatename from tblstate ts";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+   // console.log(result);
+    res.send(result);
+  });
+});
+
 app.post("/viewprovider", (req, res) => {
   var sql =
     "SELECT id, txtProvidername,txtEmail,txtContactnumber,txtRegisteredaddress,txtZipcode,refState FROM tblprovider where txtDeleteflag =0;";

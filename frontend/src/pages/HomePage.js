@@ -26,6 +26,8 @@ function HomePage() {
   const [count, setCount] = useState("");
   var uname = localStorage.getItem("uname");
   const userid=localStorage.getItem("userid")
+  const usrname = localStorage.getItem("usrname");
+  console.log("usrname", usrname.length);
   // const [lotterydetails,setLotterydetails]=useState([])
   console.log(userid)
   console.log("dt",date)
@@ -112,7 +114,7 @@ function HomePage() {
       <div className="lottery_headerUser">
         <HeaderUser
       
-          label1={"Guest"}
+          label1={usrname}
           label2={count}
           label3={"Cart"}
           label4={"Home"}

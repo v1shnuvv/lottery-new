@@ -14,7 +14,7 @@ const [providereditemail, setProvidereditemail] = useState("");
 const [providereditnumber, setProvidereditnumber] = useState("");
 const [providereditaddress, setProvidereditaddress] = useState("");
 const [providereditzip, setProvidereditzip] = useState("");
-const [providereditcity, setProvidereditcity] = useState("");
+const [providereditstate, setProvidereditstate] = useState("");
 const [providerarray, setProviderarray] = useState([]);
 //-----<
 
@@ -24,7 +24,9 @@ const [provideremail, setProvideremail] = useState("");
 const [providermobile, setProvidermobile] = useState("");
 const [provideraddress, setProvideraddress] = useState("");
 const [providerzip, setProviderzip] = useState("");
-const [providercity, setProvidercity] = useState("");
+const [providerstate, setProviderstate] = useState("");
+const [state, setState] = useState([])
+
 //-----<
 
 //provideredit----->
@@ -47,7 +49,7 @@ const handleclickSubmit = (e) => {
     providereditnumber: providereditnumber,
     providereditaddress: providereditaddress,
     providereditzip: providereditzip,
-    providereditcity: providereditcity,
+    providereditcity: providereditstate,
   };
   let header_provideredit3 = {};
   axios
@@ -62,21 +64,24 @@ const handleclickSubmit = (e) => {
 //provideradd----->
 const handleAddprovider=()=>{
   let url_provideradd = "http://localhost:8080/addprovider";
-  let req_provideradd = {providername:providername,
+  let req_provideradd = {
+    providername:providername,
     provideremail:provideremail,
     providermobile:providermobile,
     provideraddress:provideraddress,
     providerzipcode:providerzip,
-    providercity:providercity
+    providercity:providerstate
   }
   let header_provideradd = {}
-  axios.post(url_provideradd, req_provideradd, header_provideradd).then((res)=>{
-    console.log(res.data)
-    if(res.data.affectedRows==1){
-      window.location.reload();
-        }
-  }).catch();
+  if(provideremail=="" || providermobile=="" || provideraddress=="" || providerzip=="" ){document.getElementById("errmsg").innerHTML="red"}else{
+    axios.post(url_provideradd, req_provideradd, header_provideradd).then((res)=>{
+      console.log(res.data)
+      if(res.data.affectedRows==1){
+        window.location.reload();
+          }
   
+    }).catch(); 
+  }
   
 }
 //-----<
@@ -89,11 +94,15 @@ let url_provideredit2 = "http://localhost:8080/viewprovider";
 let req_provideredit2 = {};
 let header_provideredit2 = {};
 //-----<
+let url_provideradd1 = "http://localhost:8080/fetchstate";
+let req_provideradd1 = {};
+let header_provideradd1 = {};
 
 //provideredit----->
 axios
   .post(url_provideredit2, req_provideredit2, header_provideredit2)
   .then((res) => {
+ 
     var temp = [...res.data];
     for (const element of temp) {
       element.isClicked = false;
@@ -103,6 +112,15 @@ axios
   })
   .catch();
 //-----<
+axios
+  .post(url_provideradd1, req_provideradd1, header_provideradd1)
+  .then((res) => {
+    setState(res.data)
+    console.log("state",res.data);
+  })
+  .catch();
+
+
 },[])
   return (
     <>
@@ -127,7 +145,7 @@ axios
           setvalue4={setProvidereditnumber}
           setvalue5={setProvidereditaddress}
           setvalue6={setProvidereditzip}
-          setvalue7={setProvidereditcity}
+          setvalue7={setProvidereditstate}
           setarray1={setProviderarray}
           // value1={}
           value2={providereditname}
@@ -135,7 +153,7 @@ axios
           value4={providereditnumber}
           value5={providereditaddress}
           value6={providereditzip}
-          value7={providereditcity}
+          value7={providereditstate}
           array1={providerarray}
           arrayvalue1={"id"}
           arrayvalue2={"txtProvidername"}
@@ -154,7 +172,8 @@ axios
           setvalue3={setProvidermobile}
           setvalue4={setProvideraddress}
           setvalue5={setProviderzip}
-          setvalue6={setProvidercity}
+          setvalue6={setProviderstate}
+          statearray={state}
           
           />
           

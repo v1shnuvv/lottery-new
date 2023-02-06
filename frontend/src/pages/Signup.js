@@ -129,13 +129,13 @@ function Signup() {
             <Input typevalue={"text"} name={"LastName"} onChange={handleLastnameChange} />
           </div>
           <div className="signup_container_row">
-            <Input typevalue={"email"} name={"Email"} onChange={handleEmailChange}/>
+            <Input itype={"email"} name={"Email"} onChange={handleEmailChange}/>
           </div>
           <div className="signup_container_row">
-            <Input typevalue={"password"} name={"Password"} onChange={handlePasswordChange} />
+            <Input itype={"password"} name={"Password"} onChange={handlePasswordChange} />
           </div>
           <div className="signup_container_row">
-            <Input typevalue={"text"} name={"RePassword"} onChange={handleRePasswordChange} />
+            <Input itype={"password"} name={"RePassword"} onChange={handleRePasswordChange} />
           </div>
           <div className="ermsg">
             {errmsg}

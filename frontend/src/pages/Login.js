@@ -86,13 +86,13 @@ function Login() {
           <Input   typevalue={"email"} name={"Username"} onChange={handleEmailChange} />
         </div> 
         <div className="login_container_row">
-          <Input  typevalue={"password"} name={"Password"} onChange={handlePasswordChange} />
+          <Input  itype={"password"} name={"Password"} onChange={handlePasswordChange} />
         </div>
 
         <div className="login_container_row">
-          <label>Forget password?</label>
+          <label>Forgot password?</label>
         </div>
-        <div className="login_errmsg">{errmsg}</div>
+        <div className="login_errmsg" style={{color: "red"}}>{errmsg}</div>
 
         <div className="login_container_row">
           <button onClick={login}>Sign in</button>
