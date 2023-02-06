@@ -348,6 +348,31 @@ app.post("/insertunit", (req, res) => {
   });
 });
 
+app.post("/insertunitnumber", (req, res) => {
+  let arr = req.body.arr;
+  // let val = JSON.stringify(arr);
+ // console.log("val", val);
+  let uid = req.body.uid;
+  let lid = req.body.lid;
+
+  for (const obj of arr) {
+    if (obj.length > 0){
+    let val= JSON.stringify(obj);
+    var sql =
+    "insert into tblunit(refUser,refLotterymaster,txtLotteryNumber) values ('" +
+    uid +
+    "','" +
+    lid +
+    "','"+val+"')";
+ // console.log(sql);
+  con.query(sql, function (err, result) {
+    if (err) res.send("Error");
+  //  console.log("Number of records inserted: " + result.affectedRows);
+    res.send(result);
+  });
+  }}
+});
+
 //--------------winner------------------//
 
 app.post("/winners", (req, res) => {
@@ -1107,7 +1132,8 @@ app.post("/admindash_fetchall", (req, res) => {
   con.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);
-  //  console.log(result);
+
+   console.log(result);
   });
 });
 app.post("/admindash_adminpurchase", (req, res) => {

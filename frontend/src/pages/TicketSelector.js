@@ -53,8 +53,8 @@ export default function TicketSelector() {
   const location = useLocation();
   const usrname = localStorage.getItem("usrname");
   const [subltryid, setSubltryid] = useState("");
-  const [show,setShow] = useState(false);
-const[top, setTop]=useState(true)
+  const [show, setShow] = useState(false);
+  const [top, setTop] = useState(true);
   //const [isfinishd, setisfinished] = useState(false);
   const isfinishd = useSelector((state) => state.issubidexist);
   console.log("isfinished", isfinishd);
@@ -63,7 +63,7 @@ const[top, setTop]=useState(true)
   const columnvalue = useSelector((state) => state.iscolumnexist);
   console.log("columnvalue", columnvalue);
   const [show2, setShow2] = useState("");
-  const[trigger, setTrigger]=useState()
+  const [trigger, setTrigger] = useState();
   // console.log("linenum",linenum)
   var temp = [];
   // useEffect(()=>{
@@ -85,12 +85,9 @@ const[top, setTop]=useState(true)
 
   // },[linenumnew])
 
-
-
-setTimeout(() => {
-  setTrigger(1)
-}, 1);
-
+  setTimeout(() => {
+    setTrigger(1);
+  }, 1);
 
   useEffect(() => {
     console.log("newcol" + columnvalue);
@@ -111,39 +108,37 @@ setTimeout(() => {
 
     //======================================================================================//
     const myPromise = new Promise((resolve, reject) => {
-    
       //   alert("foo");
-   
-  setTimeout(() => {
-    let finalarray = [];
-    for (let k = 0; k < linenum; k++) {
-      let temparray = [];
-      if (column > 0) {
-        console.log("insideif");
-        for (let i = 0; i < column; i++) {
-          let a = [];
-          for (let j = startno; j < endno + 1; j++) {
-            a.push({ value: j, isclicked: false });
+
+      setTimeout(() => {
+        let finalarray = [];
+        for (let k = 0; k < linenum; k++) {
+          let temparray = [];
+          if (column > 0) {
+            console.log("insideif");
+            for (let i = 0; i < column; i++) {
+              let a = [];
+              for (let j = startno; j < endno + 1; j++) {
+                a.push({ value: j, isclicked: false });
+              }
+              temparray.push(a);
+            }
+          } else {
+            console.log("inside else");
+            for (let j = main_start; j <= main_end; j++) {
+              let tobj = { value: j, isselected: false };
+              temparray.push(tobj);
+            }
           }
-          temparray.push(a);
+          finalarray.push(temparray);
         }
-      } else {
-        console.log("inside else");
-        for (let j = main_start; j <= main_end; j++) {
-          let tobj = { value: j, isselected: false };
-          temparray.push(tobj);
-        }
-      }
-      finalarray.push(temparray);
-    }
-    // setNumarray(finalarray);
-    console.log("Manu", finalarray);
-    dispatch({ type: "setLineArray", payload: finalarray });
-    console.log("this is line array", linearray); 
-   }, trigger);
+        // setNumarray(finalarray);
+        console.log("Manu", finalarray);
+        dispatch({ type: "setLineArray", payload: finalarray });
+        console.log("this is line array", linearray);
+      }, trigger);
     });
 
- 
     //=============================================================================================//
 
     console.log("sublotryid=>" + isfinishd);
@@ -195,39 +190,92 @@ setTimeout(() => {
           setLotterylist(res.data);
         })
         .catch();
-    } 
+    }
     // setTimeout(() => {
     //   alert("hai")
     // }, 5000);
   }, [trigger]);
 
-
   const home = () => {
     navigate("/");
   };
 
+  // const chkout = (id) => {
+
+ 
+  // };
   const chkout = (id) => {
-   
-    if (usrname === " ") {
+    if(columnvalue){
+      if (usrname === " ") {
+        navigate("/Login");
+      }
+      let url1 = "http://localhost:8080/insertunitnumber";
+      let header1= {}
+      const temp = [...linearray];
+      const tempnew = [];
+  
+      for (const objline of temp) {
+        let selectedvalues = [];
+        for (const objlineinner of objline) {
+          for (const obj of objlineinner) {
+            if (obj.isclicked === true) {
+              selectedvalues.push(obj.value);
+            }
+          }
+        }
+        tempnew.push(selectedvalues);
+      }
+      console.log("tttt", tempnew);
+      let request1 = {uid:1, lid:id, arr:tempnew}
+          axios.post(url1, request1, header1)
+          .then((res)=>{
+            console.log(res.data);
+            if (res.data != "Error") {
+              if (!isfinishd) {
+                dispatch({ type: "setLineArray", payload: [] });
+                navigate("/Checkout", {
+                  state: { lid: lotteryid, subltryid: subltryid },
+                });
+              } else {
+                setShow(!show);
+                dispatch({ type: "setLineArray", payload: [] });
+                dispatch({ type: "issubidexist", payload: false });
+              }
+            }
+          }).catch();
+      
+      // for (const iterator of tempnew) {
+      //   if(iterator.length !=""){
+      //     console.log("itt",iterator)
+      //     let request1={userid:2, lid:id, arr:iterator}
+      //     console.log("ffff",request1);
+      //     axios.post(url1, request1, header1)
+      //     .then((res)=>{
+      //       console.log(res.data);
+      //     }).catch();
+      //   }
+      // }
+    }else{
+           if (usrname === " ") {
       navigate("/Login");
     }
+
     console.log("selected line", linearray);
     console.log("selected id", id);
     let url = "http://localhost:8080/insertunit";
-    let header = {}; 
+    let header = {};
     const valu = [];
     const temp = [...linearray];
     for (const itrt of temp) {
-      
+
       let temp = [];
       for (const t of itrt) {
-        if (t.isselected) 
-        alert(t)
+        if (t.isselected)
         temp.push(t.value);
       }
       valu.push(temp);
     }
-    alert(JSON.stringify(temp))
+
     for (var i = 0; i < valu.length; i++) {
       if (valu[i] != "") {
         let request = { uid: 2, lid: id, arr: valu[i] };
@@ -239,13 +287,11 @@ setTimeout(() => {
             console.log(res.data);
             if (res.data != "Error") {
               if (!isfinishd) {
-                console.log("isfinished", isfinishd);
                 dispatch({ type: "setLineArray", payload: [] });
                 navigate("/Checkout", {
                   state: { lid: lotteryid, subltryid: subltryid },
                 });
               } else {
-                console.log("inside784");
                 setShow(!show);
                 dispatch({ type: "setLineArray", payload: [] });
                 dispatch({ type: "issubidexist", payload: false });
@@ -256,7 +302,11 @@ setTimeout(() => {
       }
     }
     // }
+}
+
+    
   };
+
   const offerchkout = () => {
     let url = "http://localhost:8080/insertunit";
     let header = {};
@@ -457,103 +507,126 @@ setTimeout(() => {
         </div>  */}
 
         <div>
-        {!show2 ? (
-          <>
-          
-            {!show ? (
-              <>
-                <div className="ticketselector_line">
-                  {linearray.map((item, index) => {
-                    return (
-                      <>
-                        <Lineselector
-                          label1={"Unit" + index}
-                          setValue={setValue}
-                          lineindex={index}
-                          ltryid={ltryid}
-                          show={!show}
-                          array={linearray}
-                          text={"linearray"}
-                        />
-                      </> 
-                    );
-                  })}
-                </div>
-                <Linemessage />
-                <div className="ticketselector_chkoutbtn">
-                  <Checkoutbutton
-                    value2={"Checkout"}
-                    chkout={() => chkout(lotteryid)}
-                    linenum={linenum}
-                  />
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="ticketselector_line">
-                  {offerarray.map((item, index) => {
-                    return (
-                      <>
-                        <Offerselector
-                          label1={"Unit" + index}
-                          setValue={setValue}
-                          lineindex={index}
-                          ltryid={ltryid}
-                          show={show}
-                          array={linearray}
-                          text={"linearray"}
-                        />
-                      </>
-                    );
-                  })}
-                </div>
-                <Linemessage />
-                <div className="ticketselector_chkoutbtn">
-                  <Checkoutbutton
-                    value2={"Checkout"}
-                    chkout={() => offerchkout(subltryid)}
-                    linenum={linenum}
-                  />
-                </div>
-              </>
-            )}
-          </>
-        ) : (
-          <>
-            {!show ? (
-              <>
-                <div className="ticketselector_line">
-                  {linearray.map((item, index) => {
-                    return (
-                      <>
-                        <Numberselector
-                          Label1={"unit" + index}
-                          index={index}
-                          shuffle={shuffle}
-                          handlerefresh={handlerefresh}
-                          selectclick={selectclick}
-                        />
-                      </>
-                    );
-                  })}
-                </div>
-                <Linemessage />
-                <div className="ticketselector_chkoutbtn">
-                  <Checkoutbutton
-                    value2={"Checkout"}
-                    chkout={() => chkout(lotteryid)}
-                    linenum={linenum}
-                  />
-                </div>
-              </>
-            ) : (
-              <>
-                <label style={{ color: "blue" }}>hai2</label> 
-              </>
-            )}
-          </>
-        )}
-</div>
+          {!show2 ? (
+            <>
+              {!show ? (
+                <>
+                  <div className="ticketselector_line">
+                    {linearray.map((item, index) => {
+                      return (
+                        <>
+                          <Lineselector
+                            label1={"Unit" + index}
+                            setValue={setValue}
+                            lineindex={index}
+                            ltryid={ltryid}
+                            show={!show}
+                            array={linearray}
+                            text={"linearray"}
+                          />
+                        </>
+                      );
+                    })}
+                  </div>
+                  <Linemessage />
+                  <div className="ticketselector_chkoutbtn">
+                    <Checkoutbutton
+                      value2={"Checkout"}
+                      chkout={() => chkout(lotteryid)}
+                      linenum={linenum}
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="ticketselector_line">
+                    {offerarray.map((item, index) => {
+                      return (
+                        <>
+                          <Offerselector
+                            label1={"Unit" + index}
+                            setValue={setValue}
+                            lineindex={index}
+                            ltryid={ltryid}
+                            show={show}
+                            array={linearray}
+                            text={"linearray"}
+                          />
+                        </>
+                      );
+                    })}
+                  </div>
+                  <Linemessage />
+                  <div className="ticketselector_chkoutbtn">
+                    <Checkoutbutton
+                      value2={"Checkout"}
+                      chkout={() => offerchkout(subltryid)}
+                      linenum={linenum}
+                    />
+                  </div>
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              {!show ? (
+                <>
+                  <div className="ticketselector_line">
+                    {linearray.map((item, index) => {
+                      return (
+                        <>
+                          <Numberselector
+                            Label1={"unit" + index}
+                            index={index}
+                            shuffle={shuffle}
+                            handlerefresh={handlerefresh}
+                            selectclick={selectclick}
+                          />
+                        </>
+                      );
+                    })}
+                  </div>
+                  <Linemessage />
+                  <div className="ticketselector_chkoutbtn">
+                    <Checkoutbutton
+                      value2={"Checkout"}
+                      chkout={() => chkout(lotteryid)}
+                      linenum={linenum}
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="ticketselector_line">
+                    {offerarray.map((item, index) => {
+                      return (
+                        <>
+                          <Offerselector
+                            label1={"Unit" + index}
+                            setValue={setValue}
+                            lineindex={index}
+                            ltryid={ltryid}
+                            show={show}
+                            array={linearray}
+                            text={"linearray"}
+                          />
+                        </>
+                      );
+                    })}
+                  </div>
+                  <Linemessage />
+                  <div className="ticketselector_chkoutbtn">
+                    <Checkoutbutton
+                      value2={"Checkout"}
+                      chkout={() => offerchkout(subltryid)}
+                      linenum={linenum}
+                    />
+                  </div>
+                </>
+              )}
+            </>
+          )}
+        </div>
         {/* {!show2 ? (
           <>
             {show ? (
@@ -800,7 +873,7 @@ setTimeout(() => {
 
         {/* <Footer/> */}
       </div>
-          
-    </>
-  );
+               
+    </>
+  );
 }
