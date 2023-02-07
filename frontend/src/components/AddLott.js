@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { MdArrowDropDownCircle } from "react-icons/md";
 import Collapsible from "react-collapsible";
+import config from '../config.json'
+
 export default function AddLottery() {
 
     const [drawdate, setLotterydate] = useState("");
@@ -46,7 +48,7 @@ export default function AddLottery() {
     const [Array2, setArray2] = useState([]);
     const handleAddlottery = () => {
         console.log("idx")
-        let url = "http://localhost:8080/addlottery"
+        let url = config.url+"addlottery"
         let req = {
             refProvider: provider,
             lotteryname: lname,
@@ -94,7 +96,7 @@ alert("Insert all field")
     }
 
     useEffect(() => {
-        let url = "http://localhost:8080/addlotteryproviderfetch";
+        let url = config.url+"addlotteryproviderfetch";
         let req = {};
         let header = {};
         axios.post(url, req, header).then((res) => {
@@ -106,7 +108,7 @@ alert("Insert all field")
     }, []);
 
     const Lotteryname = (id) => {
-        let url1 = "http://localhost:8080/addlotteryexist"
+        let url1 = config.url+"addlotteryexist"
         let req1 = { refProvider: id }
         console.log("req", id)
         let header1 = {}
@@ -127,7 +129,7 @@ alert("Insert all field")
         }else{
         const obj = JSON.parse(e)
         console.log("ohh",obj);
-        let url2 = "http://localhost:8080/addlotterydetails";
+        let url2 = config.url+"addlotterydetails";
         let req2 = {
             id: obj.id
         };
@@ -164,7 +166,7 @@ alert("Insert all field")
         }
     }
     const handleEditlottery = () => {
-        let url3 = "http://localhost:8080/editlottery"
+        let url3 = config.url+"editlottery"
         console.log("id",provider)
         let req3 = {
             id: id,

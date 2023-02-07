@@ -22,22 +22,22 @@ export default function Userdetails() {
   const usrname = localStorage.getItem("usrname");
 
   useEffect(() => {
-    let url_usercollapsiblelottery = "http://localhost:8080/userunitfetch";
+    let url_usercollapsiblelottery = config.url+"userunitfetch";
     let request_usercollapsiblelottery = {};
     let header_usercollapsiblelottery = {};
 
     let url_usercollapsibleprovider1 =
-      "http://localhost:8080/providerlotterynamewinnings";
+      config.url+"providerlotterynamewinnings";
     let request_usercollapsibleprovider1 = {};
     let header_usercollapsibleprovider1 = {};
 
     let url_usercollapsibleprovider =
-      "http://localhost:8080/userwinningtodatefetch";
+      config.url+"userwinningtodatefetch";
     let request_usercollapsibleprovider = {};
     let header_usercollapsibleprovider = {};
 
     let url_usercollapsiblelottery1 =
-      "http://localhost:8080/userwinningvalidationfetch";
+      config.url+"userwinningvalidationfetch";
     let request_usercollapsiblelottery1 = {};
     let header_usercollapsiblelottery1 = {};
 

@@ -23,7 +23,7 @@ function UserPage() {
   const [userresult, setUserresult] = useState([]);
 
   useEffect(()=>{
-    let url = "http://localhost:8080/drawticket";
+    let url = config.url+"drawticket";
     let request = {};
     let header = {};
     axios
@@ -41,7 +41,7 @@ function UserPage() {
 
 
 
-        let url1 = "http://localhost:8080/userunitfetch";
+        let url1 = config.url+"userunitfetch";
         let req1 = {
           userid: 5,
           provid: 3,

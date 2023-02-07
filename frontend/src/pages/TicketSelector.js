@@ -159,7 +159,7 @@ export default function TicketSelector() {
 
     console.log("offerary" + JSON.stringify(offerarray));
 
-    let url = "http://localhost:8080/drawticket";
+    let url = config.url+"drawticket";
     let request = {};
     let header = {};
     axios
@@ -179,7 +179,7 @@ export default function TicketSelector() {
       console.log("location.state", lotterydetails);
       setLotterylist(lotterydetails);
     } else {
-      let url = "http://localhost:8080/ticketselector_lotteryfetch";
+      let url = config.url+"ticketselector_lotteryfetch";
       let header = {};
       let request = {};
       axios
@@ -209,7 +209,7 @@ export default function TicketSelector() {
       if (usrname === " ") {
         navigate("/Login");
       }
-      let url1 = "http://localhost:8080/insertunitnumber";
+      let url1 = config.url+"insertunitnumber";
       let header1= {}
       const temp = [...linearray];
       const tempnew = [];
@@ -262,7 +262,7 @@ export default function TicketSelector() {
 
     console.log("selected line", linearray);
     console.log("selected id", id);
-    let url = "http://localhost:8080/insertunit";
+    let url = config.url+"insertunit";
     let header = {};
     const valu = [];
     const temp = [...linearray];
@@ -308,7 +308,7 @@ export default function TicketSelector() {
   };
 
   const offerchkout = () => {
-    let url = "http://localhost:8080/insertunit";
+    let url = config.url+"insertunit";
     let header = {};
 
     const valu = [];

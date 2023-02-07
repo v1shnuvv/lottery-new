@@ -16,7 +16,7 @@ export default function UserProfileedit() {
   useEffect(() => {
    
     console.log("id",id)
-    let url = "http://localhost:8080/profile";
+    let url = config.url+"profile";
     let req = {userid:id};
     let header = {};
     axios
@@ -34,7 +34,7 @@ export default function UserProfileedit() {
       })
       .catch();
 
-    let url1 = "http://localhost:8080/fetchcity";
+    let url1 = config.url+"fetchcity";
     let req2 = {};
     let header3 = {};
     axios
@@ -47,7 +47,7 @@ export default function UserProfileedit() {
   }, []);
 
   const updateclick = (e) => {
-    let url = "http://localhost:8080/profileupdate";
+    let url = config.url+"profileupdate";
     let req = { userid: id, phone: mobile, useraddress: address,city:city };
     let header = {};
     console.log(req)

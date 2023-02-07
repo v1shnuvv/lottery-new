@@ -32,23 +32,23 @@ export default function LotteryManager() {
   useEffect(() => {
     console.log("hi");
 
-    let url_unitsold = "http://localhost:8080/Unitsold";
+    let url_unitsold = config.url+"Unitsold";
     let request_unitsold = {};
     let header_unitsold = {};
 
-    let url_unitpending = "http://localhost:8080/Unitpending";
+    let url_unitpending = config.url+"Unitpending";
     let request_unitpending = {};
     let header_unitpending = {};
 
-    let url_winners = "http://localhost:8080/winners";
+    let url_winners = config.url+"winners";
     let request_winners = {};
     let header_winners = {};
 
-    let url_drawlist = "http://localhost:8080/lotterydrawresult";
+    let url_drawlist = config.url+"lotterydrawresult";
     let req_drawlist = {};
     let header_drawlist = {};
 
-    let url_drawresult = "http://localhost:8080/latestlotterydrawresult";
+    let url_drawresult = config.url+"latestlotterydrawresult";
     let req_drawresult = {};
     let header_drawresult = {};
 

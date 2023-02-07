@@ -22,7 +22,7 @@ export default function ResultUpdate() {
     }
 console.log("winni",winningarray);
     useEffect(() => {
-        let url = "http://localhost:8080/Lotteryprovdresultfetch";
+        let url = config.url+"Lotteryprovdresultfetch";
         let request = {};
         let header = {};
         axios.post(url, request, header).then((res) => {

@@ -10,7 +10,7 @@ export default function Cartitems({label1,array}) {
   console.log("array",array)
   const dispatch=useDispatch();
   useEffect(() => {
-    // let url = "http://localhost:8080/unitcheckout";
+    // let url = config.url+"unitcheckout";
     // let request = { id: id };
     // let header = {};
     // axios
@@ -32,7 +32,7 @@ export default function Cartitems({label1,array}) {
     // }
     //  dispatch({ type: "setLineArray", payload: tempsel });
     
-    let url = "http://localhost:8080/unitdelete";
+    let url = config.url+"unitdelete";
     let request = { id: id };
     let header = {};
     axios
@@ -49,7 +49,7 @@ export default function Cartitems({label1,array}) {
 
   //   const [pricearray, SetPricearray] = useState([]);
   //   useEffect(() => {
-  //     let url = "http://localhost:8080/Price";
+  //     let url = config.url+"Price";
   //     let request = {};
   //     let header = {};
   //     axios
@@ -65,7 +65,7 @@ export default function Cartitems({label1,array}) {
 
   //   const [numberarray, SetNumberarray] = useState([]);
   //   useEffect(() => {
-  //     let url = "http://localhost:8080/Numbers";
+  //     let url = config.url+"Numbers";
   //     let request = {};
   //     let header = {};
   //     axios

@@ -14,6 +14,7 @@ import { useDispatch,useSelector } from "react-redux";
 import TicketSelector from "./TicketSelector";
 import { GiConsoleController } from "react-icons/gi";
 
+import config from '../config.json'
 
 function HomePage() {
   const lotterydetails = useSelector((state) => state.lotterydetails);
@@ -35,7 +36,7 @@ function HomePage() {
   useEffect(() => {
     dispatch({ type: "issubidexist", payload: false });
     dispatch({ type: "iscolumnexist", payload: false })
-    let url = "http://localhost:8080/drawticket";
+    let url = config.url+"drawticket";
     let request = {};
     let header = {};
     axios
@@ -69,7 +70,7 @@ function HomePage() {
       .catch();
 
 
-      let url_cart="http://localhost:8080/header_countunit"
+      let url_cart=config.url+"header_countunit"
       let header_cart={};
       let request_cart={id:userid};
       axios.post(url_cart,request_cart,header_cart).then((res)=>{

@@ -37,7 +37,7 @@ export default function AdminUnitlist() {
 
 
   useEffect(() => {
-    let url = "http://localhost:8080/userlistforadmin";
+    let url = config.url+"userlistforadmin";
     let req = {};
     let header = {};
     axios
@@ -246,7 +246,7 @@ const sortdated =() => {
   //     navigate("/Login");
   //   };
   //   const DeleteFunc = () => {
-  //     let url = "http://localhost:8080/unitdelete";
+  //     let url = config.url+"unitdelete";
   //     let request = { id: 1 };
   //     let header = {};
   //     axios
@@ -277,7 +277,7 @@ const sortdated =() => {
   //   };
   //   const search_date = (d) => {
   //     console.log(d);
-  //     let url = "http://localhost:8080/search_date";
+  //     let url = config.url+"search_date";
   //     let request = { date: d };
   //     console.log("req", request);
   //     let header = {};

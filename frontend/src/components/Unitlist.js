@@ -11,7 +11,7 @@ export default function Unitlist() {
 
     useEffect(() => {
     
-      let url = "http://localhost:8080/Unitlist";
+      let url = config.url+"Unitlist";
       let request = {};
       let header = {};
       axios
@@ -25,7 +25,7 @@ export default function Unitlist() {
         });
     }, []);
   const handleDeleteClick=(id)=>{
-    let url = "http://localhost:8080/unitdelete";
+    let url = config.url+"unitdelete";
     let request = {id:id};
     let header = {};
     axios

@@ -14,7 +14,7 @@ export default function VerifyOTP({ show, setShow, newid }) {
   const verify = () => {
     console.log("newid created", newid);
     // alert(newid)
-    let url = "http://localhost:8080/verify";
+    let url = config.url+"verify";
     let request = { id: newid, otp: eotp };
     let header = {};
     axios
@@ -29,7 +29,7 @@ export default function VerifyOTP({ show, setShow, newid }) {
         } else {
           setShowsucess(true);
           let update_req={id:newid};
-          let update_url="http://localhost:8080/confirmuser";
+          let update_url=config.url+"confirmuser";
           let update_header={};
           axios.post(update_url,update_req,update_header).then((res)=>{
             console.log(res.data)
@@ -42,7 +42,7 @@ export default function VerifyOTP({ show, setShow, newid }) {
  const reverify=()=>{
   
   console.log("reverfiy");
-        let url_otp = "http://localhost:8080/otpgenerate";
+        let url_otp = config.url+"otpgenerate";
         let request_otp = { newid:newid };
         console.log("request_otp",request_otp)
         let header_otp = {};
@@ -53,7 +53,7 @@ export default function VerifyOTP({ show, setShow, newid }) {
             var email = res.data[0].txtUemail;
             var otp = res.data[0].txtOtp;
             console.log("email is", email);
-            let url_email = "http://localhost:8080/sendmail";
+            let url_email = config.url+"sendmail";
             let request_email = { email: email, otp: otp };
             let header_email = {};
             console.log(request_email);

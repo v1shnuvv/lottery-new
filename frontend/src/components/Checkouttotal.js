@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function Checkouttotal() {
   const [totalcost, setTotalcost] = useState("");
   useEffect(() => {
-    let url = "http://localhost:8080/checkouttotal";
+    let url = config.url+"checkouttotal";
     let request = {};
     let header = {};
     axios

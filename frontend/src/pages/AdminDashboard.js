@@ -115,48 +115,48 @@ const handleclick6=()=>{
 
 //-----<
   useEffect(() => {
-    let url_unitsold = "http://localhost:8080/Unitsold";
+    let url_unitsold = config.url+"Unitsold";
     let request_unitsold = {};
     let header_unitsold = {};
 
-    let url_unitpending = "http://localhost:8080/Unitpending";
+    let url_unitpending = config.url+"Unitpending";
     let request_unitpending = {};
     let header_unitpending = {};
 
-    let url_winners = "http://localhost:8080/winners";
+    let url_winners = config.url+"winners";
     let request_winners = {};
     let header_winners = {};
 
     //drawresult//uservalidationfetch----->
-    let url_drawlist = "http://localhost:8080/upcominglotterydraws";
+    let url_drawlist = config.url+"upcominglotterydraws";
     let req_drawlist = {};
     let header_drawlist = {};
 
-    let url_drawresult = "http://localhost:8080/latestdrawunits";
+    let url_drawresult = config.url+"latestdrawunits";
     let req_drawresult = {};
     let header_drawresult = {};
     //-----<
     //totalwinningvalidation----->
     let url_totalwinningvalidation =
-      "http://localhost:8080/totallotterywinnigtodate";
+      config.url+"totallotterywinnigtodate";
     let req_totalwinningvalidation = {};
     let header_totalwinningvalidation = {};
-    let url_totalwinningvalidation1 = "http://localhost:8080/totalwinnigtodate";
+    let url_totalwinningvalidation1 = config.url+"totalwinnigtodate";
     let req_totalwinningvalidation1 = {};
     let header_totalwinningvalidation1 = {};
     //-----<
-    let url_all = "http://localhost:8080/admindash_fetchall";
+    let url_all = config.url+"admindash_fetchall";
     let request_all = {};
     let header_all = {};
-    let url_admin = "http://localhost:8080/admindash_adminpurchase";
+    let url_admin = config.url+"admindash_adminpurchase";
     let request_admin = {};
     let header_admin = {};
     // //uservalidationfetch----->
-    // let url_uservalidation = "http://localhost:8080/latestdrawunits";
+    // let url_uservalidation = config.url+"latestdrawunits";
     // let req_uservalidation = {};
     // let header_uservalidation = {};
     // //-----<
-    let url = "http://localhost:8080/drawticket";
+    let url = config.url+"drawticket";
     let request = {};
     let header = {};
     axios

@@ -23,7 +23,7 @@ export default function Checkout({ linenum }) {
   useEffect(()=>{
     
     console.log(location.state.subltryid)
-    let url="http://localhost:8080/purchasedloryfetch";
+    let url=config.url+"purchasedloryfetch";
     let request={userid: userid};
     let header={};
     axios.post(url,request,header).then((res)=>{
@@ -33,7 +33,7 @@ export default function Checkout({ linenum }) {
   },[])
   const chkout = () => {
 
-    let url = "http://localhost:8080/insertunit";
+    let url = config.url+"insertunit";
     let header = {};
 
     const valu = [];

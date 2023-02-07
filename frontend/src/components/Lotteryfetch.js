@@ -6,7 +6,7 @@ export default function Lotteryfetch() {
   const [array,setArray] = useState([]);
 
   useEffect(() => {
-    const url = "http://localhost:8080/lotteryfetch";
+    const url = config.url+"lotteryfetch";
     // const request = {id:1}
     const request = {};
     const header = {};
@@ -27,7 +27,7 @@ export default function Lotteryfetch() {
       });
   }, []);
   const handleDeleteClick = (id) => {
-    let url = "http://localhost:8080/lotterydelete";
+    let url = config.url+"lotterydelete";
     let request = { id: id};
     let header = {};
     axios

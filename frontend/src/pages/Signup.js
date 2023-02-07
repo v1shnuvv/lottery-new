@@ -29,7 +29,7 @@ function Signup() {
     // navigate("/Verifyotp")
   };
   const signup = () => {
-    let url = "http://localhost:8080/insertuser";
+    let url = config.url+"insertuser";
     let request = {
       fname: fname,
       lname: lname,
@@ -48,7 +48,7 @@ function Signup() {
           .then((res) => {
             setNewid(res.data.insertId);
             var newid = res.data.insertId;
-            let url_otp = "http://localhost:8080/otpgenerate";
+            let url_otp = config.url+"otpgenerate";
             let request_otp = { newid: newid };
             let header_otp = {};
             axios
@@ -58,7 +58,7 @@ function Signup() {
                 var email = res.data[0].txtUemail;
                 var otp = res.data[0].txtOtp;
                 console.log("email is", email);
-                let url_email = "http://localhost:8080/sendmail";
+                let url_email = config.url+"sendmail";
                 let request_email = { email: email, otp: otp };
                 let header_email = {};
                 console.log(request_email);

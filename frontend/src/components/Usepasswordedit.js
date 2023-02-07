@@ -7,7 +7,7 @@ export default function Usepasswordedit() {
   const [confirmpassword, setConfirmpassword] = useState("");
   const updateclick = (e) => {
     if (newpassword == confirmpassword) {
-      let url = "http://localhost:8080/updatepassword";
+      let url = config.url+"updatepassword";
       let req = { password: newpassword, userid:2};
       let header = {};
       axios
@@ -22,7 +22,7 @@ export default function Usepasswordedit() {
   };
   
   useEffect(() => {
-    let url = "http://localhost:8080/showpassword";
+    let url = config.url+"showpassword";
     let req = { userid: 2};
     let header = {};
     axios

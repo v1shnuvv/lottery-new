@@ -31,7 +31,7 @@ const [state, setState] = useState([])
 
 //provideredit----->
 function handleclickPdelete() {
-  let url_provideredit4 = "http://localhost:8080/deleteprovider";
+  let url_provideredit4 = config.url+"deleteprovider";
   let req_provideredit4 = { providereditid: providereditid };
   let header_provideredit4 = {};
   axios
@@ -41,7 +41,7 @@ function handleclickPdelete() {
   window.location.reload();
 }
 const handleclickSubmit = (e) => {
-  let url_provideredit3 = "http://localhost:8080/editprovider";
+  let url_provideredit3 = config.url+"editprovider";
   let req_provideredit3 = {
     providereditid: providereditid,
     providereditname: providereditname,
@@ -63,7 +63,7 @@ const handleclickSubmit = (e) => {
 //-----<
 //provideradd----->
 const handleAddprovider=()=>{
-  let url_provideradd = "http://localhost:8080/addprovider";
+  let url_provideradd = config.url+"addprovider";
   let req_provideradd = {
     providername:providername,
     provideremail:provideremail,
@@ -90,11 +90,11 @@ const handleAddprovider=()=>{
 
 useEffect(()=>{
 //provideredit----->
-let url_provideredit2 = "http://localhost:8080/viewprovider";
+let url_provideredit2 = config.url+"viewprovider";
 let req_provideredit2 = {};
 let header_provideredit2 = {};
 //-----<
-let url_provideradd1 = "http://localhost:8080/fetchstate";
+let url_provideradd1 = config.url+"fetchstate";
 let req_provideradd1 = {};
 let header_provideradd1 = {};
 

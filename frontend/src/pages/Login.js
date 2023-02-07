@@ -18,7 +18,7 @@ function Login() {
   const [userrole,setUserrole]=useState("")
   const login = () => {
     console.log("hi");
-    let url = "http://localhost:8080/uservalidate";
+    let url = config.url+"uservalidate";
     let request = { username: username, password: password };
     let header = {};
     console.log(request);
