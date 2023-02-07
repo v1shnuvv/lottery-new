@@ -3,6 +3,7 @@ import Collapsible from "react-collapsible";
 import Input from "./Input";
 import axios from "axios";
 import "../components/AddProvider.css"
+import config from '../config.json'
 
 //install react-collapsible before using this component
 //npm i react-collapsible
@@ -17,7 +18,7 @@ export default function AddProvider() {
 
 
   const handleAddprovider=()=>{
-    let url = "http://localhost:8000/addprovider";
+    let url = config.url+"addprovider";
     let req = {providername:providername,
       provideremail:provideremail,
       providermobile:providermobile,

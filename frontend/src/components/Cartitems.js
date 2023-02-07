@@ -3,8 +3,8 @@ import "./Cartitems.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-export default function Cartitems({label1,array}) {
+import config from '../config.json'
+export default function Cartitems({label1,array, handleDeleteClick}) {
   // const [array, Setarray] = useState([]);
   const id = localStorage.getItem("id");
   console.log("array",array)
@@ -23,29 +23,6 @@ export default function Cartitems({label1,array}) {
     //     console.log(err);
     //   });
   }, []);
-  const handleDeleteClick = (id) => {
-    // const tempsel = [...linearray];
-    // console.log("tempsel",tempsel)
-    // for (const eleent of tempsel[indx]) {
-      
-    //   eleent.isselected = false;
-    // }
-    //  dispatch({ type: "setLineArray", payload: tempsel });
-    
-    let url = config.url+"unitdelete";
-    let request = { id: id };
-    let header = {};
-    axios
-      .post(url, request, header)
-      .then((res) => {
-        console.log(res.data);
-        // Setarray(res.data);
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   //   const [pricearray, SetPricearray] = useState([]);
   //   useEffect(() => {

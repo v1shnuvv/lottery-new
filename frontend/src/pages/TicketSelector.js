@@ -19,6 +19,7 @@ import { CgDetailsLess } from "react-icons/cg";
 import { loadClientAuth2 } from "gapi-script";
 import usestate from "usestate";
 import Numberselector from "../components/Numberselector";
+import config from "../config.json";
 
 export default function TicketSelector() {
   const [column, setColumn] = useState("");
@@ -159,7 +160,7 @@ export default function TicketSelector() {
 
     console.log("offerary" + JSON.stringify(offerarray));
 
-    let url = config.url+"drawticket";
+    let url = config.url + "drawticket";
     let request = {};
     let header = {};
     axios
@@ -179,7 +180,7 @@ export default function TicketSelector() {
       console.log("location.state", lotterydetails);
       setLotterylist(lotterydetails);
     } else {
-      let url = config.url+"ticketselector_lotteryfetch";
+      let url = config.url + "ticketselector_lotteryfetch";
       let header = {};
       let request = {};
       axios
@@ -202,18 +203,18 @@ export default function TicketSelector() {
 
   // const chkout = (id) => {
 
- 
   // };
   const chkout = (id) => {
-    if(columnvalue){
-      if (usrname === " ") {
+    alert(usrname);
+    if (columnvalue) {
+      if (usrname === null) {
         navigate("/Login");
       }
-      let url1 = config.url+"insertunitnumber";
-      let header1= {}
+      let url1 = config.url + "insertunitnumber";
+      let header1 = {};
       const temp = [...linearray];
       const tempnew = [];
-  
+
       for (const objline of temp) {
         let selectedvalues = [];
         for (const objlineinner of objline) {
@@ -226,24 +227,26 @@ export default function TicketSelector() {
         tempnew.push(selectedvalues);
       }
       console.log("tttt", tempnew);
-      let request1 = {uid:userid, lid:id, arr:tempnew}
-          axios.post(url1, request1, header1)
-          .then((res)=>{
-            console.log(res.data);
-            if (res.data != "Error") {
-              if (!isfinishd) {
-                dispatch({ type: "setLineArray", payload: [] });
-                navigate("/Checkout", {
-                  state: { lid: lotteryid, subltryid: subltryid },
-                });
-              } else {
-                setShow(!show);
-                dispatch({ type: "setLineArray", payload: [] });
-                dispatch({ type: "issubidexist", payload: false });
-              }
+      let request1 = { uid: userid, lid: id, arr: tempnew };
+      axios
+        .post(url1, request1, header1)
+        .then((res) => {
+          console.log(res.data);
+          if (res.data != "Error") {
+            if (!isfinishd) {
+              dispatch({ type: "setLineArray", payload: [] });
+              navigate("/Checkout", {
+                state: { lid: lotteryid, subltryid: subltryid },
+              });
+            } else {
+              setShow(!show);
+              dispatch({ type: "setLineArray", payload: [] });
+              dispatch({ type: "issubidexist", payload: false });
             }
-          }).catch();
-      
+          }
+        })
+        .catch();
+
       // for (const iterator of tempnew) {
       //   if(iterator.length !=""){
       //     console.log("itt",iterator)
@@ -255,60 +258,56 @@ export default function TicketSelector() {
       //     }).catch();
       //   }
       // }
-    }else{
-           if (usrname === " ") {
-      navigate("/Login");
-    }
-
-    console.log("selected line", linearray);
-    console.log("selected id", id);
-    let url = config.url+"insertunit";
-    let header = {};
-    const valu = [];
-    const temp = [...linearray];
-    for (const itrt of temp) {
-
-      let temp = [];
-      for (const t of itrt) {
-        if (t.isselected)
-        temp.push(t.value);
+    } else {
+      if (usrname === " ") {
+        navigate("/Login");
       }
-      valu.push(temp);
-    }
 
-    for (var i = 0; i < valu.length; i++) {
-      if (valu[i] != "") {
-        let request = { uid: userid, lid: id, arr: valu[i] };
-         console.log("req",request)
-        // console.log(request);
-        axios
-          .post(url, request, header)
-          .then((res) => {
-            console.log(res.data);
-            if (res.data != "Error") {
-              if (!isfinishd) {
-                dispatch({ type: "setLineArray", payload: [] });
-                navigate("/Checkout", {
-                  state: { lid: lotteryid, subltryid: subltryid },
-                });
-              } else {
-                setShow(!show);
-                dispatch({ type: "setLineArray", payload: [] });
-                dispatch({ type: "issubidexist", payload: false });
+      console.log("selected line", linearray);
+      console.log("selected id", id);
+      let url = config.url + "insertunit";
+      let header = {};
+      const valu = [];
+      const temp = [...linearray];
+      for (const itrt of temp) {
+        let temp = [];
+        for (const t of itrt) {
+          if (t.isselected) temp.push(t.value);
+        }
+        valu.push(temp);
+      }
+
+      for (var i = 0; i < valu.length; i++) {
+        if (valu[i] != "") {
+          let request = { uid: userid, lid: id, arr: valu[i] };
+          console.log("req", request);
+          // console.log(request);
+          axios
+            .post(url, request, header)
+            .then((res) => {
+              console.log(res.data);
+              if (res.data != "Error") {
+                if (!isfinishd) {
+                  dispatch({ type: "setLineArray", payload: [] });
+                  navigate("/Checkout", {
+                    state: { lid: lotteryid, subltryid: subltryid },
+                  });
+                } else {
+                  setShow(!show);
+                  dispatch({ type: "setLineArray", payload: [] });
+                  dispatch({ type: "issubidexist", payload: false });
+                }
               }
-            }
-          })
-          .catch();
+            })
+            .catch();
+        }
       }
+      // }
     }
-    // }
-}
-
-    
   };
 
   const offerchkout = () => {
-    let url = config.url+"insertunit";
+    let url = config.url + "insertunitnumber";
     let header = {};
 
     const valu = [];
@@ -320,28 +319,24 @@ export default function TicketSelector() {
       }
       valu.push(temp);
     }
-    for (var i = 0; i < valu.length; i++) {
-      if (valu[i] != "") {
-        let request = { uid: userid, lid: subltryid, arr: valu[i] };
+    let request = { uid: userid, lid: subltryid, arr: valu };
 
-        console.log(request);
-        axios
-          .post(url, request, header)
-          .then((res) => {
-            console.log(res.data);
-            if (res.data != "Error") {
-              navigate("/Checkout", {
-                state: { lid: lotteryid, subltryid: subltryid },
-              });
-              dispatch({ type: "setLineArray", payload: [] });
-              setShow(!show);
+    console.log(request);
+    axios
+      .post(url, request, header)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data != "Error") {
+          navigate("/Checkout", {
+            state: { lid: lotteryid, subltryid: subltryid },
+          });
+          dispatch({ type: "setLineArray", payload: [] });
+          setShow(!show);
 
-              dispatch({ type: "issubidexist", payload: false });
-            }
-          })
-          .catch();
-      }
-    }
+          dispatch({ type: "issubidexist", payload: false });
+        }
+      })
+      .catch();
   };
 
   // const childdata = (e, selection, setShowchk) => {
@@ -351,7 +346,7 @@ export default function TicketSelector() {
   //   if (selection.length < 5) {
   //     setErrmsg("Need to select 5 numbers before confirming!!");
   //   } else if (selection != "") {
-  //     let url = "http://localhost:8000/insertunit";
+  //     let url = config.url+"insertunit";
   //     let request = {
   //       firstnum: selection[0],
   //       secondnum: selection[1],
@@ -378,7 +373,7 @@ export default function TicketSelector() {
     setltryid(obj.id);
     setLtryname(obj.value);
 
-    let url = "http://localhost:8000/subltryfetch";
+    let url = config.url + "subltryfetch";
     let req = { id: obj.id };
     console.log("req", req);
     let header = {};

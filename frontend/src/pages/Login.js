@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Input from "../components/Input";
+import config from '../config.json'
 import Googlelogin from "../components/Googlelogin";
 function Login() {
   const navigate = useNavigate();

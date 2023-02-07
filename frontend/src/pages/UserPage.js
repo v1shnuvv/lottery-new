@@ -11,6 +11,7 @@ import { GrAddCircle } from "react-icons/gr";
 import { useState } from "react";
 import Userdetails from "./Userdetails";
 import { useEffect } from "react";
+import config from '../config.json'
 import List1 from "../components/List1";
 function UserPage() {
   const navigate = useNavigate();

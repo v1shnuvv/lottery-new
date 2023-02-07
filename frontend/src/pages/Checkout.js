@@ -4,36 +4,39 @@ import Footer from "../components/Footer";
 import CartHeader from "../components/Cartheader";
 import Cartitems from "../components/Cartitems";
 import Checkoutclick from "../components/Checkoutcomponent";
+import config from "../config.json";
 import CheckoutTotal from "../components/Checkouttotal";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {useLocation} from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { GiConsoleController } from "react-icons/gi";
 export default function Checkout({ linenum }) {
   const linearray = useSelector((state) => state.linearray);
-  const navigate=useNavigate();
-  const usrname=localStorage.getItem("usrname")
-  console.log("usrname",usrname)
+  const navigate = useNavigate();
+  const [reload, setReload] = useState(true);
+  const usrname = localStorage.getItem("usrname");
+  console.log("usrname", usrname);
   const location = useLocation();
   const dispatch = useDispatch();
-  const [array,setArray]=useState([])
-  const userid=localStorage.getItem("userid")
-  useEffect(()=>{
-    
-    console.log(location.state.subltryid)
-    let url=config.url+"purchasedloryfetch";
-    let request={userid: userid};
-    let header={};
-    axios.post(url,request,header).then((res)=>{
-      console.log("Array chkout",res.data)
-      setArray(res.data)
-    }).catch()
-  },[])
+  const [array, setArray] = useState([]);
+  const userid = localStorage.getItem("userid");
+  useEffect(() => {
+    console.log(location.state.subltryid);
+    let url = config.url + "purchasedloryfetch";
+    let request = { userid: userid };
+    let header = {};
+    axios
+      .post(url, request, header)
+      .then((res) => {
+        console.log("Array chkout", res.data);
+        setArray(res.data);
+      })
+      .catch();
+  }, [reload]);
   const chkout = () => {
-
-    let url = config.url+"insertunit";
+    let url = config.url + "insertunit";
     let header = {};
 
     const valu = [];
@@ -44,33 +47,43 @@ export default function Checkout({ linenum }) {
         if (t.isselected) temp.push(t.value);
       }
       valu.push(temp);
-     
     }
-    for (var i = 0; i < valu.length; i++) {
-      if(valu[i]!="")
-      {
-        let request = { uid :userid,lid: 3, arr: valu[i] };
-       console.log(request)
-        axios
-          .post(url, request, header)
-          .then((res) => {
-            console.log(res.data);
-           if(res.data!="Error")
-           {
-            dispatch({ type: "setLineArray", payload: [] });
-            
-          
-           }
-          })
-          .catch();
+    let request = { uid: userid, lid: 3, arr: valu };
+    console.log(request);
+    axios
+      .post(url, request, header)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data != "Error") {
+          dispatch({ type: "setLineArray", payload: [] });
+        }
+      })
+      .catch();
+  };
 
-      }
-      else if(usrname=="")
-      {
-        navigate("/Login")
-      }
-     
-    }
+  const handleDeleteClick = (id) => {
+    // const tempsel = [...linearray];
+    // console.log("tempsel",tempsel)
+    // for (const eleent of tempsel[indx]) {
+
+    //   eleent.isselected = false;
+    // }
+    //  dispatch({ type: "setLineArray", payload: tempsel });
+    //alert(id)
+    let url = config.url + "unitdelete";
+    let request = { id: id };
+    let header = {};
+    axios
+      .post(url, request, header)
+      .then((res) => {
+        console.log(res.data);
+        setReload(!reload);
+        // Setarray(res.data);
+        // window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   //  console.log(valu)
 
@@ -85,12 +98,16 @@ export default function Checkout({ linenum }) {
         <div className="Checkout_header">
           <Header />
         </div>
-       
+
         <div className="Checkout_cartheader">
           <CartHeader />
         </div>
         <div className="Checkout_cartitems">
-          <Cartitems label1={location.state.lname} array={array}/>
+          <Cartitems
+            label1={location.state.lname}
+            array={array}
+            handleDeleteClick={handleDeleteClick}
+          />
         </div>
         {/* <div className="Checkout_total">
           <CheckoutTotal />
