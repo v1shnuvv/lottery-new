@@ -70,8 +70,7 @@ console.log("winni",winningarray);
         axios.post(url, req, header)
             .then((res) => {
                 if (res.data.length !== 0) {
-                    console.log("nn",JSON.stringify(res.data))
-                    console.log("Insert lottery number");
+                    window.location.reload()
                 }
                 else {
                     alert("error Insert lottery number");

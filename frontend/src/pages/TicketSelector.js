@@ -48,7 +48,7 @@ export default function TicketSelector() {
   const linearray = useSelector((state) => state.linearray);
   const offerarray = useSelector((state) => state.offerarray);
   const lotterydetails = useSelector((state) => state.lotterydetails);
-  console.log("ts+ld", lotterydetails);
+  // console.log("ts+ld", lotterydetails);
   const dispatch = useDispatch();
   const location = useLocation();
   const usrname = localStorage.getItem("usrname");
@@ -61,7 +61,7 @@ export default function TicketSelector() {
   console.log("ts", usrname);
 
   const columnvalue = useSelector((state) => state.iscolumnexist);
-  console.log("columnvalue", columnvalue);
+  // console.log("columnvalue", columnvalue);
   const [show2, setShow2] = useState("");
   const [trigger, setTrigger] = useState();
   // console.log("linenum",linenum)
@@ -71,7 +71,7 @@ export default function TicketSelector() {
   // })
   let Ltr_name = "";
   const userid = localStorage.getItem("userid");
-  console.log("userid", userid);
+  // console.log("userid", userid);
   const cnt = localStorage.getItem("cartcount");
 
   // useEffect(()=>{
@@ -226,7 +226,7 @@ export default function TicketSelector() {
         tempnew.push(selectedvalues);
       }
       console.log("tttt", tempnew);
-      let request1 = {uid:1, lid:id, arr:tempnew}
+      let request1 = {uid:userid, lid:id, arr:tempnew}
           axios.post(url1, request1, header1)
           .then((res)=>{
             console.log(res.data);
@@ -278,7 +278,7 @@ export default function TicketSelector() {
 
     for (var i = 0; i < valu.length; i++) {
       if (valu[i] != "") {
-        let request = { uid: 2, lid: id, arr: valu[i] };
+        let request = { uid: userid, lid: id, arr: valu[i] };
          console.log("req",request)
         // console.log(request);
         axios
@@ -322,7 +322,7 @@ export default function TicketSelector() {
     }
     for (var i = 0; i < valu.length; i++) {
       if (valu[i] != "") {
-        let request = { uid: 2, lid: subltryid, arr: valu[i] };
+        let request = { uid: userid, lid: subltryid, arr: valu[i] };
 
         console.log(request);
         axios

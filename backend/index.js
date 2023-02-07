@@ -10,7 +10,7 @@ var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "sqladmin",
-  database: "lotterydrumsnew",
+  database: "lotterydump",
 });
 
 con.connect(function (err) {
@@ -674,7 +674,7 @@ app.post("/addlottery", function (req, res) {
     sixth +
     "')";
   con.query(sql, function (err, result) {
-    if (err) throw err;
+    if (err) res.send("Error");
   //  console.log(result);
    // console.log("ji", sql);
     res.send(result);
@@ -752,7 +752,7 @@ app.post("/addlotteryexist", function (req, res) {
 app.post("/addlotterydetails", function (req, res) {
   let id = req.body.id;
   var sql =
-    "select date_format(dtLotterydrawdate, '%Y-%m-%d' )as drawdate  ,txtFirstprize, txtSecondprize, txtThirdprize, txtFourthprize, txtFifthprize, txtSixthprize, txtCost,txtStartRange,txtEndRange,txtSelectionLimit,txtPurchaseLimit,txtSubLottery, txtAdminChargeperUnit, txtUnitSaleAmount, txtAgentCommission, txtTax, txtCommissionrate, txtOtherDeduct1, txtOtherDeduct2 from tbllotterymaster where id = '" +
+    "select date_format(dtLotterydrawdate, '%Y-%m-%d' )as drawdate  ,txtFirstprize, txtSecondprize, txtThirdprize, txtFourthprize, txtFifthprize, txtSixthprize, txtCost,txtStartRange,txtEndRange,txtSelectionLimit,txtPurchaseLimit,txtSubLottery, txtAdminChargeperUnit, txtUnitSaleAmount, txtAgentCommission, txtTax, txtCommissionrate, txtOtherDeduct1, txtOtherDeduct2 ,txtCharitypercent, txtPurchasedamount from tbllotterymaster where id = '" +
     id +
     "'";
   con.query(sql, function (err, result) {
@@ -926,10 +926,9 @@ app.post('/RaffleBothInsert', (req, res) => {
   // var promisedResult = await new Promise ((resolve, reject)=>{
     con.query(sql, (err, result) => {
       if (err) throw err;
-      console.log(result);
+      console.log(sql);
       res.send(result);
     })
-    console.log("pr",promisedResult)
   // })
   // var promisedResult1 = await new Promise ((resolve, reject)=>{  
   //   con.query(sql2, (err, result) => {
@@ -1147,8 +1146,9 @@ app.post("/admindash_adminpurchase", (req, res) => {
 });
 //--<
 app.post("/purchasedloryfetch", (req, res) => {
+  let userid= req.body.userid
   let sql =
-    "select tu.id ,tm.txtLotteryname,tu.txtLotteryNumber from tblunit tu left join tbllotterymaster tm on tu.refLotterymaster=tm.id where tu.refUser=2 and tu.txtDeleteflag=0 and tu.txtPurchaseddate < tm.dtLotterydrawdate;";
+    "select tu.id ,tm.txtLotteryname,tu.txtLotteryNumber from tblunit tu left join tbllotterymaster tm on tu.refLotterymaster=tm.id where tu.refUser='"+userid+"' and tu.txtDeleteflag=0 and tu.txtPurchaseddate < tm.dtLotterydrawdate;";
   con.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);

@@ -39,6 +39,8 @@ export default function AddLottery() {
     const [colendNo, setColendNo] = useState('');
     const [lotshow, setLotshow]= useState("none")
 
+    
+
     const [Array, setArray] = useState([]);
     const [Array1, setArray1] = useState([]);
     const [Array2, setArray2] = useState([]);
@@ -82,10 +84,10 @@ export default function AddLottery() {
         if(provider=="" || lname=="" ||drawdate=="" ||puramount=="" || unitsaleamount=="" || adminchargeperunit=="" || lotterycost=="" ||lotterypurchase==""
         || agentcommission=="" || commissionrate=="" ||tax=="" ||otherdeduct1=="" || otherdeduct2=="" || charitypercent=="" || first=="" ||second==""
         || third=="" ||fourth=="" ||fifth=="" ){
-alert("insert")
+alert("Insert all field")
         }else{
             axios.post(url, req, header).then((res) => {
-                console.log("Success", res.data);
+                if(res.data != "Error"){window.location.reload()}
             }).catch();
         }
        
@@ -99,6 +101,8 @@ alert("insert")
             console.log("Hiii", res.data)
             setArray(res.data)
         }).catch();
+
+        
     }, []);
 
     const Lotteryname = (id) => {
@@ -130,7 +134,7 @@ alert("insert")
         let header2 = {};
         axios.post(url2, req2, header2)
             .then((res) => {
-                console.log("hi", obj.id)
+                console.log("hi", res.data)
                 setArray2("hi", res.data)
                 setLotterydate(res.data[0].drawdate)
                 setAdminchargeperunit(res.data[0].txtAdminChargeperUnit)
@@ -143,6 +147,8 @@ alert("insert")
                 setOtherdeduct2(res.data[0].txtOtherDeduct2)
                 setLotterystart(res.data[0].txtStartRange)
                 setLotteryend(res.data[0].txtEndRange)
+                setPuramount(res.data[0].txtPurchasedamount)
+                setCharitypercent(res.data[0].txtCharitypercent)
                 setLotterypurchase(res.data[0].txtPurchaseLimit)
                 setLotterysub(res.data[0].txtSubLottery)
                 setLotteryselection(res.data[0].txtSelectionLimit)

@@ -51,11 +51,13 @@ export default function Provideradd({
             <div className="provideradd_input">
               <Input
                 name="Mobile Number"
+                itype="tel"
                 onChange={(e) => {
                   setvalue3(e.target.value);
                 }}
               />
             </div>
+            
             <div className="provideradd_input">
               <Input
                 name="Address"
@@ -95,7 +97,7 @@ export default function Provideradd({
           </div>
           <div className="provideradd_button">
             <div id="errmsg"></div><br/>
-            <div></div>
+            
             <button
               onClick={(e) => {
                 handleAddprovider(e);

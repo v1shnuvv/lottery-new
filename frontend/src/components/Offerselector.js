@@ -29,12 +29,15 @@ export default function Offerselector({
   console.log("id and name", ltryid, ltryname);
   const dispatch = useDispatch();
   const [num,setNum] = useState("");
-  var limit = 39;
+  // var limit = 39;
+  const [limit, setLimit] = useState("")
 
   useEffect(() => {
     //console.log("line", linearray);
     console.log("offerarray", show);
     setSel_limit(lotterydetails[0].sub_limit)
+    setNum(lotterydetails[0].sub_start)
+    setLimit(lotterydetails[0].sub_end)
   }, []);
 
   const handleClick = (e, indx) => {

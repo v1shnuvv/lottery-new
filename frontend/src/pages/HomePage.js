@@ -27,7 +27,6 @@ function HomePage() {
   var uname = localStorage.getItem("uname");
   const userid=localStorage.getItem("userid")
   const usrname = localStorage.getItem("usrname");
-  console.log("usrname", usrname.length);
   // const [lotterydetails,setLotterydetails]=useState([])
   console.log(userid)
   console.log("dt",date)

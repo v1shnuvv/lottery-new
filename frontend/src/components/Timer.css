@@ -3,9 +3,9 @@ body {
     min-width: 550px;
   }
   .timer_container {
-    background-color: black;
+    background-color: #020223;
     color: #ffff;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 15px;
     margin: 10px;
     width:80%;
@@ -13,7 +13,7 @@ body {
   .timer_lotteryname {
     background-color: #171739;
     padding: 10px 10px;
-    border-radius: 10px;
+    border-radius: 10px 10px 0px 0px;
     font-size: 35px;
     margin-bottom: 10px;
     text-align: center;
@@ -35,7 +35,7 @@ body {
   .timer_lotteryprice {
     background-color: #171739;
     padding: 10px 10px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     margin-bottom: 10px;
     font-size: 25px;
     display: flex;
@@ -59,7 +59,7 @@ body {
     display: flex;
     background-color: #171739;
     padding: 5px 10px;
-    border-radius: 10px;
+    border-radius: 0px 0px 10px 10px;
     align-items: center;
     justify-content: space-between;
   }

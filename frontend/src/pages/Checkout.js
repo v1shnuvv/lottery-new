@@ -24,7 +24,7 @@ export default function Checkout({ linenum }) {
     
     console.log(location.state.subltryid)
     let url="http://localhost:8080/purchasedloryfetch";
-    let request={};
+    let request={userid: userid};
     let header={};
     axios.post(url,request,header).then((res)=>{
       console.log("Array chkout",res.data)
@@ -49,7 +49,7 @@ export default function Checkout({ linenum }) {
     for (var i = 0; i < valu.length; i++) {
       if(valu[i]!="")
       {
-        let request = { uid :2,lid: 3, arr: valu[i] };
+        let request = { uid :userid,lid: 3, arr: valu[i] };
        console.log(request)
         axios
           .post(url, request, header)

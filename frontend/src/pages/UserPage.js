@@ -4,7 +4,6 @@ import HeaderUser from "../components/HeaderUser";
 import LotteryUnits from "../components/LotteryUnits";
 import Option from "../components/Option";
 import Footer from "../components/Footer";
-import List from "../components/List";
 import { useNavigate } from "react-router-dom";
 import Timer from "../components/Timer";
 import Collapsible from "react-collapsible";
@@ -108,6 +107,7 @@ function UserPage() {
           label8click={label8click}
         />
       </div>
+      <div className="userpage_row_container">
       <div className="userpage_row">
         <List1 
         label1={"Lottery Name"}
@@ -121,6 +121,7 @@ variable4={"TotalPrize"}
 
         array={userresult}
         />
+      </div>
       </div>
       {/* <div className="userpage_col1"> */}
         {/* <Userdetails/> */}
