@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../pages/VerifyOTP.css";
 import Failure from "./Failure";
 import Sucess from "./Sucess";
+import config from "../config.json"
 export default function VerifyOTP({ show, setShow, newid }) {
   const [showsucess, setShowsucess] = useState(false);
   const [showfailure, setShowfailure] = useState(false);

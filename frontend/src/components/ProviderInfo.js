@@ -5,7 +5,7 @@ import axios from "axios";
 import Collapsible from "react-collapsible";
 import { MdArrowDropDownCircle } from "react-icons/md";
 import { useEffect, useState } from "react";
-
+import config from "../config.json"
 export default function Providerinfo() {
 //provideredit----->
 const [providereditid, setProvidereditid] = useState("");

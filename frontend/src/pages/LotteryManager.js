@@ -1,7 +1,7 @@
 import "./LotteryManager.css";
 import HeaderUser from "../components/HeaderUser";
 import Filterbar from "../components/Filterbar";
-
+import config from "../config.json"
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";

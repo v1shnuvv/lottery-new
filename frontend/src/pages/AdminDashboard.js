@@ -5,6 +5,7 @@ import Uservalidationfetch_Admin from "../components/Uservalidationfetch_Admin";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import config from "../config.json"
 import axios from "axios";
 import { useEffect } from "react";
 import Result from "../components/Drawresult";

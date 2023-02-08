@@ -1,6 +1,7 @@
 import './ResultUpdate.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import config from "../config.json"
 export default function ResultUpdate() {
     const [Lotprores, setLotprores] = useState([]);
     const [winningnumber, setWinningnumber] = useState({ resultl: "", lid: "" });

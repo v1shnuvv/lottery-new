@@ -7,7 +7,7 @@ import HeaderUser from "../components/HeaderUser";
 import Footer from "../components/Footer";
 import UserCollapsibleprovider from "../components/Usercollapsible";
 import UserCollapsiblelotteryname from "../components/Usercollapsible";
-
+import config from "../config.json"
 export default function Userdetails() {
   const [fetchunitdetails, setFetchunitdetails] = useState([]);
   const [fetchwinningstodate, setFetchwinningstodate] = useState([]);

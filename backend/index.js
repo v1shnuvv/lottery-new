@@ -136,7 +136,7 @@ app.post("/confirmuser", (req, res) => {
 
 app.post("/drawticket", (req, res) => {
   let sql =
-    "SELECT  tm.id, tm.txtLotteryname AS main_ltry, tb.id AS sub_id, tm.txtPurchaseLimit AS purchase, tm.txtSelectionLimit AS main_limit, tb.txtSelectionLimit AS sub_limit, tb.txtLotteryname AS sub_ltry, tm.txtFirstprize, tm.txtStartRange AS mina_start, tm.txtEndRange AS main_end, tb.txtStartRange AS sub_start, tb.txtEndRange AS sub_end, DATE_FORMAT(tm.dtLotterydrawdate, '%Y-%m-%d') AS drawdate, DATE_FORMAT(tb.dtLotterydrawdate, '%Y-%m-%d') AS sub_drawdate, tm.txtNoOfCol AS columnNo, tm.txtNoOfRow AS rowNo, tm.txtColStartAt AS strtNo, tm.txtColEndAt AS endNo FROM (SELECT  * FROM     tbllotterymaster tm WHERE     tm.dtLotterydrawdate > NOW() ORDER BY tm.dtLotterydrawdate , tm.id LIMIT 1) tm     LEFT JOIN tbllotterymaster tb ON tm.txtSubLottery = tb.id";
+    "SELECT  tm.id, tm.txtLotteryname AS main_ltry, tb.id AS sub_id, tm.txtLotterytype as lottype, tm.txtPurchaseLimit AS purchase, tm.txtSelectionLimit AS main_limit, tb.txtSelectionLimit AS sub_limit, tb.txtLotteryname AS sub_ltry, tm.txtFirstprize, tm.txtStartRange AS mina_start, tm.txtEndRange AS main_end, tb.txtStartRange AS sub_start, tb.txtEndRange AS sub_end, DATE_FORMAT(tm.dtLotterydrawdate, '%Y-%m-%d') AS drawdate, DATE_FORMAT(tb.dtLotterydrawdate, '%Y-%m-%d') AS sub_drawdate, tm.txtNoOfCol AS columnNo, tm.txtNoOfRow AS rowNo, tm.txtColStartAt AS strtNo, tm.txtColEndAt AS endNo FROM (SELECT  * FROM     tbllotterymaster tm WHERE tm.txtLotterytype=0 &&     tm.dtLotterydrawdate > NOW() ORDER BY tm.dtLotterydrawdate , tm.id LIMIT 1) tm     LEFT JOIN tbllotterymaster tb ON tm.txtSubLottery = tb.id";
   con.query(sql, (err, result) => {
     res.send(result);
     //  console.log(result);

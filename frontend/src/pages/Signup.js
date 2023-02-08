@@ -9,6 +9,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useEffect, useState } from "react";
 import VerifyOTP from "./VerifyOTP";
 import axios from "axios";
+import config from "../config.json"
 // import logo from "./image/Linkedin_logo.png";
 import Sucess from "./Sucess";
 function Signup() {

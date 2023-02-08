@@ -9,7 +9,7 @@ import "./AdminUnitlist.css";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-
+import config from "../config.json"
 export default function AdminUnitlist() {
   const navigate = useNavigate();
   const uname = localStorage.getItem("usrname");

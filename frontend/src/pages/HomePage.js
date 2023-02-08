@@ -43,12 +43,13 @@ function HomePage() {
       .post(url, request, header)
       .then((res) => {
         console.log("draw",res.data);
+        dispatch({type:'setLotterydetails',payload:res.data})
         setDate(res.data[0].drawdate);
         setLotteryname(res.data[0].txtLotteryname);
         setPrize(res.data[0].txtLotteryprize);
         setLotteryid(res.data[0].id);
         // setLotterydetails(res.data);
-        dispatch({type:'setLotterydetails',payload:res.data})
+       
         var t = false;
         for (const iterator of res.data) {
           if (iterator.sub_id != null) {

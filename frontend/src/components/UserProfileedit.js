@@ -1,5 +1,6 @@
 import "./UserProfileedit.css";
 import axios from "axios";
+import config from "../config.json"
 import profilepic from "../images/megan.png";
 import { useState, useEffect } from "react";
 export default function UserProfileedit() {

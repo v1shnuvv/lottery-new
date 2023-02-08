@@ -3,6 +3,7 @@ import Button from "./Checkoutbutton";
 import "./Checkouttotal.css";
 import axios from "axios";
 import { useState } from "react";
+import config from "../config.json"
 export default function Checkouttotal() {
   const [totalcost, setTotalcost] = useState("");
   useEffect(() => {
