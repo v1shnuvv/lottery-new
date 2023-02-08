@@ -9,7 +9,7 @@ var nodemailer = require("nodemailer");
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "password",
+  password: "sqladmin",
   database: "lotterydump",
 });
 
@@ -607,6 +607,7 @@ app.post("/addprovider", (req, res) => {
 
 app.post("/addlottery", function (req, res) {
   let lotteryname = req.body.lotteryname;
+  let lotterytype = req.body.lotterytype;
   let lotterydate = req.body.lotterydate;
   let lotterycost = req.body.lotterycost;
   let unitsaleamount = req.body.unitsaleamount;
@@ -636,8 +637,10 @@ app.post("/addlottery", function (req, res) {
   let colendNo = req.body.colendNo;
   let id = req.body.id;
   var sql =
-    "insert into tbllotterymaster (txtLotteryname, refProvider, dtLotterydrawdate, txtCost, txtPurchasedamount, txtUnitSaleAmount, txtAdminChargeperUnit, txtSubLottery, txtStartRange, txtEndRange, txtSelectionLimit, txtPurchaseLimit, txtNoOfCol, txtNoOfRow, txtColStartAt, txtColEndAt, txtAgentCommission, txtTax, txtCommissionrate, txtOtherDeduct1, txtOtherDeduct2, txtCharitypercent, txtFirstprize, txtSecondprize, txtThirdprize, txtFourthprize, txtFifthprize, txtSixthprize) values ('" +
+    "insert into tbllotterymaster (txtLotteryname,txtLotterytype,refProvider, dtLotterydrawdate, txtCost, txtPurchasedamount, txtUnitSaleAmount, txtAdminChargeperUnit, txtSubLottery, txtStartRange, txtEndRange, txtSelectionLimit, txtPurchaseLimit, txtNoOfCol, txtNoOfRow, txtColStartAt, txtColEndAt, txtAgentCommission, txtTax, txtCommissionrate, txtOtherDeduct1, txtOtherDeduct2, txtCharitypercent, txtFirstprize, txtSecondprize, txtThirdprize, txtFourthprize, txtFifthprize, txtSixthprize) values ('" +
     lotteryname +
+    "','" +
+    lotterytype +
     "','" +
     refProvider +
     "','" +
@@ -772,7 +775,7 @@ app.post("/addlotteryexist", function (req, res) {
 app.post("/addlotterydetails", function (req, res) {
   let id = req.body.id;
   var sql =
-    "select date_format(dtLotterydrawdate, '%Y-%m-%d' )as drawdate  ,txtFirstprize, txtSecondprize, txtThirdprize, txtFourthprize, txtFifthprize, txtSixthprize, txtCost,txtStartRange,txtEndRange,txtSelectionLimit,txtPurchaseLimit,txtSubLottery, txtAdminChargeperUnit, txtUnitSaleAmount, txtAgentCommission, txtTax, txtCommissionrate, txtOtherDeduct1, txtOtherDeduct2 ,txtCharitypercent, txtPurchasedamount from tbllotterymaster where id = '" +
+    "select date_format(dtLotterydrawdate, '%Y-%m-%d' )as drawdate,txtLotterytype,txtFirstprize, txtSecondprize, txtThirdprize, txtFourthprize, txtFifthprize, txtSixthprize, txtCost,txtStartRange,txtEndRange,txtSelectionLimit,txtPurchaseLimit,txtSubLottery, txtAdminChargeperUnit, txtUnitSaleAmount, txtAgentCommission, txtTax, txtCommissionrate, txtOtherDeduct1, txtOtherDeduct2 ,txtCharitypercent, txtPurchasedamount from tbllotterymaster where id = '" +
     id +
     "'";
   con.query(sql, function (err, result) {
@@ -790,6 +793,7 @@ app.post("/editlottery", function (req, res) {
   let puramount = req.body.puramount;
   let unitsaleamount = req.body.unitsaleamount;
   let adminchargeperunit = req.body.adminchargeperunit;
+  let lotterytype = req.body.lotterytype;
   let commissionrate = req.body.commissionrate;
   let agentcommission = req.body.agentcommission;
   let tax = req.body.tax;
@@ -807,7 +811,7 @@ app.post("/editlottery", function (req, res) {
   let end = req.body.end;
   let selection = req.body.selection;
   let purchase = req.body.purchase;
-  let sublottery = req.body.sublottery;
+  let sublottery = req.body.lotterysub;
   var sql =
     "UPDATE tbllotterymaster SET dtLotterydrawdate='" +
     drawdate +
@@ -829,6 +833,8 @@ app.post("/editlottery", function (req, res) {
     unitsaleamount +
     "',txtAdminChargeperUnit='" +
     adminchargeperunit +
+    "',txtLotterytype='" +
+    lotterytype +
     "',txtCommissionrate='" +
     commissionrate +
     "',txtAgentCommission='" +
@@ -878,6 +884,21 @@ app.post("/sublottery", function (req, res) {
     if (err) res.send(err);
     // console.log(result);
     res.send(result);
+  });
+});
+
+//-------------------------SUBLOTTERY LIST-------------------//
+
+app.post("/sublotterylist", function (req, res) {
+  let provider = req.body.providerid;
+  var sql =
+    "select tlm.id,tlm.txtLotteryname from tbllotterymaster tlm join tblprovider tp on tlm.refProvider=tp.id where tp.id='" +
+    provider +
+    "' && tlm.txtLotterytype=1;";
+  con.query(sql, function (err, result) {
+    if (err) res.send(err);
+    res.send(result);
+    console.log("ttt",result);
   });
 });
 
@@ -1181,7 +1202,7 @@ app.post("/purchasedloryfetch", (req, res) => {
     "select tu.id ,tm.txtLotteryname,tu.txtLotteryNumber from tblunit tu left join tbllotterymaster tm on tu.refLotterymaster=tm.id where tu.refUser='" +
     userid +
     "' and tu.txtDeleteflag=0 and tu.txtPurchaseddate < tm.dtLotterydrawdate;";
-   // res.send(sql)
+  // res.send(sql)
   con.query(sql, (err, result) => {
     if (err) res.send(err);
     res.send(result);
