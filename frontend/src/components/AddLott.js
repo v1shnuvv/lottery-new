@@ -112,6 +112,7 @@ export default function AddLottery() {
           if (res.data != "Error") {
             window.location.reload();
           }
+          alert("Lottery added sucessfully")
         })
         .catch();
     }
@@ -325,8 +326,9 @@ const subShow=(isShow)=>{
           }
         >
           <div className="AddLottery_labels">
-            <div>
+            <div className="Addlott_req" >
               <Input
+              isRequired="*"
                 name="Draw Date"
                 value={drawdate}
                 onChange={(e) => {
@@ -334,8 +336,9 @@ const subShow=(isShow)=>{
                 }}
               />
             </div>
-            <div>
+            <div className="Addlott_req">
               <Input
+              isRequired="*"
                 name="Ticket Cost"
                 value={lotterycost}
                 onChange={(e) => {
@@ -345,6 +348,7 @@ const subShow=(isShow)=>{
             </div>
             <div>
               <Input
+              isRequired="*"
                 name="Purchased Amount per unit"
                 value={puramount}
                 onChange={(e) => {
@@ -354,6 +358,7 @@ const subShow=(isShow)=>{
             </div>
             <div>
               <Input
+              isRequired="*"
                 name="Unit Sale Amount"
                 value={unitsaleamount}
                 onChange={(e) => {
@@ -363,6 +368,7 @@ const subShow=(isShow)=>{
             </div>
             <div>
               <Input
+              isRequired="*"
                 name="Admin Charge per Unit"
                 value={adminchargeperunit}
                 onChange={(e) => {
@@ -407,6 +413,7 @@ const subShow=(isShow)=>{
             </div>
             <div>
               <Input
+
                 name="Start Range"
                 value={lotterystart}
                 onChange={(e) => {
@@ -425,6 +432,7 @@ const subShow=(isShow)=>{
             </div>
             <div>
               <Input
+              isRequired="*"
                 name="Selection Limit"
                 value={lotteryselect}
                 onChange={(e) => {
@@ -434,6 +442,7 @@ const subShow=(isShow)=>{
             </div>
             <div>
               <Input
+              isRequired="*"
                 name="Purchasing Limit"
                 value={lotterypurchase}
                 onChange={(e) => {
@@ -492,6 +501,7 @@ const subShow=(isShow)=>{
           <div className="AddLottery_labels">
             <div>
               <Input
+              isRequired="*"
                 name="Agent Commission"
                 value={agentcommission}
                 onChange={(e) => {
@@ -501,6 +511,7 @@ const subShow=(isShow)=>{
             </div>
             <div>
               <Input
+              isRequired="*"
                 name="Tax"
                 value={tax}
                 onChange={(e) => {
@@ -510,6 +521,7 @@ const subShow=(isShow)=>{
             </div>
             <div>
               <Input
+              isRequired="*"
                 name="Commission Rate"
                 value={commissionrate}
                 onChange={(e) => {
@@ -520,6 +532,7 @@ const subShow=(isShow)=>{
 
             <div>
               <Input
+              isRequired="*"
                 name="Other Deductions 1"
                 value={otherdeduct1}
                 onChange={(e) => {
@@ -529,6 +542,7 @@ const subShow=(isShow)=>{
             </div>
             <div>
               <Input
+              isRequired="*"
                 name="Other Deductions 2"
                 value={otherdeduct2}
                 onChange={(e) => {
@@ -538,6 +552,7 @@ const subShow=(isShow)=>{
             </div>
             <div>
               <Input
+              isRequired="*"
                 name="Charity Percentage"
                 value={charitypercent}
                 onChange={(e) => {
@@ -560,6 +575,7 @@ const subShow=(isShow)=>{
           <div className="AddLottery_labels">
             <div>
               <Input
+              isRequired="*"
                 name="First Prize"
                 value={first}
                 onChange={(e) => {
@@ -569,6 +585,7 @@ const subShow=(isShow)=>{
             </div>
             <div>
               <Input
+              isRequired="*"
                 name="Second Prize"
                 value={second}
                 onChange={(e) => {
@@ -578,6 +595,7 @@ const subShow=(isShow)=>{
             </div>
             <div>
               <Input
+              isRequired="*"
                 name="Third Prize"
                 value={third}
                 onChange={(e) => {
@@ -588,6 +606,7 @@ const subShow=(isShow)=>{
 
             <div>
               <Input
+              isRequired="*"
                 name="Fourth Prize"
                 value={fourth}
                 onChange={(e) => {
@@ -597,6 +616,7 @@ const subShow=(isShow)=>{
             </div>
             <div>
               <Input
+              isRequired="*"
                 name="Fifth Prize"
                 value={fifth}
                 onChange={(e) => {
