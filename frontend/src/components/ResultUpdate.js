@@ -61,7 +61,7 @@ console.log("winni",winningarray);
 
         // if (winningnumber !== 0 && RaffleId === 0) {
         //     // if (winningnumber !== 0 ) {
-        const url = 'http://localhost:8080/RaffleBothInsert';
+        const url = config.url+"RaffleBothInsert";
         console.log("winning array" + JSON.stringify(winningarray));
         // const req=[winningarray]
         const req = { winl: winningnumber, winr: RaffleId };

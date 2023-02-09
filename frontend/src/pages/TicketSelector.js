@@ -205,104 +205,105 @@ export default function TicketSelector() {
 
   // };
   const chkout = (id) => {
-    alert(usrname);
-    if (columnvalue) {
-      if (usrname === null) {
-        navigate("/Login");
-      }
-      let url1 = config.url + "insertunitnumber";
-      let header1 = {};
-      const temp = [...linearray];
-      const tempnew = [];
 
-      for (const objline of temp) {
-        let selectedvalues = [];
-        for (const objlineinner of objline) {
-          for (const obj of objlineinner) {
-            if (obj.isclicked === true) {
-              selectedvalues.push(obj.value);
-            }
-          }
-        }
-        tempnew.push(selectedvalues);
-      }
-      console.log("tttt", tempnew);
-      let request1 = { uid: userid, lid: id, arr: tempnew };
-      axios
-        .post(url1, request1, header1)
-        .then((res) => {
-          console.log(res.data);
-          if (res.data != "Error") {
-            if (!isfinishd) {
-              dispatch({ type: "setLineArray", payload: [] });
-              navigate("/Checkout", {
-                state: { lid: lotteryid, subltryid: subltryid },
-              });
-            } else {
-              setShow(!show);
-              dispatch({ type: "setLineArray", payload: [] });
-              dispatch({ type: "issubidexist", payload: false });
-            }
-          }
-        })
-        .catch();
-
-      // for (const iterator of tempnew) {
-      //   if(iterator.length !=""){
-      //     console.log("itt",iterator)
-      //     let request1={userid:2, lid:id, arr:iterator}
-      //     console.log("ffff",request1);
-      //     axios.post(url1, request1, header1)
-      //     .then((res)=>{
-      //       console.log(res.data);
-      //     }).catch();
-      //   }
-      // }
+    if (usrname === "") {
+      navigate("/Login");
     } else {
-      if (usrname === " ") {
-        navigate("/Login");
-      }
+      if (columnvalue) {
+        let url1 = config.url + "insertunitnumber";
+        let header1 = {};
+        const temp = [...linearray];
+        const tempnew = [];
 
-      console.log("selected line", linearray);
-      console.log("selected id", id);
-      let url = config.url + "insertunit";
-      let header = {};
-      const valu = [];
-      const temp = [...linearray];
-      for (const itrt of temp) {
-        let temp = [];
-        for (const t of itrt) {
-          if (t.isselected) temp.push(t.value);
-        }
-        valu.push(temp);
-      }
-
-      for (var i = 0; i < valu.length; i++) {
-        if (valu[i] != "") {
-          let request = { uid: userid, lid: id, arr: valu[i] };
-          console.log("req", request);
-          // console.log(request);
-          axios
-            .post(url, request, header)
-            .then((res) => {
-              console.log(res.data);
-              if (res.data != "Error") {
-                if (!isfinishd) {
-                  dispatch({ type: "setLineArray", payload: [] });
-                  navigate("/Checkout", {
-                    state: { lid: lotteryid, subltryid: subltryid },
-                  });
-                } else {
-                  setShow(!show);
-                  dispatch({ type: "setLineArray", payload: [] });
-                  dispatch({ type: "issubidexist", payload: false });
-                }
+        for (const objline of temp) {
+          let selectedvalues = [];
+          for (const objlineinner of objline) {
+            for (const obj of objlineinner) {
+              if (obj.isclicked === true) {
+                selectedvalues.push(obj.value);
               }
-            })
-            .catch();
+            }
+          }
+          tempnew.push(selectedvalues);
         }
+        console.log("tttt", tempnew);
+        let request1 = { uid: userid, lid: id, arr: tempnew };
+        axios
+          .post(url1, request1, header1)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data != "Error") {
+              if (!isfinishd) {
+                dispatch({ type: "setLineArray", payload: [] });
+                navigate("/Checkout", {
+                  state: { lid: lotteryid, subltryid: subltryid },
+                });
+              } else {
+                setShow(!show);
+                dispatch({ type: "setLineArray", payload: [] });
+                dispatch({ type: "issubidexist", payload: false });
+              }
+            }
+          })
+          .catch();
+
+        // for (const iterator of tempnew) {
+        //   if(iterator.length !=""){
+        //     console.log("itt",iterator)
+        //     let request1={userid:2, lid:id, arr:iterator}
+        //     console.log("ffff",request1);
+        //     axios.post(url1, request1, header1)
+        //     .then((res)=>{
+        //       console.log(res.data);
+        //     }).catch();
+        //   }
+        // }
+      } else {
+        // if (usrname === " ") {
+        //   navigate("/Login");
+        // }
+
+        console.log("selected line", linearray);
+        console.log("selected id", id);
+        let url = config.url + "insertunitnumber";
+        let header = {};
+        const valu = [];
+        const temp = [...linearray];
+        for (const itrt of temp) {
+          let temp = [];
+          for (const t of itrt) {
+            if (t.isselected) temp.push(t.value);
+          }
+          valu.push(temp);
+        }
+
+        // for (var i = 0; i < valu.length; i++) {
+        //   if (valu[i] != "") {
+        let request = { uid: userid, lid: id, arr: valu };
+        console.log("req", request);
+        // console.log(request);
+        axios
+          .post(url, request, header)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data != "Error") {
+              if (!isfinishd) {
+                dispatch({ type: "setLineArray", payload: [] });
+                navigate("/Checkout", {
+                  state: { lid: lotteryid, subltryid: subltryid },
+                });
+              } else {
+                setShow(!show);
+                dispatch({ type: "setLineArray", payload: [] });
+                dispatch({ type: "issubidexist", payload: false });
+              }
+            }
+          })
+          .catch();
+        //   }
+        // }
+        // }
       }
-      // }
     }
   };
 

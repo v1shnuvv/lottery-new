@@ -117,6 +117,14 @@ export default function AddLottery() {
     }
   };
 
+const subShow=(isShow)=>{
+  if(isShow==1){
+    document.getElementById("subLotteryshow").style.display="none"
+  } else{
+    document.getElementById("subLotteryshow").style.display="block"
+  } 
+}
+
   useEffect(() => {
     let url = config.url + "addlotteryproviderfetch";
     let req = {};
@@ -366,7 +374,7 @@ export default function AddLottery() {
             <div>
               <select value={lottype} style={{outline:"none" }}
                 onChange={(e) => {
-                  setLottype(e.target.value);
+                  setLottype(e.target.value) ; subShow(e.target.value) ;
                 }}
               >
                 <option value="">Lottery type</option>
@@ -374,7 +382,7 @@ export default function AddLottery() {
                 <option value={1}>Sub Lottery</option>
               </select>
             </div>
-            <div>
+            <div id="subLotteryshow" style={{display: "none"}}>
               {/* <Input
                 name="Sub Lottery"
                 value={lotterysub}
