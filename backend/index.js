@@ -1040,6 +1040,17 @@ app.post("/userunitfetch", (req, res) => {
   });
 });
 
+app.post("/userlotterydetails", (req, res) => {
+let userid = req.body.userid;
+  var sql =
+    "select DATE_FORMAT(tu.txtPurchaseddate, '%Y-%m-%d') as purchaseddate, tu.txtLotteryNumber as lotterynumber, lm.txtLotteryname as lotteryname, tp.txtProvidername as providername, date_format(lm.dtLotterydrawdate, '%Y-%m-%d') as drawdate from tblunit tu left join tbllotterymaster lm on tu.refLotterymaster= lm.id left join tblprovider tp on lm.refProvider=tp.id where tu.refUser= '"+userid+"' and lm.dtLotterydrawdate > curdate() and tu.txtDeleteflag=0";
+  con.query(sql, function (err, result) {
+    if (err) res.send(err);
+    console.log(result);
+    res.send(result);
+  });
+});
+
 /*********************************************************Archana =- Ticket Selector      ********************************************************************************************************************* */
 
 app.post("/ticketselector_lotteryfetch", (req, res) => {

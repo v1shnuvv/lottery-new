@@ -46,10 +46,11 @@
    color: goldenrod;
 }
 .userpage_footer{
-   position: absolute;
+   position: fixed;
    width: 100%;
    bottom: 0;
    background-color: #0b0b2a;
+
 }
 .userpage_row{
    padding: 20px;

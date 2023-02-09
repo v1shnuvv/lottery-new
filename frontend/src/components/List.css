@@ -69,3 +69,12 @@
   font-weight: 600;
   background-color: #2A687C;
 }
+.list2_lotterynumber{
+  display: flex;
+}
+.list2_lotterynumber p{
+  background-color: #171739;
+  padding:.2rem .5rem;
+  margin: .2rem;
+  border-radius: 0.5rem;
+}

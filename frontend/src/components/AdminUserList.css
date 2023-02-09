@@ -20,3 +20,41 @@ th{
     color: white;
     padding: 10px;
 }
+.adminuserlist_container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* border-collapse: collapse; */
+    color: #fff;
+    background-color: #171739;
+}
+.adminuserlist_header{
+    display: flex;
+    flex-direction: row;
+    background-color: #2A687C;
+    color: white;
+    padding: 10px;
+}
+.adminuserlist_body_row{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+.adminuserlist_header_column_cb, .adminuserlist_body_column_cb{
+ width: 4%;
+}
+.adminuserlist_header_column, .adminuserlist_body_column{
+    width: 24%;
+}
+.adminuserlist_header_column{
+    display: flex;
+    align-items: center;
+    
+}
+.adminuserlist_header_column button{
+    background: none;
+    border: none;
+    color: #ffff;
+    margin-left: 10px;
+    font-size: 20px;
+}

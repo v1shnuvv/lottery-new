@@ -9,7 +9,8 @@ import "./AdminUnitlist.css";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-import config from "../config.json"
+import config from '../config.json'
+
 export default function AdminUnitlist() {
   const navigate = useNavigate();
   const uname = localStorage.getItem("usrname");
@@ -26,11 +27,11 @@ export default function AdminUnitlist() {
   const [selectall, setSelectall] = useState(false);
   const [mainshow, setMainshow] = useState(false);
 //adminuserlist
-  const [lonameup2, setLonameup2] = useState("none");
+  const [lonameup2, setLonameup2] = useState("block");
   const [lonamedown2, setLonamedown2] = useState("none");
-  const [providerup2, setProviderup2] = useState("none");
+  const [providerup2, setProviderup2] = useState("block");
   const [providerdown2, setProviderdown2] = useState("none");
-  const [dateup2, setDateup2] = useState("none");
+  const [dateup2, setDateup2] = useState("block");
   const [datedown2, setDatedown2] = useState("none")
   const _ = require("lodash");
  
@@ -169,26 +170,7 @@ export default function AdminUnitlist() {
   };
 
 //adminuserlist
-const showloname =() => {
-  
-  if(lonameup2=="none"){
-    setLonameup2("block")
-  }
-}
 
-const showproname =() => {
-  
-  if(providerup2=="none"){
-    setProviderup2("block")
-  }
-}
-
-const showdate =() => {
-  
-  if(dateup2=="none"){
-    setDateup2("block")
-  }
-}
 
 const sortnamea =(e) => {
   let sortnamea = _.orderBy(userarray, ['txtLotteryname' ], ['asc']);
@@ -345,7 +327,7 @@ const sortdated =() => {
 
       <div className="AdminUnitlist_unitlist">
         <div className="AdminUnitlist_unitlist_item">
-          <AdminUserList data={userarray} handlechange={handlechanging} sortnamea={sortnamea} sortnamed={sortnamed} sortproa={sortproa} sortprod={sortprod} sortdatea={sortdatea} sortdated={sortdated} lonamedown2={lonamedown2} lonameup2={lonameup2} showloname={showloname} providerup2={providerup2} providerdown2={providerdown2} showproname={showproname} dateup2={dateup2} datedown2={datedown2} showdate={showdate}/>
+          <AdminUserList data={userarray} handlechange={handlechanging} sortnamea={sortnamea} sortnamed={sortnamed} sortproa={sortproa} sortprod={sortprod} sortdatea={sortdatea} sortdated={sortdated} lonamedown2={lonamedown2} lonameup2={lonameup2}  providerup2={providerup2} providerdown2={providerdown2}  dateup2={dateup2} datedown2={datedown2} />
         </div>
       </div>
     

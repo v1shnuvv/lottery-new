@@ -11,22 +11,28 @@ import { GrAddCircle } from "react-icons/gr";
 import { useState } from "react";
 import Userdetails from "./Userdetails";
 import { useEffect } from "react";
-import config from '../config.json'
+import config from "../config.json";
 import List1 from "../components/List1";
-function UserPage() {
+function UserPage() { 
   const navigate = useNavigate();
   const [array, setArray] = useState([]);
   const [maindate, setMaindate] = useState("");
   const [subdate, setSubdate] = useState("");
   const [lotterydetails, setLotterydetails] = useState([]);
   const [lotteryid, setLotteryid] = useState("");
-
+  const [userlotterydetails, setUserlotterydeatils] = useState([]);
   const [userresult, setUserresult] = useState([]);
+  const userid = localStorage.getItem("userid");
 
-  useEffect(()=>{
-    let url = config.url+"drawticket";
+  useEffect(() => {
+    let url = config.url + "drawticket";
     let request = {};
     let header = {};
+
+    let urluserld = config.url + "userlotterydetails";
+    let requestuserld = {userid: userid};
+    let headeruserld = {};
+
     axios
       .post(url, request, header)
       .then((res) => {
@@ -40,28 +46,33 @@ function UserPage() {
       })
       .catch();
 
+    axios
+      .post(urluserld, requestuserld, headeruserld)
+      .then((res) => {
+        console.log("userlottery", res.data);
+        setUserlotterydeatils(res.data);
+      })
+      .catch();
 
+    let url1 = config.url + "userunitfetch";
+    let req1 = {
+      userid: 5,
+      provid: 3,
+      lotteryname: "Kerala lottery",
+    };
+    let header1 = {};
 
-        let url1 = config.url+"userunitfetch";
-        let req1 = {
-          userid: 5,
-          provid: 3,
-          lotteryname: "Kerala lottery"
-        };
-        let header1 = {};
-    
-        axios.post(url1, req1, header1).then((res) => {
-          console.log("result", userresult)
-          setUserresult(res.data)
-    console.log("k",userresult[0].txtLotteryname)
-        })
-          .catch();
-    
-  
+    axios
+      .post(url1, req1, header1)
+      .then((res) => {
+        console.log("result", userresult);
+        setUserresult(res.data);
+        console.log("k", userresult[0].txtLotteryname);
+      })
+      .catch();
+  }, []);
 
-  },[])
- 
-  const usrname=localStorage.getItem('usrname')
+  const usrname = localStorage.getItem("usrname");
   const mycart = () => {
     navigate("/Login");
   };
@@ -71,22 +82,21 @@ function UserPage() {
   const profile = () => {
     navigate("/Userprofile");
   };
-  const label5click=()=>{
-    navigate("/UserPage")
-  }
-  const label7click=()=>{
+  const label5click = () => {
+    navigate("/UserPage");
+  };
+  const label7click = () => {
     // navigate("/LotteryManager")
-    
-  }
-  const label6click=()=>{
-    navigate("/Userprofile")
-  }
-  const label8click=()=>{
+  };
+  const label6click = () => {
+    navigate("/Userprofile");
+  };
+  const label8click = () => {
     navigate("/TicketSelector", { state: { lotterydetails: lotterydetails } });
-  }
-  const label4click=()=>{
-    navigate("/")
-  }
+  };
+  const label4click = () => {
+    navigate("/");
+  };
 
   return (
     <div className="userpage_outer">
@@ -109,23 +119,35 @@ function UserPage() {
         />
       </div>
       <div className="userpage_row_container">
-      <div className="userpage_row">
-        <List1 
-        label1={"Lottery Name"}
-        label2={"Prize won"}
-        label3="Provider Name"
-        label4="Prizes Won Until Now" 
-variable1={"txtLotteryname"} 
-variable2={"txtPrizemoney"} 
-variable3={"txtProvidername"} 
-variable4={"TotalPrize"} 
-
-        array={userresult}
-        />
-      </div>
+        <div className="userpage_row">
+          <List1 label1={"Lottery Name"} 
+          label2={"Provider Name"}
+          label3={"Lottery Number"}
+         label4={"Purchased Date"}
+         label5={"Draw Date"}
+         variable1={"lotteryname"}
+         variable2={"providername"}
+         variable3={"lotterynumber"}
+         variable5={"drawdate"}
+         variable4={"purchaseddate"}
+          array={userlotterydetails} />
+        </div>
+        {/* <div className="userpage_row">
+          <List1
+            label1={"Lottery Name"}
+            label2={"Prize won"}
+            label3="Provider Name"
+            label4="Prizes Won Until Now"
+            variable1={"txtLotteryname"}
+            variable2={"txtPrizemoney"}
+            variable3={"txtProvidername"}
+            variable4={"TotalPrize"}
+            array={userresult}
+          />
+        </div> */}
       </div>
       {/* <div className="userpage_col1"> */}
-        {/* <Userdetails/> */}
+      {/* <Userdetails/> */}
       {/* <div className="userpage_lottunits">
         <Timer />
         </div> */}
@@ -144,7 +166,7 @@ variable4={"TotalPrize"}
       </div> */}
       {/* </div> */}
       {/* <div className="userpage_list"> */}
-        {/* <List label1={"Lotteryname"} label2={"Numbers"} label3={"status"} /> */}
+      {/* <List label1={"Lotteryname"} label2={"Numbers"} label3={"status"} /> */}
       {/* </div> */}
       {/* <div className="userpage_option">
         {" "}
