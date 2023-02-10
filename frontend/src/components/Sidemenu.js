@@ -5,7 +5,7 @@ import { BsGraphUp } from "react-icons/bs"
 import { TfiBriefcase } from "react-icons/tfi"
 import { FiFilter, FiArrowUp, FiArrowDown } from "react-icons/fi"
 import { GiPodiumWinner } from "react-icons/gi"
-export default function Sidemenu({shwFilter, shwAddresult, shwAddlottery, shwAddprovider, shwPurchasesummary, shwResult}){
+export default function Sidemenu({shwFilter, shwAddresult, shwAddlottery, shwAddprovider, shwPurchasesummary, shwResult, shwResultupdate}){
     const [show, setDownarrow] = useState(false)
     return (
                 <div className="sidemenu_menu">
@@ -26,6 +26,9 @@ export default function Sidemenu({shwFilter, shwAddresult, shwAddlottery, shwAdd
                             </div>
                             <div className="sidemenu_sublist" onClick={e=>{shwAddprovider()}}>
                                 <label>Add Provider</label>
+                            </div>
+                            <div className="sidemenu_sublist" onClick={e=>{shwResultupdate()}}>
+                                <label>Update result</label>
                             </div>
                         </div>
                     }

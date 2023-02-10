@@ -13,6 +13,7 @@ import Userdetails from "./Userdetails";
 import { useEffect } from "react";
 import config from "../config.json";
 import List1 from "../components/List1";
+import List2 from "../components/List2";
 function UserPage() { 
   const navigate = useNavigate();
   const [array, setArray] = useState([]);
@@ -21,6 +22,7 @@ function UserPage() {
   const [lotterydetails, setLotterydetails] = useState([]);
   const [lotteryid, setLotteryid] = useState("");
   const [userlotterydetails, setUserlotterydeatils] = useState([]);
+  const [userwinnigdetails, setUserwinnigdetails]=useState([])
   const [userresult, setUserresult] = useState([]);
   const userid = localStorage.getItem("userid");
 
@@ -33,6 +35,11 @@ function UserPage() {
     let requestuserld = {userid: userid};
     let headeruserld = {};
 
+    let urluserwindetails = config.url + "userwinningdetails";
+    let requestuserwindetails = {userid: userid};
+    let headeruserwindetails = {};
+
+    
     axios
       .post(url, request, header)
       .then((res) => {
@@ -49,8 +56,17 @@ function UserPage() {
     axios
       .post(urluserld, requestuserld, headeruserld)
       .then((res) => {
-        console.log("userlottery", res.data);
+        
         setUserlotterydeatils(res.data);
+      })
+      .catch();
+
+      axios
+      .post(urluserwindetails, requestuserwindetails, headeruserwindetails)
+      .then((res) => {
+        console.log("userwinnig", res.data);
+        setUserwinnigdetails(res.data)
+        
       })
       .catch();
 
@@ -131,6 +147,17 @@ function UserPage() {
          variable5={"drawdate"}
          variable4={"purchaseddate"}
           array={userlotterydetails} />
+        </div>
+        <div className="userpage_row">
+          <List2 label1={"Lottery Name"} 
+          label2={"Prize money"}
+         label3={"No.of Matching"}
+         label4={"Draw Date"}
+         variable1={"lotteryname"}
+         variable2={"prizemoney"}
+         variable3={"matchingcount"}
+         variable4={"drawdate"}
+          array={userwinnigdetails} />
         </div>
         {/* <div className="userpage_row">
           <List1

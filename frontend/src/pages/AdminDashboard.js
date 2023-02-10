@@ -26,6 +26,7 @@ import Sidemenu from "../components/Sidemenu";
 import AdminUnitlist from "./AdminUnitlist";
 import Providerinfo from "../components/ProviderInfo";
 import ResultUpdate from "../components/ResultUpdate";
+import Resultpublish from "../components/Resultpublish";
 function Dashboard() {
   const navigate = useNavigate();
 
@@ -62,7 +63,7 @@ function Dashboard() {
   const [unitlist, setUnitlist] = useState([]);
   const [adminpurchase, setAdminpurchase] = useState([]);
 //component show----->
-const[shw, setShw]=useState([{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"}])
+const[shw, setShw]=useState([{"shwme": "block"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"}])
 console.log("investi",shw[0].shwme);
 const handleclick1=()=>{
   let temp = [...shw];
@@ -112,6 +113,15 @@ const handleclick6=()=>{
   temp[5].shwme="block"
   setShw(temp)
 }
+const handleclick7=()=>{
+  let temp = [...shw];
+  for (const item of temp) {
+    item.shwme="none"
+  }
+  temp[7].shwme="block"
+  setShw(temp)
+}
+
 
 
 //-----<
@@ -337,6 +347,7 @@ const handleclick6=()=>{
            shwAddprovider={ handleclick4}
            shwPurchasesummary={handleclick5}
            shwResult={handleclick6}
+           shwResultupdate={handleclick7}
           />
         </div>
         <div className="AdminDashboard_main_col_right">
@@ -352,6 +363,9 @@ const handleclick6=()=>{
           </div>
           <div className="AdminDashboard_row" style={{display: shw[3].shwme}}>
             <Providerinfo/>
+          </div>
+          <div className="AdminDashboard_row" style={{display: shw[7].shwme}}>
+            <Resultpublish/>
           </div>
 
           <div className="AdminDashboard_row" style={{display: shw[5].shwme}}>

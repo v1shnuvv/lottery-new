@@ -1,49 +1,41 @@
+export default function Drop() {
+  const lotMaster = [{ id: 1, lotname: "Friday", result: "[1,2,3,4,5]" }];
 
-export default function Drop(){
-    var selectQuery = [
-        {
-            "id": 115,
-            "txtLotteryNumber": "[9,10,11,16,20]"
-        },
-        {
-            "id": 116,
-            "txtLotteryNumber": "[6,11,19,27,36]"
-        },
-        {
-            "id": 117,
-            "txtLotteryNumber": "[8,23,28,29,36]"
-        },
-        {
-            "id": 118,
-            "txtLotteryNumber": "[6,7,8,15,28]"
+  const tblUnit = [
+    { id: 1, lotnumber: "[2,6,7,8,9]" },
+    { id: 2, lotnumber: "[2,3,7,8,9]" },
+    { id: 3, lotnumber: "[1,2,3,4,5]" },
+  ];
+
+for (const iterator of lotMaster) {
+    // console.log(iterator.result);
+}
+
+
+const arr1 = [1,2,3,4,5]
+const arr2 = [{res: [1,2,6,7,8]}, {res: [1,2,3,4,5]}]
+const temp=[]
+for (const elemof1 of arr1) {
+    for (const elemof2 of arr2) {
+        // console.log(elemof2.res);
+        for (const elemof3 of elemof2.res) {
+            console.log(elemof3);
         }
-    ]
-var updateQuery = "[6,7,5,1,2]"
-
-var newArray=[]
-
-for (const obj of selectQuery) {
-    // console.log(obj);
-    for (const objlnum of JSON.parse(obj.txtLotteryNumber)) {
-        // console.log(objlnum);
-        for (const objresult of JSON.parse(updateQuery)) {
-            // console.log(objresult);
-            console.log(obj.id, objresult);
-           if(objlnum== objresult){
-            newArray.push(obj.id, objresult)
-           }
-
-           
-        }
+        
     }
 }
-console.log(newArray);
+// if(elemof1==elemof2){
+//     temp.push(elemof1)
+    
+// }
+console.log(temp);
 
-
-    return(
-        <>
-        <div>
-        </div>
-        </>
-    )
+  return (
+    <>
+      <div>
+        <h1>Towards greater</h1>
+        {lotMaster[0].result}
+      </div>
+    </>
+  );
 }

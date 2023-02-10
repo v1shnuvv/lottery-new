@@ -142,7 +142,7 @@ console.log("winni",winningarray);
                         <div className="resupdate_hcol"><label>Draw Date</label></div>
                         <div className="resupdate_hcol"><label>Result No:</label></div>
                         <div className="resupdate_hcol"><label>Raffle ID</label></div>
-
+ 
                     </div>
 
                     <div className="resupdate_row_test2" >
@@ -153,7 +153,7 @@ console.log("winni",winningarray);
                                         <label>{itm.Providername}</label>
                                         <label>{itm.Lotteryname}</label>
                                         <label>{itm.DrawDate}</label>
-                                        <input onChange={(e) => { handleChangeResult(e, itm.lotteryid) }} value={itm.Winningnumber} type="text" placeholder="Number" />
+                                        <input onChange={(e) => { handleChangeResult(e, itm.lotteryid)  }} value={itm.Winningnumber} type="text" placeholder="Number" />
                                         <input onChange={(e) => { handleChangeRaffleId(e, itm.lotteryid) }} value={itm.Raffleid} type="text" placeholder="RaffleID" />
                                     </div>
 
