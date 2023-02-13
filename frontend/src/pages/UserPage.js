@@ -24,6 +24,7 @@ function UserPage() {
   const [userlotterydetails, setUserlotterydeatils] = useState([]);
   const [userwinnigdetails, setUserwinnigdetails]=useState([])
   const [userresult, setUserresult] = useState([]);
+  const [unitcount, setUnitcount] = useState("")
   const userid = localStorage.getItem("userid");
 
   useEffect(() => {
@@ -38,6 +39,11 @@ function UserPage() {
     let urluserwindetails = config.url + "userwinningdetails";
     let requestuserwindetails = {userid: userid};
     let headeruserwindetails = {};
+
+    let urlunitcount = config.url + "header_countunit";
+    let requestunitcount = {id: userid};
+    let headerunitcount = {};
+
 
     
     axios
@@ -66,7 +72,7 @@ function UserPage() {
       .then((res) => {
         console.log("userwinnig", res.data);
         setUserwinnigdetails(res.data)
-        
+         
       })
       .catch();
 
@@ -86,6 +92,15 @@ function UserPage() {
         console.log("k", userresult[0].txtLotteryname);
       })
       .catch();
+
+      axios
+      .post(urlunitcount, requestunitcount, headerunitcount)
+      .then((res) => {
+        setUnitcount(res.data[0].count);
+        console.log("unitcount",res.data[0].count);
+      })
+      .catch();
+
   }, []);
 
   const usrname = localStorage.getItem("usrname");
@@ -120,7 +135,7 @@ function UserPage() {
         {" "}
         <HeaderUser
           label1={usrname}
-          label2={0}
+          label2={unitcount}
           label3={"My Cart"}
           label4={"Home"}
           label5={"Dashboard"}

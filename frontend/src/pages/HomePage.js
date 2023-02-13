@@ -119,7 +119,7 @@ function HomePage() {
           label2={count}
           label3={"Cart"}
           label4={"Home"}
-          label5={"Learn"}
+          label5={"Learn"} 
           label6={"Buy Now"}
           label7={"Login"}
           label8={"Register"}

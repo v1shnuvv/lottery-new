@@ -22,11 +22,24 @@ export default function Checkout({ linenum }) {
   const dispatch = useDispatch();
   const [array, setArray] = useState([]);
   const userid = localStorage.getItem("userid");
+  const [unitcount, setUnitcount] = useState("")
   useEffect(() => {
     console.log(location.state.subltryid);
     let url = config.url + "purchasedloryfetch";
     let request = { userid: userid };
     let header = {};
+
+    let urlunitcount = config.url + "header_countunit";
+    let requestunitcount = {id: userid};
+    let headerunitcount = {};
+    axios
+      .post(urlunitcount, requestunitcount, headerunitcount)
+      .then((res) => {
+        setUnitcount(res.data[0].count);
+        console.log("unitcount",res.data[0].count);
+      })
+      .catch();
+
     axios
       .post(url, request, header)
       .then((res) => {
@@ -96,7 +109,8 @@ export default function Checkout({ linenum }) {
     <>
       <div className="Checkout_Main">
         <div className="Checkout_header">
-          <Header />
+          <Header 
+          label2={unitcount}/>
         </div>
 
         <div className="Checkout_cartheader">

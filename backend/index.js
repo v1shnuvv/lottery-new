@@ -1116,7 +1116,7 @@ app.post("/ticketselector_lotteryfetch", (req, res) => {
 
 app.post("/header_countunit", (req, res) => {
   let id = req.body.id;
-  // let id=1;
+  
   let sql =
     "select count(id) as count from tblunit where refuser='" +
     id +
