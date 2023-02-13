@@ -206,9 +206,9 @@ export default function TicketSelector() {
   // };
   const chkout = (id) => {
 
-    if (usrname === "") {
-      navigate("/Login");
-    } else {
+    // if (usrname === "") {
+    //   navigate("/Login");
+    // } else {
       if (columnvalue) {
         let url1 = config.url + "insertunitnumber";
         let header1 = {};
@@ -304,7 +304,7 @@ export default function TicketSelector() {
         // }
         // }
       }
-    }
+    // }
   };
 
   const offerchkout = () => {
