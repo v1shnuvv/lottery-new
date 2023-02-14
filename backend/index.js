@@ -9,8 +9,8 @@ var nodemailer = require("nodemailer");
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "sqladmin",
-  database: "lotterydump",
+  password: "Visakh@97",
+  database: "lotterydrums",
 });
 
 con.connect(function (err) {
@@ -898,7 +898,7 @@ app.post("/sublotterylist", function (req, res) {
   con.query(sql, function (err, result) {
     if (err) res.send(err);
     res.send(result);
-    console.log("ttt",result);
+    console.log("ttt", result);
   });
 });
 
@@ -1041,9 +1041,11 @@ app.post("/userunitfetch", (req, res) => {
 });
 
 app.post("/userlotterydetails", (req, res) => {
-let userid = req.body.userid;
+  let userid = req.body.userid;
   var sql =
-    "select DATE_FORMAT(tu.txtPurchaseddate, '%Y-%m-%d') as purchaseddate, tu.txtLotteryNumber as lotterynumber, lm.txtLotteryname as lotteryname, tp.txtProvidername as providername, date_format(lm.dtLotterydrawdate, '%Y-%m-%d') as drawdate from tblunit tu left join tbllotterymaster lm on tu.refLotterymaster= lm.id left join tblprovider tp on lm.refProvider=tp.id where tu.refUser= '"+userid+"' and lm.dtLotterydrawdate > curdate() and tu.txtDeleteflag=0";
+    "select DATE_FORMAT(tu.txtPurchaseddate, '%Y-%m-%d') as purchaseddate, tu.txtLotteryNumber as lotterynumber, lm.txtLotteryname as lotteryname, tp.txtProvidername as providername, date_format(lm.dtLotterydrawdate, '%Y-%m-%d') as drawdate from tblunit tu left join tbllotterymaster lm on tu.refLotterymaster= lm.id left join tblprovider tp on lm.refProvider=tp.id where tu.refUser= '" +
+    userid +
+    "' and lm.dtLotterydrawdate > curdate() and tu.txtDeleteflag=0";
   con.query(sql, function (err, result) {
     if (err) res.send(err);
     console.log(result);
@@ -1053,53 +1055,72 @@ let userid = req.body.userid;
 
 app.post("/userwinningdetails", (req, res) => {
   let userid = req.body.userid;
-    var sql =
-      "SELECT tr.txtMatchingcount as matchingcount, tr.txtPrizemoney as prizemoney, tu.txtLotteryNumber as lotterynumber, tl.txtLotteryname as lotteryname, date_format(tl.dtLotterydrawdate, '%Y-%m-%d') as drawdate FROM tblresultmap tr left join tblunit tu on tr.refUnitid = tu.id left join tbllotterymaster tl on tr.refLotterymasterid= tl.id where tu.refUser= '"+userid+"' and tu.txtDeleteflag=0";
-    con.query(sql, function (err, result) {
-      if (err) res.send(err);
-      console.log(result);
-      res.send(result);
-    });
+  var sql =
+    "SELECT tr.txtMatchingcount as matchingcount, tr.txtPrizemoney as prizemoney, tu.txtLotteryNumber as lotterynumber, tl.txtLotteryname as lotteryname, date_format(tl.dtLotterydrawdate, '%Y-%m-%d') as drawdate FROM tblresultmap tr left join tblunit tu on tr.refUnitid = tu.id left join tbllotterymaster tl on tr.refLotterymasterid= tl.id where tu.refUser= '" +
+    userid +
+    "' and tu.txtDeleteflag=0";
+  con.query(sql, function (err, result) {
+    if (err) res.send(err);
+    console.log(result);
+    res.send(result);
   });
+});
 //-------------------------resultpublish----------------------------------------------//
 app.post("/resulttopublishlist", (req, res) => {
   let sql =
     "SELECT tl.txtLotteryname as lotteryname, tp.txtProvidername as providername, tl.id as lotteryid, tl.txtLotteryresult as lotteryresult FROM tbllotterymaster tl left join tblprovider tp on tl.refProvider = tp.id  where tl.dtLotterydrawdate > curdate()";
   con.query(sql, (err, result) => {
     res.send(result);
-    
   });
 });
 
 app.post("/unittocompare", (req, res) => {
-  let lotteryid = req.body.lotteryid
+  let lotteryid = req.body.lotteryid;
   let sql =
-    "SELECT tu.id as unitid, tu.txtLotteryNumber as selectednumber, tl.txtLotteryresult as lotteryresult, tl.id as lotid, tl.txtFirstprize as firstp, tl.txtSecondprize as secondp, tl.txtThirdprize as thirdp, tl.txtFourthprize as fourthp, tl.txtFifthprize as fifthp, tl.txtSixthprize as sixthp FROM tblunit tu left join tbllotterymaster tl on tu.refLotterymaster=tl.id where tl.id= '"+lotteryid+"' and tu.txtDeleteflag=0";
+    "SELECT tu.id as unitid, tu.txtLotteryNumber as selectednumber, tl.txtLotteryresult as lotteryresult, tl.id as lotid, tl.txtFirstprize as firstp, tl.txtSecondprize as secondp, tl.txtThirdprize as thirdp, tl.txtFourthprize as fourthp, tl.txtFifthprize as fifthp, tl.txtSixthprize as sixthp FROM tblunit tu left join tbllotterymaster tl on tu.refLotterymaster=tl.id where tl.id= '" +
+    lotteryid +
+    "' and tu.txtDeleteflag=0";
   con.query(sql, (err, result) => {
     res.send(result);
-    
   });
 });
 app.post("/updatewinningunit", (req, res) => {
-  let finalarr= req.body.finalarr;
-  let first= true
+  let finalarr = req.body.finalarr;
+  let first = true;
   var sql =
     "insert into tblresultmap (refUnitid, txtMatchingcount, txtPrizemoney, refLotterymasterid) values ";
-    for (const row of finalarr) {
-      if (first){
-        sql += "('"+row.unitid+"','"+row.matchno+"','"+row.prize+"','"+row.lotid+"')"
-        first = false;
-      }else{
-        sql += " ,('"+row.unitid+"','"+row.matchno+"','"+row.prize+"','"+row.lotid+"')"
-      }
+  for (const row of finalarr) {
+    if (first) {
+      sql +=
+        "('" +
+        row.unitid +
+        "','" +
+        row.matchno +
+        "','" +
+        row.prize +
+        "','" +
+        row.lotid +
+        "')";
+      first = false;
+    } else {
+      sql +=
+        " ,('" +
+        row.unitid +
+        "','" +
+        row.matchno +
+        "','" +
+        row.prize +
+        "','" +
+        row.lotid +
+        "')";
     }
+  }
   con.query(sql, (err, result) => {
-    if (err) res.send("Error")
+    if (err) res.send("Error");
     res.send(result);
-    console.log("sqqql",sql);
+    console.log("sqqql", sql);
   });
 });
-
 
 /*********************************************************Archana =- Ticket Selector      ********************************************************************************************************************* */
 
@@ -1116,7 +1137,7 @@ app.post("/ticketselector_lotteryfetch", (req, res) => {
 
 app.post("/header_countunit", (req, res) => {
   let id = req.body.id;
-  
+
   let sql =
     "select count(id) as count from tblunit where refuser='" +
     id +
@@ -1158,6 +1179,16 @@ app.post("/upcominglotterydraws", (req, res) => {
     if (err) res.send(err);
     //  console.log(result);
     res.send(result);
+  });
+});
+app.post("/providerprizelist", (req, res) => {
+  var sql =
+    "SELECT tp.txtProvidername as providername, sum(tr.txtPrizemoney) as totalwinning FROM tblresultmap tr left join tbllotterymaster lm on tr.refLotterymasterid=lm.id left join tblprovider tp on lm.refProvider=tp.id group by tp.txtProvidername";
+  console.log("sql",sql);
+  con.query(sql, function (err, result) {
+    if (err) res.send(err);
+    res.send(result);
+    console.log("hhh",result);
   });
 });
 app.post("/latestdrawunits", (req, res) => {

@@ -139,7 +139,8 @@ const handleclick7=()=>{
     let header_winners = {};
 
     //drawresult//uservalidationfetch----->
-    let url_drawlist = config.url+"upcominglotterydraws";
+    // let url_drawlist = config.url+"upcominglotterydraws";
+    let url_drawlist = config.url+"providerprizelist";
     let req_drawlist = {};
     let header_drawlist = {};
 
@@ -210,7 +211,7 @@ const handleclick7=()=>{
       .post(url_drawlist, req_drawlist, header_drawlist)
       .then((res) => {
         setLotteryresult(res.data);
-        console.log(res.data);
+        console.log("hello",res.data);
       })
       .catch();
     axios

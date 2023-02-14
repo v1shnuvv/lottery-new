@@ -14,6 +14,8 @@ export default function Drawresult({
   // const month = current.getMonth();
   // const yr = current.getFullYear();
 
+  console.log("gggg",array1);
+
   return (
     <div className="drawres_container">
       <div className="drawres_box">
@@ -28,21 +30,21 @@ export default function Drawresult({
           <div className="drawres_body_sec_lft">
             <div className="drawres_body_sec_lft_content">
               <div className="drawres_body_sec_header">
-                <h2>Upcoming Lottery Draws</h2>
+                <h2>Total Winning Details</h2>
               </div>
 
               <div className="drawres_body_lft_row">
                 <div className="drawres_body_sec_lft_row_header">
-                  <p>Lottery Name</p>
-                  <p>Amount</p>
+                  <p>Lottery Provider</p>
+                  <p>Total Prize</p>
                 </div>
                 {array1.map((itm, index) => {
                   return (
                     <div className="drawres_body_sec_lft_row">
                       <div className="drawres_sec_lft_row_div">
                         <div className="drawres_sec_lft_row_inner_div">
-                          <p>{itm[value1]}</p>
-                          <p>{itm[value2]}</p>
+                          <p>{itm.providername}</p>
+                          <p>{itm.totalwinning}</p>
                         </div>
                       </div>
                     </div>
