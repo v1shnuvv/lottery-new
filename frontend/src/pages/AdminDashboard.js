@@ -62,6 +62,8 @@ function Dashboard() {
 
   const [unitlist, setUnitlist] = useState([]);
   const [adminpurchase, setAdminpurchase] = useState([]);
+  const [listarray, setListarray] = useState([])
+  console.log("listarray",listarray);
 //component show----->
 const[shw, setShw]=useState([{"shwme": "block"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"}])
 console.log("investi",shw[0].shwme);
@@ -221,12 +223,12 @@ const handleclick7=()=>{
       })
       .catch();
 
-    // axios
-    //   .post(url_drawresult, req_drawresult, header_drawresult)
-    //   .then((res) => {
-    //     setLatestDrawNum(JSON.parse(res.data[0].txtLotteryresult));
-    //   })
-    //   .catch();
+    axios
+      .post(url_drawresult, req_drawresult, header_drawresult)
+      .then((res) => {
+        setLatestDrawNum(JSON.parse(res.data[0].txtLotteryresult));
+      })
+      .catch();
 
     axios
       .post(url_drawresult, req_drawresult, header_drawresult)
@@ -295,11 +297,10 @@ const handleclick7=()=>{
       .post(url_admin, request_admin, header_admin)
       .then((res) => {
         console.log("Admin", res.data);
-        setAdminpurchase(res.data);
+        setListarray(res.data);
       })
       .catch();
   }, []);
-
   const LogIn = () => {
     navigate("/Login");
   };
@@ -369,21 +370,10 @@ const handleclick7=()=>{
             <Resultpublish/>
           </div>
 
-          <div className="AdminDashboard_row" style={{display: shw[5].shwme}}>
-            <Result
-              array1={lotteryresult}
-              array2={latestlotteryresult}
-              array3={latestDrawNum}
-              array4={matchinNum}
-              value1={"txtLotteryname"}
-              value2={"txtCost"}
-            />
-          </div>
-
           <div className="AdminDashboard_row" style={{display: shw[4].shwme}}>
             {/* <div className="AdminDashboard_tables"> */}
               {/* <div className="AdminDashboard_row_col" > */}
-                <label>Unit sold</label>
+               
                 {/* <Unitsold
         label1={"Lottery"}
         label2={"Drawdate"}
@@ -405,9 +395,22 @@ const handleclick7=()=>{
                   variable4={"adminticket"}
                   variable5={"adminsold"}
                   array={unitlist}
-                  array1={adminpurchase}
+                  array1={listarray}
                 />
               </div>
+
+          <div className="AdminDashboard_row" style={{display: shw[5].shwme}}>
+            <Result
+              array1={lotteryresult}
+              array2={latestlotteryresult}
+              array3={latestDrawNum}
+              array4={matchinNum}
+              value1={"txtLotteryname"}
+              value2={"txtCost"}
+            />
+          </div>
+
+         
               {/* <div className="AdminDashboard_row_col">
       <label>Unit pending</label>
       <Unitpending

@@ -1,6 +1,7 @@
 import "./List.css";
 import { useNavigate } from "react-router-dom";
 export default function List({ label1, label2, label3,label4,label5, array,variable1,variable2,variable3, variable4, variable5,array1}) {
+  console.log(array1)
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/AdminLotteryManager");
@@ -23,13 +24,16 @@ export default function List({ label1, label2, label3,label4,label5, array,varia
               <p>{item[variable2]}</p>
               <p>{item[variable3]}</p>
               <p>{item[variable4]}</p>
+              
               {array1.map((itm,indx)=>{
                 {if(item[variable1]==itm[variable1] && item[variable2]==itm[variable2]) {
                        return<>
                       <p>{item[variable4]-itm[variable5]}</p>
+                      
                        </>
                 }}
               })}
+              
             </div>
           </>
         );
