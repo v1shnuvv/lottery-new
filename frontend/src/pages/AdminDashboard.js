@@ -5,23 +5,21 @@ import Uservalidationfetch_Admin from "../components/Uservalidationfetch_Admin";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import config from "../config.json"
+import config from "../config.json";
 import axios from "axios";
 import { useEffect } from "react";
 import Result from "../components/Drawresult";
-import AddLott from "../components/AddLott"
+import AddLott from "../components/AddLott";
 import AddLottery from "../components/AddLottery";
 import AddLotterycalc from "../components/AddLotterycalc";
 import AddLotterycom from "../components/AddLotterycom";
-import Checkoutbutton from "../components/Checkoutbutton";
-import Unitsold from "../components/List";
-import Winners from "../components/Winners";
-import Unitpending from "../components/List";
+import Checkoutbutton from "../components/Checkoutbutton"; 
+import Winners from "../components/Winners"; 
 import { BsCloudMoonFill } from "react-icons/bs";
 import { GiConsoleController } from "react-icons/gi";
 import Totalwinningvalidation from "../components/Totalwinningvalidation";
 import Uservalidationfetch from "../components/Uservalidationfetch_Admin";
-import List from "../components/List";
+import ListNew from "../components/ListNew";
 import Sidemenu from "../components/Sidemenu";
 import AdminUnitlist from "./AdminUnitlist";
 import Providerinfo from "../components/ProviderInfo";
@@ -37,8 +35,6 @@ function Dashboard() {
   const usrname = localStorage.getItem("usrname");
   console.log("usrname", usrname);
   const [value, setValue] = useState("false");
-
-  
 
   //drawresult----->
   const [lotteryresult, setLotteryresult] = useState([]);
@@ -62,107 +58,114 @@ function Dashboard() {
 
   const [unitlist, setUnitlist] = useState([]);
   const [adminpurchase, setAdminpurchase] = useState([]);
-  const [listarray, setListarray] = useState([])
-  console.log("listarray",listarray);
-//component show----->
-const[shw, setShw]=useState([{"shwme": "block"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"},{"shwme": "none"}])
-console.log("investi",shw[0].shwme);
-const handleclick1=()=>{
-  let temp = [...shw];
-  for (const item of temp) {
-    item.shwme="none"
-  }
-  temp[0].shwme="block"
-  setShw(temp)
-}
-const handleclick2=()=>{
-  let temp = [...shw];
-  for (const item of temp) {
-    item.shwme="none"
-  }
-  temp[6].shwme="block"
-  setShw(temp)
-}
-const handleclick3=()=>{
-  let temp = [...shw];
-  for (const item of temp) {
-    item.shwme="none"
-  }
-  temp[2].shwme="block"
-  setShw(temp)
-}
-const handleclick4=()=>{
-  let temp = [...shw];
-  for (const item of temp) {
-    item.shwme="none"
-  }
-  temp[3].shwme="block"
-  setShw(temp)
-}
-const handleclick5=()=>{
-  let temp = [...shw];
-  for (const item of temp) {
-    item.shwme="none"
-  }
-  temp[4].shwme="block"
-  setShw(temp)
-}
-const handleclick6=()=>{
-  let temp = [...shw];
-  for (const item of temp) {
-    item.shwme="none"
-  }
-  temp[5].shwme="block"
-  setShw(temp)
-}
-const handleclick7=()=>{
-  let temp = [...shw];
-  for (const item of temp) {
-    item.shwme="none"
-  }
-  temp[7].shwme="block"
-  setShw(temp)
-}
+  const [listarray, setListarray] = useState([]);
+  const [listsample, setListsample] = useState([]);
+  console.log("listarray", listarray);
+  //component show----->
+  const [shw, setShw] = useState([
+    { shwme: "block" },
+    { shwme: "none" },
+    { shwme: "none" },
+    { shwme: "none" },
+    { shwme: "none" },
+    { shwme: "none" },
+    { shwme: "none" },
+    { shwme: "none" },
+  ]);
+  console.log("investi", shw[0].shwme);
+  const handleclick1 = () => {
+    let temp = [...shw];
+    for (const item of temp) {
+      item.shwme = "none";
+    }
+    temp[0].shwme = "block";
+    setShw(temp);
+  };
+  const handleclick2 = () => {
+    let temp = [...shw];
+    for (const item of temp) {
+      item.shwme = "none";
+    }
+    temp[6].shwme = "block";
+    setShw(temp);
+  };
+  const handleclick3 = () => {
+    let temp = [...shw];
+    for (const item of temp) {
+      item.shwme = "none";
+    }
+    temp[2].shwme = "block";
+    setShw(temp);
+  };
+  const handleclick4 = () => {
+    let temp = [...shw];
+    for (const item of temp) {
+      item.shwme = "none";
+    }
+    temp[3].shwme = "block";
+    setShw(temp);
+  };
+  const handleclick5 = () => {
+    let temp = [...shw];
+    for (const item of temp) {
+      item.shwme = "none";
+    }
+    temp[4].shwme = "block";
+    setShw(temp);
+  };
+  const handleclick6 = () => {
+    let temp = [...shw];
+    for (const item of temp) {
+      item.shwme = "none";
+    }
+    temp[5].shwme = "block";
+    setShw(temp);
+  };
+  const handleclick7 = () => {
+    let temp = [...shw];
+    for (const item of temp) {
+      item.shwme = "none";
+    }
+    temp[7].shwme = "block";
+    setShw(temp);
+  };
 
-
-
-//-----<
+  //-----<
   useEffect(() => {
-    let url_unitsold = config.url+"Unitsold";
+    let url_unitsold = config.url + "Unitsold";
     let request_unitsold = {};
     let header_unitsold = {};
- 
-    let url_unitpending = config.url+"Unitpending";
+
+    let url_unitpending = config.url + "Unitpending";
     let request_unitpending = {};
     let header_unitpending = {};
 
-    let url_winners = config.url+"winners";
+    let url_winners = config.url + "winners";
     let request_winners = {};
     let header_winners = {};
 
     //drawresult//uservalidationfetch----->
     // let url_drawlist = config.url+"upcominglotterydraws";
-    let url_drawlist = config.url+"providerprizelist";
+    let url_drawlist = config.url + "providerprizelist";
     let req_drawlist = {};
     let header_drawlist = {};
 
-    let url_drawresult = config.url+"latestdrawunits";
+    let url_drawresult = config.url + "latestdrawunits";
     let req_drawresult = {};
     let header_drawresult = {};
     //-----<
     //totalwinningvalidation----->
-    let url_totalwinningvalidation =
-      config.url+"totallotterywinnigtodate";
+    let url_totalwinningvalidation = config.url + "totallotterywinnigtodate";
     let req_totalwinningvalidation = {};
     let header_totalwinningvalidation = {};
-    let url_totalwinningvalidation1 = config.url+"totalwinnigtodate";
+    let url_totalwinningvalidation1 = config.url + "totalwinnigtodate";
     let req_totalwinningvalidation1 = {};
     let header_totalwinningvalidation1 = {};
     //-----<
-    let url_all = config.url+"admindash_fetchall";
+    let url_all = config.url + "admindash_fetchall";
     let request_all = {};
     let header_all = {};
-    let url_admin = config.url+"admindash_adminpurchase";
+    let url_admin = config.url + "admindash_adminpurchase";
     let request_admin = {};
     let header_admin = {};
     // //uservalidationfetch----->
@@ -170,35 +173,35 @@ const handleclick7=()=>{
     // let req_uservalidation = {};
     // let header_uservalidation = {};
     // //-----<
-    let url = config.url+"drawticket";
-    let request = {};
-    let header = {};
-    axios
-      .post(url, request, header)
-      .then((res) => {
-        console.log("draw", res.data);
-        setMaindate(res.data[0].drawdate);
-        setSubdate(res.data[0].sub_drawdate);
-        // setLotteryname(res.data[0].txtLotteryname);
-        // setPrize(res.data[0].txtLotteryprize);
-        setLotteryid(res.data[0].id);
-        setLotterydetails(res.data);
-      })
-      .catch();
-    axios
-      .post(url_unitsold, request_unitsold, header_unitsold)
-      .then((res) => {
-        console.log("unitsold", res.data);
-        setUnitsold(res.data);
-      })
-      .catch();
-    axios
-      .post(url_unitpending, request_unitpending, header_unitpending)
-      .then((res) => {
-        console.log("unitpending", res.data);
-        setUnitpending(res.data);
-      })
-      .catch();
+    // let url = config.url+"drawticket";
+    // let request = {};
+    // let header = {};
+    // axios
+    //   .post(url, request, header)
+    //   .then((res) => {
+    //     console.log("draw", res.data);
+    //     setMaindate(res.data[0].drawdate);
+    //     setSubdate(res.data[0].sub_drawdate);
+    //     // setLotteryname(res.data[0].txtLotteryname);
+    //     // setPrize(res.data[0].txtLotteryprize);
+    //     setLotteryid(res.data[0].id);
+    //     setLotterydetails(res.data);
+    //   })
+    //   .catch();
+    // axios
+    //   .post(url_unitsold, request_unitsold, header_unitsold)
+    //   .then((res) => {
+    //     console.log("unitsold", res.data);
+    //     setUnitsold(res.data);
+    //   })
+    //   .catch();
+    // axios
+    //   .post(url_unitpending, request_unitpending, header_unitpending)
+    //   .then((res) => {
+    //     console.log("unitpending", res.data);
+    //     setUnitpending(res.data);
+    //   })
+    //   .catch();
 
     axios
       .post(url_winners, request_winners, header_winners)
@@ -213,9 +216,10 @@ const handleclick7=()=>{
       .post(url_drawlist, req_drawlist, header_drawlist)
       .then((res) => {
         setLotteryresult(res.data);
-        console.log("hello",res.data);
+        console.log("hello", res.data);
       })
       .catch();
+
     axios
       .post(url_drawresult, req_drawresult, header_drawresult)
       .then((res) => {
@@ -297,7 +301,7 @@ const handleclick7=()=>{
       .post(url_admin, request_admin, header_admin)
       .then((res) => {
         console.log("Admin", res.data);
-        setListarray(res.data);
+        setListsample(res.data);
       })
       .catch();
   }, []);
@@ -343,38 +347,37 @@ const handleclick7=()=>{
       <div className="AdminDashboard_main">
         <div className="AdminDashboard_main_col_left">
           <Sidemenu
-           shwFilter={handleclick1}
-           shwAddresult={ handleclick2}
-           shwAddlottery={handleclick3}
-           shwAddprovider={ handleclick4}
-           shwPurchasesummary={handleclick5}
-           shwResult={handleclick6}
-           shwResultupdate={handleclick7}
+            shwFilter={handleclick1}
+            shwAddresult={handleclick2}
+            shwAddlottery={handleclick3}
+            shwAddprovider={handleclick4}
+            shwPurchasesummary={handleclick5}
+            shwResult={handleclick6}
+            shwResultupdate={handleclick7}
           />
         </div>
         <div className="AdminDashboard_main_col_right">
+          <div className="AdminDashboard_row" style={{ display: shw[0].shwme }}>
+            <AdminUnitlist />
+          </div>
+          <div className="AdminDashboard_row" style={{ display: shw[6].shwme }}>
+            <ResultUpdate />
+          </div>
+          <div className="AdminDashboard_row" style={{ display: shw[2].shwme }}>
+            <AddLott />
+          </div>
+          <div className="AdminDashboard_row" style={{ display: shw[3].shwme }}>
+            <Providerinfo />
+          </div>
+          <div className="AdminDashboard_row" style={{ display: shw[7].shwme }}>
+            <Resultpublish />
+          </div>
 
-          <div className="AdminDashboard_row" style={{display: shw[0].shwme}}>
-            <AdminUnitlist/>
-          </div>
-          <div className="AdminDashboard_row" style={{display: shw[6].shwme}}>
-            <ResultUpdate/>
-          </div>
-          <div className="AdminDashboard_row" style={{display: shw[2].shwme}}>
-            <AddLott/>
-          </div>
-          <div className="AdminDashboard_row" style={{display: shw[3].shwme}}>
-            <Providerinfo/>
-          </div>
-          <div className="AdminDashboard_row" style={{display: shw[7].shwme}}>
-            <Resultpublish/>
-          </div>
-
-          <div className="AdminDashboard_row" style={{display: shw[4].shwme}}>
+          <div className="AdminDashboard_row" style={{ display: shw[4].shwme }}>
             {/* <div className="AdminDashboard_tables"> */}
-              {/* <div className="AdminDashboard_row_col" > */}
-               
-                {/* <Unitsold
+            {/* <div className="AdminDashboard_row_col" > */}
+
+            {/* <Unitsold
         label1={"Lottery"}
         label2={"Drawdate"}
         label3={"Units Sold"}
@@ -383,23 +386,24 @@ const handleclick7=()=>{
         variable2={"DrawDate"}
         variable3={"UnitSold"}
       /> */}
-                <List
-                  label1={"Lottery"}
-                  label2={"Provider"}
-                  label3={"Units Sold"}
-                  label4={"Units admin to purchase"}
-                  label5={"Units pending to purchase"}
-                  variable1={"txtLotteryname"}
-                  variable2={"txtProvidername"}
-                  variable3={"unitsold"}
-                  variable4={"adminticket"}
-                  variable5={"adminsold"}
-                  array={unitlist}
-                  array1={listarray}
-                />
-              </div>
+            <ListNew
+              listsample={listsample}
+              label1={"Lottery"}
+              label2={"Provider"}
+              label3={"Units Sold"}
+              label4={"Units admin to purchase"}
+              label5={"Units pending to purchase"}
+              variable1={"txtLotteryname"}
+              variable2={"txtProvidername"}
+              variable3={"unitsold"}
+              variable4={"adminticket"}
+              variable5={"adminsold"}
+              array={unitlist}
+              array1={listarray}
+            />
+          </div>
 
-          <div className="AdminDashboard_row" style={{display: shw[5].shwme}}>
+          <div className="AdminDashboard_row" style={{ display: shw[5].shwme }}>
             <Result
               array1={lotteryresult}
               array2={latestlotteryresult}
@@ -410,8 +414,7 @@ const handleclick7=()=>{
             />
           </div>
 
-         
-              {/* <div className="AdminDashboard_row_col">
+          {/* <div className="AdminDashboard_row_col">
       <label>Unit pending</label>
       <Unitpending
         label1={"Lottery"}
@@ -423,10 +426,10 @@ const handleclick7=()=>{
         variable3={"UnitPending"}
       />
     </div> */}
-            {/* </div> */}
+          {/* </div> */}
           {/* </div> */}
 
-          <div className="AdminDashboard_row" style={{display: "none"}}>
+          <div className="AdminDashboard_row" style={{ display: "none" }}>
             <div className="AdminDashboard_tables">
               <div className="AdminDashboard_row_col">
                 <Totalwinningvalidation

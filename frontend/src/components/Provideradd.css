@@ -41,3 +41,12 @@ color: white;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) ;
 }
+.provideradd_input select{
+    color: #020223;
+    background-color: white;
+    padding: 10px 15px;
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 5px;
+    border: 1px solid #020223;
+}

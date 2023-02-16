@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import List from './List.js'
+import { useEffect, useState } from 'react'; 
 export default function Unitsold({array}){
    
     // const [array, setArrayFunc] = useState([]);
@@ -34,7 +33,7 @@ return(
     <>
     
       
-    <List  label1={"Lottery"} label2={"Drawdate"} label3={"Unitsold"} array={array} />
+    {/* <List  label1={"Lottery"} label2={"Drawdate"} label3={"Unitsold"} array={array} /> */}
 
     </>
 )

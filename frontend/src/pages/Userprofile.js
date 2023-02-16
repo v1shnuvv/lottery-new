@@ -1,7 +1,6 @@
 import "../pages/Userprofile.css";
 import HeaderUser from "../components/HeaderUser";
-import Footer from "../components/Footer";
-import List from "../components/List";
+import Footer from "../components/Footer"; 
 import Useredit from "../components/UserProfileedit";
 import Collapsible from "react-collapsible";
 import { GrAddCircle } from "react-icons/gr";

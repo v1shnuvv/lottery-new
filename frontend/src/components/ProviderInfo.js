@@ -77,6 +77,7 @@ const handleAddprovider=()=>{
     axios.post(url_provideradd, req_provideradd, header_provideradd).then((res)=>{
       console.log(res.data)
       if(res.data.affectedRows==1){
+        alert("Provider added")
         window.location.reload();
           }
   

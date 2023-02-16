@@ -246,6 +246,10 @@ const subShow=(isShow)=>{
       .post(url3, req3, header3)
       .then((res) => {
         console.log("Successedit", res.data);
+        if(res.data!="error"){
+          alert("Lottery edit success")
+          window.location.reload()
+        }
       })
       .catch();
     console.log("Successedit", lname);

@@ -863,7 +863,7 @@ app.post("/editlottery", function (req, res) {
     id +
     "';";
   con.query(sql, function (err, result) {
-    if (err) res.send(err);
+    if (err) res.send("error");
     // console.log(result);
     res.send(result);
   });
