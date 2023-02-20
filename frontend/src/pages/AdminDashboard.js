@@ -391,8 +391,9 @@ function Dashboard() {
               label1={"Lottery"}
               label2={"Provider"}
               label3={"Units Sold"}
-              label4={"Units admin to purchase"}
-              label5={"Units pending to purchase"}
+              label4={"Units to purchase"}
+              label5={"Units purchased"}
+              label6={"Balance"}
               variable1={"txtLotteryname"}
               variable2={"txtProvidername"}
               variable3={"unitsold"}

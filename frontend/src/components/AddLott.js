@@ -6,7 +6,8 @@ import axios from "axios";
 import { MdArrowDropDownCircle } from "react-icons/md";
 import Collapsible from "react-collapsible";
 import config from "../config.json";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 export default function AddLottery() {
   const [drawdate, setLotterydate] = useState("");
   const [otherdeduct1, setOtherdeduct1] = useState("");
@@ -45,6 +46,9 @@ export default function AddLottery() {
   const [Array, setArray] = useState([]);
   const [Array1, setArray1] = useState([]);
   const [Array2, setArray2] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
+  console.log("datee", startDate.date);
+
   console.log("lotyp",lottype)
   const handleAddlottery = () => {
     console.log("idx");
@@ -81,6 +85,7 @@ export default function AddLottery() {
       colendNo: colendNo == "" ? 0 : colendNo,
       // id: id
     };
+
     console.log(req);
     let header = {};
     if (
@@ -339,6 +344,7 @@ const subShow=(isShow)=>{
                   setLotterydate(e.target.value);
                 }}
               />
+              <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} dateFormat="yyyy-MM-dd"/>
             </div>
             <div className="Addlott_req">
               <Input

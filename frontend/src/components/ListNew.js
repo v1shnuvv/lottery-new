@@ -1,6 +1,6 @@
 import "./List.css";
 import { useNavigate } from "react-router-dom";
-export default function ListNew({listsample, label1, label2, label3,label4,label5, array,variable1,variable2,variable3, variable4, variable5,array1}) {
+export default function ListNew({listsample, label1, label2, label3,label4,label5,label6, array,variable1,variable2,variable3, variable4, variable5,array1}) {
   console.log("newhhh"+listsample)
 
   const navigate = useNavigate();
@@ -16,6 +16,7 @@ export default function ListNew({listsample, label1, label2, label3,label4,label
         <p>{label3}</p>
         <p>{label4}</p>
         <p>{label5}</p>
+        <p>{label6}</p>
       </div> 
       {array.map((item, index) => {
         return (
