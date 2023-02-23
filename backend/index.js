@@ -1088,7 +1088,7 @@ app.post("/updatewinningunit", (req, res) => {
   let finalarr = req.body.finalarr;
   let first = true;
   var sql =
-    "insert into tblresultmap (refUnitid, txtMatchingcount, txtPrizemoney, refLotterymasterid) values ";
+    "insert into tblresultmap (refUnitid, txtMatchingcount, txtPrizemoney, refLotterymasterid, txtMatchnum) values ";
   for (const row of finalarr) {
     if (first) {
       sql +=
@@ -1100,6 +1100,8 @@ app.post("/updatewinningunit", (req, res) => {
         row.prize +
         "','" +
         row.lotid +
+        "','" +
+        row.matchnum +
         "')";
       first = false;
     } else {
@@ -1112,6 +1114,8 @@ app.post("/updatewinningunit", (req, res) => {
         row.prize +
         "','" +
         row.lotid +
+        "','" +
+        row.matchnum +
         "')";
     }
   }

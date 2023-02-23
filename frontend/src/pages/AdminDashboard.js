@@ -25,6 +25,7 @@ import AdminUnitlist from "./AdminUnitlist";
 import Providerinfo from "../components/ProviderInfo";
 import ResultUpdate from "../components/ResultUpdate";
 import Resultpublish from "../components/Resultpublish";
+import Purchaselist from "../components/Purchaselist"
 function Dashboard() {
   const navigate = useNavigate();
 
@@ -64,6 +65,7 @@ function Dashboard() {
   //component show----->
   const [shw, setShw] = useState([
     { shwme: "block" },
+    { shwme: "none" },
     { shwme: "none" },
     { shwme: "none" },
     { shwme: "none" },
@@ -129,6 +131,14 @@ function Dashboard() {
     temp[7].shwme = "block";
     setShw(temp);
   };
+  const handleclick8=()=>{
+    let temp = [...shw];
+    for (const item of temp) {
+      item.shwme = "none";
+    }
+    temp[8].shwme = "block";
+    setShw(temp);
+  }
 
   //-----<
   useEffect(() => {
@@ -354,6 +364,7 @@ function Dashboard() {
             shwPurchasesummary={handleclick5}
             shwResult={handleclick6}
             shwResultupdate={handleclick7}
+            shwPurchaselist={handleclick8}
           />
         </div>
         <div className="AdminDashboard_main_col_right">
@@ -401,6 +412,10 @@ function Dashboard() {
               variable5={"adminsold"}
               array={unitlist}
               array1={listarray}
+            />
+          </div>
+          <div className="AdminDashboard_row" style={{ display: shw[8].shwme }}>
+            <Purchaselist
             />
           </div>
 

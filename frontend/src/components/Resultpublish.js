@@ -54,23 +54,24 @@ export default function ResultUpdate() {
             temp.push({ unitid: obj.unitid, lid: obj.lotid, matchno: matchingnum, first: obj.firstp,
             second: obj.secondp, third: obj.thirdp, fourth: obj.fourthp, fifth: obj.fifthp, sixth: obj.sixthp, resultlen: JSON.parse(obj.lotteryresult).length  })
         }
+        
     }
-    
+    console.log("matching number",temp);
     for (const itr of temp) {
         let a = itr.resultlen
         let b = itr.matchno.length
         if((a-b +1)==1){
-            finalarr.push({unitid: itr.unitid, matchno: b, prize: itr.first, lotid: itr.lid})
+            finalarr.push({unitid: itr.unitid, matchno: b, prize: itr.first, lotid: itr.lid, matchnum: itr.matchno})
         }else if((a-b +1)==2){
-            finalarr.push({unitid: itr.unitid, matchno: b, prize: itr.second, lotid: itr.lid})
+            finalarr.push({unitid: itr.unitid, matchno: b, prize: itr.second, lotid: itr.lid, matchnum: itr.matchno})
         }else if((a-b +1)==3){
-            finalarr.push({unitid: itr.unitid, matchno: b, prize: itr.third, lotid: itr.lid})
+            finalarr.push({unitid: itr.unitid, matchno: b, prize: itr.third, lotid: itr.lid, matchnum: itr.matchno})
         }else if((a-b +1)==4){
-            finalarr.push({unitid: itr.unitid, matchno: b, prize: itr.fourth, lotid: itr.lid})
+            finalarr.push({unitid: itr.unitid, matchno: b, prize: itr.fourth, lotid: itr.lid, matchnum: itr.matchno})
         }else if((a-b +1)==5){
-            finalarr.push({unitid: itr.unitid, matchno: b, prize: itr.fifth, lotid: itr.lid})
+            finalarr.push({unitid: itr.unitid, matchno: b, prize: itr.fifth, lotid: itr.lid, matchnum: itr.matchno})
         }else if((a-b +1)==6){
-            finalarr.push({unitid: itr.unitid, matchno: b, prize: itr.sixth, lotid: itr.lid})
+            finalarr.push({unitid: itr.unitid, matchno: b, prize: itr.sixth, lotid: itr.lid, matchnum: itr.matchno})
         }
     }
     console.log("1",finalarr);
@@ -79,7 +80,7 @@ export default function ResultUpdate() {
       .then((res) => {
         if(res.data!="Error"){
             alert("Result published")
-            window.location.reload()
+            // window.location.reload()
         }
         console.log("success",res.data)
         

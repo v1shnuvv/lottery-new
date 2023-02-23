@@ -1,0 +1,29 @@
+.Purlist{
+    background-color: #171739;
+    font-family: sans-serif;
+    color: #fff;
+    margin: 10px;
+}
+.Purlist_head{
+    background-color: #2a687c;
+    padding: 10px;
+    border-radius: 7px;
+}
+.Purlist_head_label1{
+    font-size: 30px;
+}
+.Purlist_table{
+    padding: 20px;
+}
+.Purlist_table table{
+    width: 100%;
+    font-size: 16px;
+}
+.Purlist_table th{
+    background-color: #2a687c;
+    padding: 10px;
+}
+.Purlist_table td{
+   padding: 5px;
+   text-align: center;
+}
